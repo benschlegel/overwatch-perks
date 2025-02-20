@@ -39,7 +39,7 @@ const socials: SocialProps[] = [
 	},
 ];
 
-const projectGithubLink = 'https://github.com/benschlegel/OWLDLE';
+const projectGithubLink = 'https://github.com/benschlegel/overwatch-perks';
 
 export default function Socials() {
 	const plausible = usePlausible<PlausibleEvents>();
