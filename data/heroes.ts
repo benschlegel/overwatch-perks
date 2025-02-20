@@ -253,6 +253,21 @@ const heroes = [
 	},
 ] as const;
 
-export type HeroNameId = (typeof heroes)[number]['key'];
+export type HeroId = (typeof heroes)[number]['key'];
 export type HeroName = (typeof heroes)[number]['name'];
 export type HeroRole = (typeof heroes)[number]['role'];
+
+/**
+ * Returns hero name for given hero id
+ * @param heroId
+ * @returns Hero name for hero id. If ID was not found, hero name for hero at index 0 will be provided
+ */
+export function getHeroName(heroId: HeroId): string | undefined {
+	return heroes.find((h) => h.key === heroId)?.name;
+}
+
+export const DEFAULT_HERO_ID: HeroId = 'ana';
+
+export function getHeroImage(heroId: HeroId) {
+	return heroes.find((h) => h.key === heroId)?.portrait ?? heroes[0].portrait;
+}
