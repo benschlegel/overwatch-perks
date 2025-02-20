@@ -1,10 +1,18 @@
+import { HelpDialog, HelpTriggerButton } from '@/components/dialogs/help-dialog';
 import { ModeToggle } from '@/components/landing-page/theme-switcher';
 import { Separator } from '@/components/ui/separator';
+import { Suspense } from 'react';
 
 export default function Header() {
 	return (
 		<div className="sticky sm:static top-0 bg-background sm:bg-inherit z-10 pt-[0.5rem] w-full">
 			<div className="flex flex-row justify-between items-center w-full">
+				<div className="flex gap-2 items-center">
+					<Suspense fallback={HelpTriggerButton}>
+						<HelpDialog />
+					</Suspense>
+					{/* <SeasonSelector /> */}
+				</div>
 				<div className="mb-1 flex items-center">
 					{/* <div className="absolute left-1/2 transform -translate-x-1/2 text-center"> */}
 					<h1

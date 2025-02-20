@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Suspense } from 'react';
 import PlausibleWrapper from '@/context/PlausibleWrapper';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -46,12 +47,12 @@ export default function RootLayout({
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-					<>
+					<NuqsAdapter>
 						<div className="px-2 pt-8 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
 							<main className="w-[40rem]">{children}</main>
 						</div>
 						<Toaster />
-					</>
+					</NuqsAdapter>
 				</ThemeProvider>
 			</body>
 		</html>
