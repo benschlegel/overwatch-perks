@@ -9,7 +9,7 @@ type Props = {
 };
 
 const className: React.ComponentProps<'a'>['className'] =
-	'text-base tracking-normal rounded-lg px-[0.1rem] py-[0.1rem] focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary-foreground focus-visible:ring-offset-1';
+	'text-base tracking-normal rounded-lg px-[0.1rem] py-[0.1rem] focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary-foreground focus-visible:ring-offset-1 p-0!';
 
 export default function LinkButton({ children, href, type = 'a', onClick }: PropsWithChildren<Props>) {
 	return (
