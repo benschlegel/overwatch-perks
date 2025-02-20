@@ -3,6 +3,8 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { Suspense } from 'react';
+import PlausibleWrapper from '@/context/PlausibleWrapper';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -35,6 +37,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				<meta name="twitter:card" content="summary_large_image" />
+				{/* Add your own plausible config (if you want to set up analytics) */}
+				<Suspense>
+					<PlausibleWrapper />
+				</Suspense>
+			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
 					<>
