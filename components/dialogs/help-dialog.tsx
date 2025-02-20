@@ -57,7 +57,7 @@ export function HelpDialog() {
 }
 
 export const HelpTriggerButton = (
-	<Button variant="ghost" size="icon" className="p-0" aria-label="Help">
-		<CircleHelpIcon className="h-[1.3rem] w-[1.3rem] transition-all" />
+	<Button variant="ghost" size="icon" className="!p-0" aria-label="Help">
+		<CircleHelpIcon className="!h-[1.3rem] !w-[1.3rem] !transition-all" />
 	</Button>
 );
