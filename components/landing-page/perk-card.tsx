@@ -3,14 +3,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
 import type { Perk } from '@/data/perks';
+import { cn } from '@/lib/utils';
 import { useCallback } from 'react';
 
-type Props = {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
+	isCorrect?: boolean;
 	index: number;
-};
+}
 
-export default function PerkCard({ perk, index }: Props) {
+export default function PerkCard({ perk, index, className }: Props) {
 	if (!perk) return <></>;
 
 	const onClick = useCallback(() => {
@@ -29,12 +31,12 @@ export default function PerkCard({ perk, index }: Props) {
 					onClick();
 				}
 			}}>
-			<CardContent className="flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
+			<CardContent className={cn('flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors', className)}>
 				<div className="flex flex-col flex-1">
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
 					<HighlightText className="sm:text-base text-sm" text={perk.description} />
 				</div>
-				<Separator className="mt-1" />
+				<Separator className="mb-1 mt-2" />
 				<div className="w-full text-xs text-muted-foreground flex justify-between">
 					<p>{perk.perkType}</p>
 					<p>{index + 1}</p>

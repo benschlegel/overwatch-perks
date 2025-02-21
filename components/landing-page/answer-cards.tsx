@@ -7,7 +7,7 @@ export default function AnswerCards() {
 	return (
 		<div className="flex flex-col w-full sm:gap-3 gap-2 sm:mt-4 mt-1">
 			<div className="flex flex-row sm:gap-3 gap-2">
-				<PerkCard perk={heroPerks[0]} index={0} />
+				<PerkCard perk={heroPerks[0]} index={0} isCorrect />
 				<PerkCard perk={heroPerks[1]} index={1} />
 			</div>
 			<div className="flex flex-row sm:gap-3 gap-2">
