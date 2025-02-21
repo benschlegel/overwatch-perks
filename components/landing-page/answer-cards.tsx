@@ -6,12 +6,12 @@ export default function AnswerCards() {
 	return (
 		<div className="flex flex-col w-full gap-4 mt-4">
 			<div className="flex flex-row gap-4">
-				<PerkCard perk={currPerk} />
-				<PerkCard perk={currPerk} />
+				<PerkCard perk={currPerk} index={0} />
+				<PerkCard perk={currPerk} index={1} />
 			</div>
 			<div className="flex flex-row gap-4">
-				<PerkCard perk={currPerk} />
-				<PerkCard perk={currPerk} />
+				<PerkCard perk={currPerk} index={2} />
+				<PerkCard perk={currPerk} index={3} />
 			</div>
 		</div>
 	);
