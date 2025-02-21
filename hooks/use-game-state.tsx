@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect } from 'react';
 
 export default function useGameState() {
 	const [currPerk, setCurrPerk] = useContext(PerkContext);
-	const heroPerks = PERKS.filter((p) => p.heroId === currPerk.heroId);
+	const heroPerks = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
 
 	const rerollPerk = useCallback(() => {
 		const newPerk = getRandomPerk();

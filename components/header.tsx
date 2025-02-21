@@ -30,7 +30,7 @@ export default function Header() {
 					<ModeToggle />
 				</div>
 			</div>
-			<Separator className="mb-6 mt-1 transition-colors duration-300" />
+			<Separator className="sm:mb-6 mb-3 mt-1 transition-colors duration-300" />
 		</div>
 	);
 }
