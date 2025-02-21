@@ -1,10 +1,18 @@
-import { Card, CardContent } from '@/components/ui/card';
+'use client';
+import PerkCard from '@/components/landing-page/perk-description';
+import useGameState from '@/hooks/use-game-state';
 export default function AnswerCards() {
+	const { currPerk } = useGameState();
 	return (
-		<Card className="transition-colors">
-			<CardContent className="flex flex-col sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
-				<p>Test</p>
-			</CardContent>
-		</Card>
+		<div className="flex flex-col w-full gap-4 mt-4">
+			<div className="flex flex-row gap-4">
+				<PerkCard perk={currPerk} />
+				<PerkCard perk={currPerk} />
+			</div>
+			<div className="flex flex-row gap-4">
+				<PerkCard perk={currPerk} />
+				<PerkCard perk={currPerk} />
+			</div>
+		</div>
 	);
 }
