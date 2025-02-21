@@ -13,14 +13,18 @@ export default function PerkInfo() {
 				<div className="flex items-center justify-between">
 					<HeroCard heroId={currPerk?.heroId} />
 					<div className="flex w-full flex-col items-center justify-center gap-4">
-						<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Guess this perk</h2>
+						<h2 className="scroll-m-20 border-b pb-2 sm:text-3xl text-xl font-semibold tracking-tight first:mt-0">Guess this perk</h2>
 						<PerkIcon perk={currPerk} />
 						<div className="w-full pl-4">
-							<Separator className="my-1" />
-							<div className="flex h-5 items-center space-x-4 text-sm text-muted-foreground w-full justify-center mt-2">
-								<div>Current Streak: 0</div>
+							<Separator className="mt-1" />
+							<div className="flex h-5 items-center space-x-4 sm:text-sm text-xs text-muted-foreground w-full justify-center mt-4">
+								<p className="text-center">
+									Current Streak: <span className="sm:block">0</span>
+								</p>
 								<Separator orientation="vertical" />
-								<div>Best Streak: 0</div>
+								<p className="text-center">
+									Best Streak: <span className="sm:block">0</span>
+								</p>
 							</div>
 						</div>
 					</div>
