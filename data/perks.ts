@@ -610,7 +610,7 @@ export const PERKS: Perk[] = [
 		id: 84,
 		heroId: 'pharah',
 		name: 'Drift Thrusters',
-		description: 'Pharah can move while Barrage is active',
+		description: 'Pharah can move while Barrage is active.',
 		perkType: 'minor',
 		perkIndex: 0,
 	},
