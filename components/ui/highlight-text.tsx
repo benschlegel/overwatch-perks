@@ -9,7 +9,7 @@ export default function HighlightText({ text, children, className, ...props }: P
 	const parts = text.split(/(\d+\.\d+%?|\d+%?)/);
 
 	return (
-		<p>
+		<p className={className}>
 			{parts.map((part, index) => {
 				// Check if this part is a number or number with % symbol
 				return /^(\d+\.\d+%?|\d+%?)$/.test(part) ? (
