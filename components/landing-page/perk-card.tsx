@@ -19,7 +19,7 @@ export default function PerkCard({ perk, index }: Props) {
 
 	return (
 		<Card
-			className="transition-colors w-full"
+			className="w-full outline-background-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background hover:bg-secondary focus-visible:bg-secondary focus-visible:transition-none transition-colors"
 			tabIndex={0}
 			onClick={onClick}
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
