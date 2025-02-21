@@ -1,5 +1,5 @@
 'use client';
-import PerkCard from '@/components/landing-page/perk-description';
+import PerkCard from '@/components/landing-page/perk-card';
 import useGameState from '@/hooks/use-game-state';
 export default function AnswerCards() {
 	const { currPerk, heroPerks } = useGameState();
