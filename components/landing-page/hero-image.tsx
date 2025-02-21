@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 
 type Props = {
-	heroId: HeroId;
+	heroId?: HeroId;
 };
 
 export default function HeroImage({ heroId }: Props) {
-	if (!heroId) return <></>;
+	if (!heroId) return <div className="relative w-[8rem] pb-[120%]" />;
 	const heroSource = useMemo(() => {
 		return getHeroImage(heroId);
 	}, [heroId]);

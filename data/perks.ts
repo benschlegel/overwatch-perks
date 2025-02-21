@@ -1288,3 +1288,7 @@ export const PERKS: Perk[] = [
 		perkIndex: 1,
 	},
 ];
+
+export function getRandomPerk() {
+	return PERKS[Math.floor(Math.random() * PERKS.length)];
+}

@@ -1,14 +1,17 @@
+'use client';
 import PerkIcon from '@/components/game/perk-icon';
 import HeroCard from '@/components/landing-page/hero-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { DEFAULT_HERO_ID } from '@/data/heroes';
+import useGameState from '@/hooks/use-game-state';
 export default function PerkInfo() {
+	const { currPerk, setCurrPerk } = useGameState();
 	return (
 		<Card className="transition-colors">
 			<CardContent className="flex flex-col sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
 				<div className="flex items-center justify-between">
-					<HeroCard heroId={'ana'} />
+					<HeroCard heroId={currPerk?.heroId} />
 					<div className="flex w-full flex-col items-center justify-center gap-4">
 						<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Guess this perk</h2>
 						<PerkIcon />

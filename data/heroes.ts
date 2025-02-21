@@ -262,7 +262,7 @@ export type HeroRole = (typeof HEROES)[number]['role'];
  * @param heroId
  * @returns Hero name for hero id. If ID was not found, hero name for hero at index 0 will be provided
  */
-export function getHeroName(heroId: HeroId): string | undefined {
+export function getHeroName(heroId: HeroId | undefined): string | undefined {
 	return HEROES.find((h) => h.id === heroId)?.name;
 }
 
