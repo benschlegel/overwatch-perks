@@ -14,7 +14,7 @@ export default function PerkInfo() {
 					<HeroCard heroId={currPerk?.heroId} />
 					<div className="flex w-full flex-col items-center justify-center gap-4">
 						<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Guess this perk</h2>
-						<PerkIcon />
+						<PerkIcon perk={currPerk} />
 						<div className="w-full pl-4">
 							<Separator className="my-1" />
 							<div className="flex h-5 items-center space-x-4 text-sm text-muted-foreground w-full justify-center mt-2">
