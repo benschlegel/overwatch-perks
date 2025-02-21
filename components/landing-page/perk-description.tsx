@@ -12,9 +12,11 @@ export default function PerkCard({ perk, index }: Props) {
 	if (!perk) return <></>;
 	return (
 		<Card className="transition-colors w-full">
-			<CardContent className="flex flex-col text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
-				<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
-				<HighlightText className="sm:text-base text-sm" text={perk.description} />
+			<CardContent className="flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
+				<div className="flex flex-col flex-1">
+					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
+					<HighlightText className="sm:text-base text-sm" text={perk.description} />
+				</div>
 				<Separator className="mt-1" />
 				<div className="w-full text-xs text-muted-foreground flex justify-between">
 					<p>{perk.perkType}</p>
