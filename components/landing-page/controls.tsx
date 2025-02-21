@@ -10,7 +10,7 @@ export default function Controls() {
 			<Button variant="outline">Share</Button>
 			<Button className="bg-primary-foreground/90 text-white/85 hover:bg-primary-foreground" onClick={rerollPerk}>
 				<div className="flex flex-row gap-2">
-					<p className="text-md font-semibold tracking-tight">Reshuffle</p>
+					<p className="text-md font-semibold tracking-tight">Reroll</p>
 					<div className="flex items-center justify-center">
 						<DicesIcon className="h-4 w-4" />
 						<span className="sr-only">Reroll</span>
