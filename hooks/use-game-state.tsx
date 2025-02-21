@@ -16,9 +16,5 @@ export default function useGameState() {
 		}
 	}, [currPerk, rerollPerk]);
 
-	useEffect(() => {
-		console.log('Curr perk: ', currPerk);
-	}, [currPerk]);
-
-	return { currPerk, setCurrPerk };
+	return { currPerk, setCurrPerk, rerollPerk };
 }

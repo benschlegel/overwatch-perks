@@ -3,8 +3,8 @@ import PerkIcon from '@/components/game/perk-icon';
 import HeroCard from '@/components/landing-page/hero-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { DEFAULT_HERO_ID } from '@/data/heroes';
 import useGameState from '@/hooks/use-game-state';
+
 export default function PerkInfo() {
 	const { currPerk, setCurrPerk } = useGameState();
 	return (
