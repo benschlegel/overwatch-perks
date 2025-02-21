@@ -21,7 +21,7 @@ export default function useGameState() {
 		// Handle hotkeys
 		const handleKeyDown = (e: KeyboardEvent) => {
 			// reroll on r or space (only trigger if ctrl wasn't pressed so ctrl + r reload still works)
-			if ((e.key === 'r' && !(e.metaKey || e.ctrlKey)) || e.key === ' ') {
+			if ((e.key === 'r' && !(e.metaKey || e.ctrlKey)) || (e.key === ' ' && (e.metaKey || e.ctrlKey))) {
 				e.preventDefault();
 
 				// Hotkey action
