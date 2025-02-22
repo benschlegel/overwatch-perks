@@ -13,6 +13,9 @@ const defaultScore: GameScore = { currentStreak: 0, bestStreak: 0, setCurrentStr
 
 export const GameScoreContext = createContext<GameScore>(defaultScore);
 
+export const LOCAL_STORAGE_SCORE_KEY = 'score';
+export const LOCAL_STORAGE_BEST_SCORE_KEY = 'highScore';
+
 export default function GameScoreContextProvider({ children }: PropsWithChildren) {
 	const [currentStreak, setCurrentStreak] = useState<number>(0);
 	const [bestStreak, setBestStreak] = useState<number>(0);
@@ -29,12 +32,28 @@ export function useGameScore() {
 		setCurrentStreak(newStreak);
 		if (newStreak > bestStreak) {
 			setBestStreak(newStreak);
+			localStorage.setItem(LOCAL_STORAGE_BEST_SCORE_KEY, JSON.stringify(newStreak));
 		}
 	}, [currentStreak, bestStreak, setBestStreak, setCurrentStreak]);
 
 	const resetCurrent = useCallback(() => {
 		setCurrentStreak(0);
 	}, [setCurrentStreak]);
+
+	const readLocalStorageScore = useCallback(() => {
+		if (typeof window !== 'undefined') {
+			const storageHighScore = localStorage.getItem(LOCAL_STORAGE_BEST_SCORE_KEY);
+			const parsedScore = storageHighScore !== null ? Number(storageHighScore) : undefined;
+
+			if (parsedScore !== undefined && parsedScore > 0) {
+				setBestStreak(parsedScore);
+			}
+		}
+	}, [setBestStreak]);
+
+	useEffect(() => {
+		readLocalStorageScore();
+	}, [readLocalStorageScore]);
 
 	useEffect(() => {
 		if (gameState === 'starting') {
