@@ -28,11 +28,13 @@ export default function PerkInfo() {
 								<p className="text-center">
 									Best Streak: <span className="sm:block">{bestStreak}</span>
 								</p>
-								<Separator orientation="vertical" />
 								{CONFIG.isDebug && (
-									<p className="text-center">
-										id: <span className="sm:block">{currPerk?.id}</span>
-									</p>
+									<>
+										<Separator orientation="vertical" />
+										<p className="text-center">
+											id: <span className="sm:block">{currPerk?.id}</span>
+										</p>
+									</>
 								)}
 							</div>
 						</div>

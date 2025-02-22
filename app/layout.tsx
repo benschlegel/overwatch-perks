@@ -9,6 +9,8 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import PerkContextProvider from '@/context/PerkContext';
 import GameStateContextProvider from '@/context/GameStateContext';
 import GameScoreContextProvider from '@/context/GameScoreContext';
+import { PERKS } from '@/data/perks';
+import { CONFIG } from '@/config';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -43,6 +45,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="twitter:card" content="summary_large_image" />
+				{PERKS.map((p) => (
+					<link rel="preload" key={p.id} as="image" href={`${CONFIG.url}/assets/perks/${p.heroId}_${p.perkType}_${p.perkIndex}.png`} />
+				))}
 				{/* Add your own plausible config (if you want to set up analytics) */}
 				<Suspense>
 					<PlausibleWrapper />
