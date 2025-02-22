@@ -1,3 +1,4 @@
+import { FeedbackDialog, FeedbackTriggerButton } from '@/components/dialogs/feedback-dialog';
 import { HelpDialog, HelpTriggerButton } from '@/components/dialogs/help-dialog';
 import { ModeToggle } from '@/components/landing-page/theme-switcher';
 import { Separator } from '@/components/ui/separator';
@@ -12,6 +13,9 @@ export default function Header() {
 						<HelpDialog />
 					</Suspense>
 					{/* <SeasonSelector /> */}
+					<Suspense fallback={FeedbackTriggerButton}>
+						<FeedbackDialog />
+					</Suspense>
 				</div>
 				<div className="mb-1 flex items-center">
 					{/* <div className="absolute left-1/2 transform -translate-x-1/2 text-center"> */}
@@ -24,9 +28,6 @@ export default function Header() {
 					</h1>
 				</div>
 				<div className="flex gap-1">
-					{/* <Suspense fallback={FeedbackTriggerButton}>
-						<FeedbackDialog />
-					</Suspense> */}
 					<ModeToggle />
 				</div>
 			</div>
