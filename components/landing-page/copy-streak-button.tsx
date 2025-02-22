@@ -8,7 +8,7 @@ export default function CopyStreakButton() {
 
 	return (
 		<SwitchableButton
-			className="max-w-[8rem] box-border"
+			className="max-w-[7.5rem] box-border"
 			onClick={() => {
 				navigator.clipboard.writeText(text);
 			}}

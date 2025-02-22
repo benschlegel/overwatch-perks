@@ -24,15 +24,13 @@ export default function Controls() {
 				variant="secondary"
 				disabled={gameState === 'starting' || gameState === 'in-progress'}
 				onClick={rerollPerk}
-				className="sm:px-8 px-9 transform active:scale-95 transition-transform">
+				className="sm:px-8 px-10 transform active:scale-95 transition-transform">
 				<p>Next</p>
 				<kbd className="pointer-events-none sm:inline-flex hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
 					C
 				</kbd>
 			</Button>
-			<Button
-				className="bg-primary-foreground/85 text-white/85 hover:bg-primary-foreground transform active:scale-95 transition-transform"
-				onClick={restartGame}>
+			<Button variant="outline" className="sm:px-5 px-3 transform active:scale-95 transition-transform" onClick={restartGame}>
 				<div className="flex flex-row gap-2">
 					<p className="tracking-wide">Restart</p>
 					<div className="flex items-center justify-center">
