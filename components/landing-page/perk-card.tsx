@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
+import { CONFIG } from '@/config';
 import type { Perk } from '@/data/perks';
 import useAnswerCard from '@/hooks/use-answer-card';
 import { cn } from '@/lib/utils';
@@ -46,7 +47,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					<p>
 						<span className="font-semibold">{perk.perkType}</span>
 					</p>
-					{/* <p>{isCorrect ? 'correct' : ''}</p> */}
+					{CONFIG.isDebug && <p>{isCorrect ? 'correct' : ''}</p>}
 					<p>{cardId}</p>
 				</div>
 			</CardContent>
