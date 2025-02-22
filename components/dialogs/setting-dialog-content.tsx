@@ -4,6 +4,7 @@ import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTit
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Switch } from '@/components/ui/switch';
+import { useSetting } from '@/hooks/use-settings-param';
 import { SettingsIcon } from 'lucide-react';
 import React, { memo, useCallback } from 'react';
 type Props = {
@@ -44,7 +45,8 @@ export default function SettingsContent({ setOpen }: Props) {
 	);
 }
 
-export type SettingName = 'hardMode' | 'debug';
+export const settingNames = ['hardMode', 'debug'] as const;
+export type SettingName = (typeof settingNames)[number];
 
 type SettingItem = {
 	name: string;
@@ -53,19 +55,20 @@ type SettingItem = {
 	settingId: SettingName;
 };
 
-const SETTINGS: SettingItem[] = [
+export const SETTINGS: SettingItem[] = [
 	{ name: 'Hard Mode', description: 'Guess perks by providing the exact name instead of choosing from four options.', settingId: 'hardMode' },
 	{ name: 'Debug Mode', description: 'Show perk id and other information useful for debugging and feedback.', settingId: 'debug' },
 ];
 
 export function SettingsItem({ name, description, settingId, defaultChecked }: SettingItem) {
+	const [enabled, setEnabled] = useSetting(settingId);
 	return (
 		<div className="flex items-center justify-between space-x-4">
 			<Label htmlFor={settingId} className="flex flex-col space-y-1 w-full">
 				<span>{name}</span>
 				<span className="font-normal leading-snug text-muted-foreground">{description}</span>
 			</Label>
-			<Switch id={settingId} defaultChecked={defaultChecked} />
+			<Switch id={settingId} defaultChecked={defaultChecked} checked={enabled} onCheckedChange={(checked) => setEnabled(checked)} />
 		</div>
 	);
 }
