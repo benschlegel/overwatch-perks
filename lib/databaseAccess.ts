@@ -1,4 +1,4 @@
-import type { DbGameResult, DbLoggedGame } from '@/types/database';
+import type { GameResult, DbLoggedGame } from '@/types/database';
 import { type ClientSession, MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -19,13 +19,21 @@ const gameLogs = 'game_logs';
 const dbClient = new MongoClient(uri);
 const database = dbClient.db(dbName);
 
+/**
+ *
+ * Collections
+ *
+ */
+
 const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
 
 /**
  *
  *
  *
+ *
  * Database functions
+ *
  *
  *
  */
@@ -33,6 +41,6 @@ const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
 /**
  * Log game to database (result, perkid, etc)
  */
-export async function logGame(gameResult: DbGameResult, timestamp: Date) {
+export async function logGame(gameResult: GameResult, timestamp: Date) {
 	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult });
 }
