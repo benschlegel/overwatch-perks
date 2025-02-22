@@ -14,7 +14,7 @@ export default function HeroImage({ heroId }: Props) {
 
 	return (
 		<div className="relative w-[8rem] pb-[120%]">
-			<Image src={heroSource} alt={`${heroId}'s hero portrait`} unoptimized={false} quality={100} fill className="object-cover rounded-t-lg" />
+			<Image src={heroSource} alt={`${heroId}'s hero portrait`} unoptimized={true} quality={100} fill className="object-cover rounded-t-lg" />
 		</div>
 	);
 }
