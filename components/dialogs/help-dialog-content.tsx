@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import HotkeyInfo from '@/components/ui/hotkey-info';
 import LinkButton from '@/components/ui/link-button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useDialogParams } from '@/hooks/use-dialog-param';
@@ -52,27 +53,12 @@ export default function HelpContent({ setOpen }: Props) {
 						</div>
 						<div className="flex flex-col gap-2">
 							<p className="scroll-m-20 text-base tracking-normal mt-4">
-								Most elements on this website have tooltips, so when you need more info, try hovering it (or pressing on mobile). The website also has some
-								hotkeys:
+								To make navigation and playing easier, this website has some hotkeys that can be used:
 							</p>
-							<div className="flex items-center gap-6 mt-1">
-								<kbd className="pointer-events-none inline-flex h-5 select-none items-center rounded border bg-muted px-1.5 py-2 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-									<span className="text-xs">ctrl + y</span>
-								</kbd>
-								<p className="opacity-90 tracking-tight">Jump to search input</p>
-							</div>
-							<div className="flex items-center gap-6">
-								<kbd className="pointer-events-none inline-flex h-5 select-none items-center rounded border bg-muted px-1.5 py-2 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-									<span className="text-xs">ctrl + k</span>
-								</kbd>
-								<p className="opacity-90 tracking-tight">Open search in popup dialog</p>
-							</div>
-							<div className="flex items-center gap-6">
-								<kbd className="pointer-events-none inline-flex h-5 select-none items-center rounded border bg-muted px-1.5 py-2 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-									<span className="text-xs">ctrl + e</span>
-								</kbd>
-								<p className="opacity-90 tracking-tight">Open/close help dialog</p>
-							</div>
+							<HotkeyInfo hotkey="1,2,3,4" label="Select perk (number for can be found on bottom right of card)" />
+							<HotkeyInfo hotkey="c" label="Go to next perk" />
+							<HotkeyInfo hotkey="r" label="Restart game (also resets streak)" />
+							<HotkeyInfo hotkey="ctrl + e" label="Open/close help dialog" />
 						</div>
 					</div>
 					<div>
