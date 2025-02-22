@@ -1,13 +1,15 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import useGameState from '@/hooks/use-game-state';
+import useStreakText from '@/hooks/use-streak-text';
 import { CopyIcon, DicesIcon } from 'lucide-react';
 
 export default function Controls() {
 	const { rerollPerk, gameState, restartGame } = useGameState();
+	const text = useStreakText();
 	return (
 		<div className="flex justify-between items-center mb-4">
-			<Button variant="outline" className="px-3 sm:px-4">
+			<Button variant="outline" className="px-3 sm:px-4" onClick={() => navigator.clipboard.writeText(text)}>
 				<div className="flex flex-row gap-2">
 					<p className="text-md font-semibold tracking-tight">Share streak</p>
 					<div className="flex items-center justify-center">
