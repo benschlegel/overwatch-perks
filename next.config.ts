@@ -1,6 +1,6 @@
-import type { NextConfig } from 'next';
+import { withPlausibleProxy } from 'next-plausible';
 
-const nextConfig: NextConfig = {
+const nextConfig = withPlausibleProxy({ customDomain: 'https://plausible.global.bschlegel.com' })({
 	images: {
 		// TODO: remove to disable nextjs image optimizations/caching
 		remotePatterns: [
@@ -20,6 +20,6 @@ const nextConfig: NextConfig = {
 		reactCompiler: true,
 		// instrumentationHook: true,
 	},
-};
+});
 
 export default nextConfig;

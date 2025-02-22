@@ -1,5 +1,7 @@
 import { useGameScore } from '@/context/GameScoreContext';
 import useGameState from '@/hooks/use-game-state';
+import type { PlausibleEvents } from '@/types/plausible';
+import { usePlausible } from 'next-plausible';
 import { useState, useCallback, useEffect } from 'react';
 
 type Props = {
@@ -11,9 +13,13 @@ export default function useAnswerCard({ cardId, isCorrect }: Props) {
 	const { gameState, setGameState } = useGameState();
 	const { incrementCurrent, resetCurrent } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
+	const plausible = usePlausible<PlausibleEvents>();
+
 	const onClick = useCallback(() => {
 		if (gameState === 'in-progress' || gameState === 'starting') {
 			setGameState(isCorrect ? 'won' : 'lost');
+			plausible('finishGame', { props: { result: isCorrect ? 'correct' : 'incorrect' } });
+			// TODO: add db integration
 			if (!isCorrect) {
 				setResult(false);
 				resetCurrent();
@@ -21,7 +27,7 @@ export default function useAnswerCard({ cardId, isCorrect }: Props) {
 				incrementCurrent();
 			}
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {

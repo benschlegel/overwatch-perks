@@ -1,5 +1,5 @@
 export type PlausibleEvents = {
-	// TODO: add events for guesses
+	finishGame: { result: GameResult };
 	openSocials: never;
 	followSocial: { social: string };
 };
