@@ -3,10 +3,12 @@ import PerkIcon from '@/components/game/perk-icon';
 import HeroCard from '@/components/landing-page/hero-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { useGameScore } from '@/context/GameScoreContext';
 import useGameState from '@/hooks/use-game-state';
 
 export default function PerkInfo() {
 	const { currPerk, setCurrPerk } = useGameState();
+	const { bestStreak, currentStreak } = useGameScore();
 	return (
 		<Card className="transition-colors">
 			<CardContent className="flex flex-col sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
@@ -19,11 +21,11 @@ export default function PerkInfo() {
 							<Separator className="mt-1" />
 							<div className="flex h-5 items-center space-x-4 sm:text-sm text-xs text-muted-foreground w-full justify-center mt-4">
 								<p className="text-center">
-									Current Streak: <span className="sm:block">0</span>
+									Current Streak: <span className="sm:block">{currentStreak}</span>
 								</p>
 								<Separator orientation="vertical" />
 								<p className="text-center">
-									Best Streak: <span className="sm:block">0</span>
+									Best Streak: <span className="sm:block">{bestStreak}</span>
 								</p>
 							</div>
 						</div>
