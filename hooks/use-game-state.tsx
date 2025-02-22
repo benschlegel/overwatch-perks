@@ -22,7 +22,6 @@ export default function useGameState() {
 		if (gameState === 'starting' || currPerk === undefined) {
 			rerollPerk();
 		}
-		console.log(`Game state: ${gameState}`);
 	}, [gameState, currPerk, rerollPerk]);
 
 	useEffect(() => {

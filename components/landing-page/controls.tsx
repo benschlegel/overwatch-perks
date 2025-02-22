@@ -22,13 +22,16 @@ export default function Controls() {
 					C
 				</kbd>
 			</Button>
-			<Button className="bg-primary-foreground/90 text-white/85 hover:bg-primary-foreground" onClick={restartGame}>
+			<Button className="bg-primary-foreground/85 text-white/85 hover:bg-primary-foreground" onClick={restartGame}>
 				<div className="flex flex-row gap-2">
-					<p className="text-md font-semibold tracking-tight">Restart</p>
+					<p className="tracking-wide">Restart</p>
 					<div className="flex items-center justify-center">
 						<DicesIcon className="h-4 w-4" />
-						<span className="sr-only">Restart</span>
+						<span className="sr-only font-medium leading-none">Restart</span>
 					</div>
+					{/* <kbd className="pointer-events-none sm:inline-flex hidden h-5 select-none items-center gap-1 rounded border border-secondary/60 bg-secondary/60 px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+						r
+					</kbd> */}
 				</div>
 			</Button>
 		</div>
