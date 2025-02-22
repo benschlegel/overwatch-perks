@@ -1,10 +1,10 @@
 import { PerkContext } from '@/context/PerkContext';
-import { getRandomPerk, PERKS } from '@/data/perks';
+import { getRandomPerk, type Perk, PERKS } from '@/data/perks';
 import { useCallback, useContext, useEffect } from 'react';
 
 export default function useGameState() {
 	const [currPerk, setCurrPerk] = useContext(PerkContext);
-	const heroPerks = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
+	const heroPerks: Perk[] = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
 
 	const rerollPerk = useCallback(() => {
 		const newPerk = getRandomPerk();

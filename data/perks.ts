@@ -12,6 +12,8 @@ export type Perk = {
 	perkIndex: PerkIndex;
 };
 
+export type EvaluatedPerk = Perk & { isCorrect?: boolean };
+
 export const PERKS: Perk[] = [
 	/**
 	 *

@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
@@ -8,13 +7,14 @@ import { useCallback, useState } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
-	isCorrect?: boolean;
 	index: number;
+	correctPerkId: number;
 }
 
-export default function PerkCard({ perk, index, className, isCorrect = false }: Props) {
+export default function PerkCard({ perk, index, className, correctPerkId }: Props) {
 	if (!perk) return <></>;
 
+	const isCorrect = perk.id === correctPerkId;
 	const [hasClicked, setHasClicked] = useState(false);
 	const onClick = useCallback(() => {
 		setHasClicked(true);
@@ -45,9 +45,11 @@ export default function PerkCard({ perk, index, className, isCorrect = false }: 
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
 					<HighlightText className="sm:text-base text-sm" text={perk.description} />
 				</div>
-				<Separator className="mb-1 mt-2" />
-				<div className="w-full text-xs text-muted-foreground flex justify-between">
-					<p>{perk.perkType}</p>
+				<Separator className="mt-1 sm:mb-0 mb-1" />
+				<div className="w-full text-xs font-medium sm:mb-[-0.25rem] text-muted-foreground flex justify-between">
+					<p>
+						<span className="font-semibold">{perk.perkType}</span>
+					</p>
 					<p>{index + 1}</p>
 				</div>
 			</CardContent>
