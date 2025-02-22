@@ -3,26 +3,49 @@ import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
 import type { Perk } from '@/data/perks';
 import { cn } from '@/lib/utils';
-import { useCallback, useState } from 'react';
+import type { GameState } from '@/types/game-state';
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
 	index: number;
 	correctPerkId: number;
+	gameState: GameState;
+	setGameState: Dispatch<SetStateAction<GameState>>;
 }
 
-export default function PerkCard({ perk, index, className, correctPerkId }: Props) {
+export default function PerkCard({ perk, index, className, correctPerkId, gameState, setGameState }: Props) {
 	if (!perk) return <></>;
+	const cardId = index + 1;
 
 	const isCorrect = perk.id === correctPerkId;
-	const [hasClicked, setHasClicked] = useState(false);
+	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const onClick = useCallback(() => {
-		setHasClicked(true);
+		if (gameState === 'in-progress') {
+			setGameState(isCorrect ? 'won' : 'lost');
+			if (!isCorrect) {
+				setResult(false);
+			}
+		}
+	}, [isCorrect, setGameState, gameState]);
+
+	const updateCorrectCard = useCallback(() => {
+		if (isCorrect) {
+			setResult(true);
+		}
+	}, [isCorrect]);
+
+	const resetResult = useCallback(() => {
+		setResult(undefined);
 	}, []);
 
-	// TODO: set global state and do this based on global state too (e.g. show correct one)
-	// TODO: do this via gameState context
-	const result = hasClicked ? isCorrect : undefined;
+	useEffect(() => {
+		if (gameState !== 'in-progress') {
+			updateCorrectCard();
+		} else if (gameState === 'in-progress') {
+			resetResult();
+		}
+	}, [gameState, updateCorrectCard, resetResult]);
 
 	return (
 		<Card
@@ -33,7 +56,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 			)}
 			tabIndex={0}
 			onClick={onClick}
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
+			// biome-ignore lint/a11y/useSemanticElements: easier to keep card styling this way
 			role="button"
 			onKeyDown={(e) => {
 				if (e.key === 'Enter' || e.key === ' ') {
@@ -50,7 +73,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					<p>
 						<span className="font-semibold">{perk.perkType}</span>
 					</p>
-					<p>{index + 1}</p>
+					<p>{cardId}</p>
 				</div>
 			</CardContent>
 		</Card>

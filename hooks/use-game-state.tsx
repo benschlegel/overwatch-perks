@@ -36,5 +36,5 @@ export default function useGameState() {
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [rerollPerk]);
 
-	return { currPerk, setCurrPerk, rerollPerk, heroPerks };
+	return { currPerk, setCurrPerk, rerollPerk, heroPerks, gameState, setGameState };
 }
