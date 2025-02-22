@@ -7,7 +7,7 @@ export default function Controls() {
 	const { rerollPerk, gameState, restartGame } = useGameState();
 	return (
 		<div className="flex justify-between items-center mb-4">
-			<Button variant="outline">
+			<Button variant="outline" className="px-3 sm:px-4">
 				<div className="flex flex-row gap-2">
 					<p className="text-md font-semibold tracking-tight">Share streak</p>
 					<div className="flex items-center justify-center">
@@ -16,7 +16,7 @@ export default function Controls() {
 					</div>
 				</div>
 			</Button>
-			<Button variant="secondary" disabled={gameState === 'starting' || gameState === 'in-progress'} onClick={rerollPerk} className="sm:px-5 px-8">
+			<Button variant="secondary" disabled={gameState === 'starting' || gameState === 'in-progress'} onClick={rerollPerk} className="sm:px-8 px-9">
 				<p>Next</p>
 				<kbd className="pointer-events-none sm:inline-flex hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
 					C
