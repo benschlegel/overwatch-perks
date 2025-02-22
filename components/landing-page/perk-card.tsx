@@ -46,7 +46,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					<p>
 						<span className="font-semibold">{perk.perkType}</span>
 					</p>
-					<p>{isCorrect ? 'correct' : ''}</p>
+					{/* <p>{isCorrect ? 'correct' : ''}</p> */}
 					<p>{cardId}</p>
 				</div>
 			</CardContent>
