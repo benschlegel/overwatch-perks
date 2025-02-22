@@ -19,7 +19,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 	const cardId = index + 1;
 	const isCorrect = perk.id === correctPerkId;
 
-	const { onClick, result } = useAnswerCard({ cardId, isCorrect });
+	const { onClick, result } = useAnswerCard({ cardId, isCorrect, perk });
 
 	return (
 		<Card
