@@ -1,21 +1,24 @@
+import { GameStateContext } from '@/context/GameStateContext';
 import { PerkContext } from '@/context/PerkContext';
 import { getRandomPerk, type Perk, PERKS } from '@/data/perks';
 import { useCallback, useContext, useEffect } from 'react';
 
 export default function useGameState() {
 	const [currPerk, setCurrPerk] = useContext(PerkContext);
+	const [gameState, setGameState] = useContext(GameStateContext);
 	const heroPerks: Perk[] = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
 
 	const rerollPerk = useCallback(() => {
 		const newPerk = getRandomPerk();
 		setCurrPerk(newPerk);
-	}, [setCurrPerk]);
+		setGameState('in-progress');
+	}, [setCurrPerk, setGameState]);
 
 	useEffect(() => {
-		if (currPerk === undefined) {
+		if (gameState === 'restarting' || currPerk === undefined) {
 			rerollPerk();
 		}
-	}, [currPerk, rerollPerk]);
+	}, [gameState, currPerk, rerollPerk]);
 
 	useEffect(() => {
 		// Handle hotkeys
