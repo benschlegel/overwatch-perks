@@ -1,5 +1,6 @@
 import { useGameScore } from '@/context/GameScoreContext';
 import type { Perk } from '@/data/perks';
+import { useDialogParams } from '@/hooks/use-dialog-param';
 import useGameState from '@/hooks/use-game-state';
 import type { GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
@@ -17,6 +18,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 	const { incrementCurrent, resetCurrent } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const plausible = usePlausible<PlausibleEvents>();
+	const [dialog, _] = useDialogParams();
 
 	const onClick = useCallback(async () => {
 		if (gameState === 'in-progress' || gameState === 'starting') {
@@ -63,7 +65,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 		// Handle hotkeys
 		const handleKeyDown = (e: KeyboardEvent) => {
 			// reroll on r or space (only trigger if ctrl wasn't pressed so ctrl + r reload still works)
-			if (e.key === `${cardId}`) {
+			if (e.key === `${cardId}` && dialog === 'none') {
 				e.preventDefault();
 
 				// Hotkey action
@@ -74,7 +76,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
-	}, [onClick, cardId]);
+	}, [onClick, cardId, dialog]);
 
 	return { result, onClick };
 }
