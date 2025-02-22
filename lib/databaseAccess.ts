@@ -1,4 +1,4 @@
-import type { GameResult, DbLoggedGame } from '@/types/database';
+import type { GameResult, DbLoggedGame, DbFeedback } from '@/types/database';
 import { type ClientSession, MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -26,6 +26,8 @@ const database = dbClient.db(dbName);
  */
 
 const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
+const feedbackID = 'feedback';
+const feedbackCollection = database.collection<DbFeedback>(feedbackID);
 
 /**
  *
@@ -43,4 +45,11 @@ const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
  */
 export async function logGame(gameResult: GameResult, timestamp: Date, version: string) {
 	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult, gameVersion: version });
+}
+
+/**
+ * Add website feedback to db
+ */
+export async function addFeedback(feedback: DbFeedback) {
+	return feedbackCollection.insertOne(feedback);
 }
