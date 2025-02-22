@@ -10,6 +10,7 @@ export type DbLoggedGame = {
 	 * Timestamp of when the game was finished
 	 */
 	finishedAt: Date;
+	gameVersion: string;
 };
 
 export const gameSaveValidator = z.object({

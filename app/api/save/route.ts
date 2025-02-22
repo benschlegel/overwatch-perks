@@ -1,3 +1,4 @@
+import { CONFIG } from '@/config';
 import { logGame } from '@/lib/databaseAccess';
 import { gameSaveValidator } from '@/types/database';
 import type { NextRequest } from 'next/server';
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
 	try {
 		// Try to log game, return with success code if so
 		const timestamp = new Date();
-		const res = await logGame(reqData, timestamp);
+		const res = await logGame(reqData, timestamp, CONFIG.version);
 		if (res?.acknowledged) {
 			return new Response(undefined, { status: 200 });
 		}

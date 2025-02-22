@@ -41,6 +41,6 @@ const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
 /**
  * Log game to database (result, perkid, etc)
  */
-export async function logGame(gameResult: GameResult, timestamp: Date) {
-	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult });
+export async function logGame(gameResult: GameResult, timestamp: Date, version: string) {
+	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult, gameVersion: version });
 }
