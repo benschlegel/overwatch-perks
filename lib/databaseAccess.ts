@@ -1,0 +1,38 @@
+import type { DbGameResult, DbLoggedGame } from '@/types/database';
+import { type ClientSession, MongoClient } from 'mongodb';
+let useDevDatabase = false;
+if (process.env.NODE_ENV !== 'production') {
+	useDevDatabase = true;
+}
+
+const uri = process.env.MONGO_URI;
+if (!uri) {
+	throw new Error('MONGO_URI not found! Make sure to set MONGO_URI in your .env');
+}
+
+// Define db constants (collection names, etc)
+const PROD_NAME = 'OwPerks';
+const DEV_NAME = 'OwPerks-dev';
+export const dbName = !useDevDatabase ? PROD_NAME : DEV_NAME;
+const gameLogs = 'game_logs';
+
+const dbClient = new MongoClient(uri);
+const database = dbClient.db(dbName);
+
+const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
+
+/**
+ *
+ *
+ *
+ * Database functions
+ *
+ *
+ */
+
+/**
+ * Log game to database (result, perkid, etc)
+ */
+export async function logGame(gameResult: DbGameResult, timestamp: Date) {
+	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult });
+}
