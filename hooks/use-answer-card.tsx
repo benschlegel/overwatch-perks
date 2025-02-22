@@ -1,3 +1,4 @@
+import { useGameScore } from '@/context/GameScoreContext';
 import useGameState from '@/hooks/use-game-state';
 import { useState, useCallback, useEffect } from 'react';
 
@@ -8,15 +9,19 @@ type Props = {
 
 export default function useAnswerCard({ cardId, isCorrect }: Props) {
 	const { gameState, setGameState } = useGameState();
+	const { incrementCurrent, resetCurrent } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const onClick = useCallback(() => {
 		if (gameState === 'in-progress') {
 			setGameState(isCorrect ? 'won' : 'lost');
 			if (!isCorrect) {
 				setResult(false);
+				resetCurrent();
+			} else {
+				incrementCurrent();
 			}
 		}
-	}, [isCorrect, setGameState, gameState]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {

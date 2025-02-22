@@ -4,8 +4,6 @@ import { Separator } from '@/components/ui/separator';
 import type { Perk } from '@/data/perks';
 import useAnswerCard from '@/hooks/use-answer-card';
 import { cn } from '@/lib/utils';
-import type { GameState } from '@/types/game-state';
-import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
@@ -43,11 +41,12 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
 					<HighlightText className="sm:text-base text-sm mt-[0.4rem] sm:mt-1" text={perk.description} />
 				</div>
-				<Separator className="mt-1 sm:mb-0 mb-1" />
+				<Separator className="mt-1 sm:mb-0 mb-1 bg-foreground opacity-[0.08]" />
 				<div className="w-full text-xs font-medium sm:mb-[-0.25rem] text-muted-foreground flex justify-between">
 					<p>
 						<span className="font-semibold">{perk.perkType}</span>
 					</p>
+					<p>{isCorrect ? 'correct' : ''}</p>
 					<p>{cardId}</p>
 				</div>
 			</CardContent>
