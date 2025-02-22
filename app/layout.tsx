@@ -31,7 +31,7 @@ const owlHeader = localFont({
 
 export const metadata: Metadata = {
 	title: 'Guess the Perk',
-	description: 'Guess the overwatch perk based on its icon to build better muscle memory',
+	description: 'Guess the overwatch perk based on its icon and reach the longest streak possible',
 };
 
 export default function RootLayout({
