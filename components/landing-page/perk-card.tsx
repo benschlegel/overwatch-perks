@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
 import type { Perk } from '@/data/perks';
+import useAnswerCard from '@/hooks/use-answer-card';
 import { cn } from '@/lib/utils';
 import type { GameState } from '@/types/game-state';
 import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from 'react';
@@ -10,42 +11,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
 	index: number;
 	correctPerkId: number;
-	gameState: GameState;
-	setGameState: Dispatch<SetStateAction<GameState>>;
 }
 
-export default function PerkCard({ perk, index, className, correctPerkId, gameState, setGameState }: Props) {
+export default function PerkCard({ perk, index, className, correctPerkId }: Props) {
 	if (!perk) return <></>;
+
+	// Card state/info
 	const cardId = index + 1;
-
 	const isCorrect = perk.id === correctPerkId;
-	const [result, setResult] = useState<boolean | undefined>(undefined);
-	const onClick = useCallback(() => {
-		if (gameState === 'in-progress') {
-			setGameState(isCorrect ? 'won' : 'lost');
-			if (!isCorrect) {
-				setResult(false);
-			}
-		}
-	}, [isCorrect, setGameState, gameState]);
 
-	const updateCorrectCard = useCallback(() => {
-		if (isCorrect) {
-			setResult(true);
-		}
-	}, [isCorrect]);
-
-	const resetResult = useCallback(() => {
-		setResult(undefined);
-	}, []);
-
-	useEffect(() => {
-		if (gameState !== 'in-progress') {
-			updateCorrectCard();
-		} else if (gameState === 'in-progress') {
-			resetResult();
-		}
-	}, [gameState, updateCorrectCard, resetResult]);
+	const { onClick, result } = useAnswerCard({ cardId, isCorrect });
 
 	return (
 		<Card
