@@ -41,7 +41,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
 				<div className="flex flex-col flex-1">
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
-					<HighlightText className="sm:text-base text-sm" text={perk.description} />
+					<HighlightText className="sm:text-base text-sm mt-[0.4rem] sm:mt-1" text={perk.description} />
 				</div>
 				<Separator className="mt-1 sm:mb-0 mb-1" />
 				<div className="w-full text-xs font-medium sm:mb-[-0.25rem] text-muted-foreground flex justify-between">
