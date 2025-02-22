@@ -4,7 +4,7 @@ import useGameState from '@/hooks/use-game-state';
 import { CopyIcon, DicesIcon } from 'lucide-react';
 
 export default function Controls() {
-	const { rerollPerk } = useGameState();
+	const { rerollPerk, gameState } = useGameState();
 	return (
 		<div className="flex justify-between items-center mb-4">
 			<Button variant="outline">
@@ -15,6 +15,12 @@ export default function Controls() {
 						<span className="sr-only">Share streak</span>
 					</div>
 				</div>
+			</Button>
+			<Button variant="secondary" disabled={gameState === 'in-progress'} onClick={rerollPerk}>
+				<p>Next</p>
+				<kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+					C
+				</kbd>
 			</Button>
 			<Button className="bg-primary-foreground/90 text-white/85 hover:bg-primary-foreground" onClick={rerollPerk}>
 				<div className="flex flex-row gap-2">
