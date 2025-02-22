@@ -12,7 +12,7 @@ export default function useAnswerCard({ cardId, isCorrect }: Props) {
 	const { incrementCurrent, resetCurrent } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const onClick = useCallback(() => {
-		if (gameState === 'in-progress') {
+		if (gameState === 'in-progress' || gameState === 'starting') {
 			setGameState(isCorrect ? 'won' : 'lost');
 			if (!isCorrect) {
 				setResult(false);
@@ -34,9 +34,9 @@ export default function useAnswerCard({ cardId, isCorrect }: Props) {
 	}, []);
 
 	useEffect(() => {
-		if (gameState !== 'in-progress') {
+		if (gameState === 'won' || gameState === 'lost') {
 			updateCorrectCard();
-		} else if (gameState === 'in-progress') {
+		} else if (gameState === 'starting' || gameState === 'in-progress') {
 			resetResult();
 		}
 	}, [gameState, updateCorrectCard, resetResult]);

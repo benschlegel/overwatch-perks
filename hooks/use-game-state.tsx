@@ -14,10 +14,15 @@ export default function useGameState() {
 		setGameState('in-progress');
 	}, [setCurrPerk, setGameState]);
 
+	const restartGame = useCallback(() => {
+		setGameState('starting');
+	}, [setGameState]);
+
 	useEffect(() => {
-		if (gameState === 'restarting' || currPerk === undefined) {
+		if (gameState === 'starting' || currPerk === undefined) {
 			rerollPerk();
 		}
+		console.log(`Game state: ${gameState}`);
 	}, [gameState, currPerk, rerollPerk]);
 
 	useEffect(() => {
@@ -28,14 +33,14 @@ export default function useGameState() {
 				e.preventDefault();
 
 				// Hotkey action
-				rerollPerk();
+				restartGame();
 			}
 
 			if (e.key === 'c' && !(e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
 
 				// Hotkey action
-				if (gameState !== 'in-progress') {
+				if (gameState === 'won' || gameState === 'lost') {
 					rerollPerk();
 				}
 			}
@@ -43,7 +48,7 @@ export default function useGameState() {
 
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
-	}, [rerollPerk, gameState]);
+	}, [rerollPerk, restartGame, gameState]);
 
-	return { currPerk, setCurrPerk, rerollPerk, heroPerks, gameState, setGameState };
+	return { currPerk, setCurrPerk, rerollPerk, heroPerks, gameState, setGameState, restartGame };
 }

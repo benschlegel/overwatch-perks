@@ -37,7 +37,7 @@ export function useGameScore() {
 	}, [setCurrentStreak]);
 
 	useEffect(() => {
-		if (gameState === 'in-progress') {
+		if (gameState === 'starting') {
 			setCurrentStreak(0);
 		}
 	}, [gameState, setCurrentStreak]);
