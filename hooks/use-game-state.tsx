@@ -30,11 +30,20 @@ export default function useGameState() {
 				// Hotkey action
 				rerollPerk();
 			}
+
+			if (e.key === 'c' && !(e.metaKey || e.ctrlKey)) {
+				e.preventDefault();
+
+				// Hotkey action
+				if (gameState !== 'in-progress') {
+					rerollPerk();
+				}
+			}
 		};
 
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
-	}, [rerollPerk]);
+	}, [rerollPerk, gameState]);
 
 	return { currPerk, setCurrPerk, rerollPerk, heroPerks, gameState, setGameState };
 }
