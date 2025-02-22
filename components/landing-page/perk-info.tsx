@@ -6,10 +6,12 @@ import { Separator } from '@/components/ui/separator';
 import { CONFIG } from '@/config';
 import { useGameScore } from '@/context/GameScoreContext';
 import useGameState from '@/hooks/use-game-state';
+import { useSetting } from '@/hooks/use-settings-param';
 
 export default function PerkInfo() {
 	const { currPerk, setCurrPerk } = useGameState();
 	const { bestStreak, currentStreak } = useGameScore();
+	const [isDebugMode, _] = useSetting('debug');
 	return (
 		<Card className="transition-colors">
 			<CardContent className="flex flex-col sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
@@ -28,7 +30,7 @@ export default function PerkInfo() {
 								<p className="text-center">
 									Best Streak: <span className="sm:block">{bestStreak}</span>
 								</p>
-								{CONFIG.isDebug && (
+								{(CONFIG.isDebug || isDebugMode) && (
 									<>
 										<Separator orientation="vertical" />
 										<p className="text-center">
