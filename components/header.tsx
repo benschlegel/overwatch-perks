@@ -1,5 +1,6 @@
 import { FeedbackDialog, FeedbackTriggerButton } from '@/components/dialogs/feedback-dialog';
 import { HelpDialog, HelpTriggerButton } from '@/components/dialogs/help-dialog';
+import { SettingsDialog, SettingsTriggerButton } from '@/components/dialogs/settings-dialog';
 import { ModeToggle } from '@/components/landing-page/theme-switcher';
 import { Separator } from '@/components/ui/separator';
 import { Suspense } from 'react';
@@ -28,6 +29,9 @@ export default function Header() {
 					</h1>
 				</div>
 				<div className="flex gap-1">
+					<Suspense fallback={SettingsTriggerButton}>
+						<SettingsDialog />
+					</Suspense>
 					<ModeToggle />
 				</div>
 			</div>
