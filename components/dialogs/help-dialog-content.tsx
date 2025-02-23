@@ -41,7 +41,7 @@ export default function HelpContent({ setOpen }: Props) {
 				<main className="h-full w-full flex flex-col gap-6 px-2 pb-2 text-wrap break-words ">
 					{/* Description section */}
 					<blockquote className="sm:leading-7 tracking-wide opacity-90 border-l-[3px] pl-4 mt-1">
-						Guess the new Overwatch Perk based on the icon and four possible answers. Try to get the longest streak possible without getting a Perk wrong.
+						Guess the new Overwatch Perk based on the icon and four possible answers. Try to get the longest streak you can without getting a Perk wrong.
 					</blockquote>
 					<p>Description work in progress</p>
 					{/* Tips section */}

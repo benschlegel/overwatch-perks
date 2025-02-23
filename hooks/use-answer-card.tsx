@@ -6,15 +6,16 @@ import useGameState from '@/hooks/use-game-state';
 import type { GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { usePlausible } from 'next-plausible';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, type RefObject } from 'react';
 
 type Props = {
 	cardId: number;
 	perk: Perk;
 	isCorrect: boolean;
+	cardRef: RefObject<HTMLDivElement | null>;
 };
 
-export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
+export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Props) {
 	const { gameState, setGameState, currPerk } = useGameState();
 	const { incrementCurrent, resetCurrent } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
@@ -26,6 +27,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 		if (gameState === 'in-progress' || gameState === 'starting') {
 			// Update game/card state
 			const gameResult = isCorrect ? 'won' : 'lost';
+			cardRef.current?.focus();
 			setGameState(gameResult);
 			if (!isCorrect) {
 				setResult(false);
@@ -44,7 +46,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 			};
 			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {
@@ -54,7 +56,8 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 
 	const resetResult = useCallback(() => {
 		setResult(undefined);
-	}, []);
+		cardRef.current?.blur();
+	}, [cardRef.current]);
 
 	useEffect(() => {
 		if (gameState === 'won' || gameState === 'lost') {
