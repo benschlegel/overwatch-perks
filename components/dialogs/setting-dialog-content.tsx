@@ -4,6 +4,7 @@ import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTit
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Switch } from '@/components/ui/switch';
+import useGameState from '@/hooks/use-game-state';
 import { useSetting } from '@/hooks/use-settings-param';
 import { SettingsIcon } from 'lucide-react';
 import React, { memo, useCallback } from 'react';
@@ -71,13 +72,23 @@ export const SETTINGS: SettingItem[] = [
 
 export function SettingsItem({ name, description, settingId, defaultChecked }: SettingItem) {
 	const [enabled, setEnabled] = useSetting(settingId);
+	const { restartGame } = useGameState();
+
+	const onClick = useCallback(
+		(checked: boolean) => {
+			setEnabled(checked);
+			restartGame();
+		},
+		[setEnabled, restartGame]
+	);
+
 	return (
-		<div className="flex items-center justify-between space-x-4">
+		<div className="flex items-center justify-between space-x-4 mr-1">
 			<Label htmlFor={settingId} className="flex flex-col space-y-1 w-full">
 				<span>{name}</span>
 				<span className="font-normal leading-snug text-muted-foreground">{description}</span>
 			</Label>
-			<Switch id={settingId} defaultChecked={defaultChecked} checked={enabled} onCheckedChange={(checked) => setEnabled(checked)} />
+			<Switch id={settingId} defaultChecked={defaultChecked} checked={enabled} onCheckedChange={onClick} />
 		</div>
 	);
 }
