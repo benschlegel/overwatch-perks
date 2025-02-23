@@ -20,10 +20,10 @@ export default function CopyStreakButton() {
 function DefaultButtonContent() {
 	return (
 		<div className="flex flex-row gap-2">
-			<p className="text-md font-semibold tracking-tight">Share streak</p>
+			<p className="text-md font-semibold tracking-tight">Copy streak</p>
 			<div className="flex items-center justify-center">
 				<CopyIcon className="h-4 w-4" />
-				<span className="sr-only">Share streak</span>
+				<span className="sr-only">Copy streak</span>
 			</div>
 		</div>
 	);

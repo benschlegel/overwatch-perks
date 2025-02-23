@@ -1,19 +1,19 @@
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import Link from 'next/link';
-import type { PropsWithChildren } from 'react';
+import type { HtmlHTMLAttributes, PropsWithChildren } from 'react';
 
-type Props = {
+interface Props extends HtmlHTMLAttributes<HTMLDivElement> {
 	href: string;
 	type?: 'Link' | 'a' | 'button';
 	onClick?: () => void;
-};
+}
 
 const className: React.ComponentProps<'a'>['className'] =
 	'text-base tracking-normal rounded-lg px-[0.1rem] py-[0.1rem] focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary-foreground focus-visible:ring-offset-1 p-0!';
 
-export default function LinkButton({ children, href, type = 'a', onClick }: PropsWithChildren<Props>) {
+export default function LinkButton({ children, href, type = 'a', onClick, className }: PropsWithChildren<Props>) {
 	return (
-		<EnhancedButton variant={'linkHover1'} tabIndex={-1} onClick={onClick}>
+		<EnhancedButton variant={'linkHover1'} tabIndex={-1} onClick={onClick} className={className}>
 			{type === 'Link' ? (
 				<Link href={href} className={className}>
 					{children}
