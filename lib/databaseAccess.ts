@@ -47,6 +47,10 @@ export async function logGame(gameResult: GameResult, timestamp: Date, version: 
 	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult, gameVersion: version });
 }
 
+export async function deleteLogs(version: string) {
+	return gameLogCollection.deleteMany({ gameVersion: version });
+}
+
 /**
  * Add website feedback to db
  */
