@@ -1,9 +1,14 @@
 'use client';
 
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CustomCommandInput } from '@/components/ui/command';
+import { useGameScore } from '@/context/GameScoreContext';
 import { PERKS, type Perk } from '@/data/perks';
+import useGameState from '@/hooks/use-game-state';
 import { cn } from '@/lib/utils';
+import type { GameResult } from '@/types/database';
+import type { PlausibleEvents } from '@/types/plausible';
 import { Gamepad2Icon, UserIcon } from 'lucide-react';
+import { usePlausible } from 'next-plausible';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
@@ -15,6 +20,9 @@ export default function PlayerSearch({ className }: Props) {
 	const [searchState, setSearchState] = useState<SearchState>('unfocused');
 	const [searchValue, setSearchValue] = useState('');
 	const inputRef = useRef<HTMLInputElement>(null);
+	const { gameState, setGameState, currPerk } = useGameState();
+	const { incrementCurrent, resetCurrent } = useGameScore();
+	const plausible = usePlausible<PlausibleEvents>();
 
 	const closeSearch = useCallback(() => {
 		// TODO: find better workaround
@@ -23,18 +31,43 @@ export default function PlayerSearch({ className }: Props) {
 		}, 150);
 	}, []);
 
+	const handleFinishGame = useCallback(
+		async (perk: Perk) => {
+			if (gameState === 'in-progress' || gameState === 'starting') {
+				// Update game/card state
+				const isCorrect = selectedPerk?.id === currPerk?.id;
+				const gameResult = isCorrect ? 'won' : 'lost';
+				setGameState(gameResult);
+				if (!isCorrect) {
+					resetCurrent();
+				} else {
+					incrementCurrent();
+				}
+
+				// Logging
+				plausible('finishGame', { props: { result: isCorrect ? 'correct' : 'incorrect' } });
+				const loggedGame: GameResult = {
+					gameResult,
+					guessedPerk: perk.id,
+					perkId: currPerk?.id ?? -1,
+				};
+				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			}
+		},
+		[setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, selectedPerk?.id]
+	);
+
 	// Called when player is selected
 	const handleSubmit = useCallback(() => {
 		if (selectedPerk !== undefined) {
-			// Handle submit
-			console.log(`Submitted: ${selectedPerk.name}`);
+			handleFinishGame(selectedPerk);
 
 			// Reset search state
 			setSearchState('unfocused');
 			setSearchValue('');
 			setSelectedPerk(undefined);
 		}
-	}, [selectedPerk]);
+	}, [selectedPerk, handleFinishGame]);
 
 	// Called when item is selected from dropdown (through click or enter)
 	const handleItemSubmit = useCallback(
@@ -90,6 +123,7 @@ export default function PlayerSearch({ className }: Props) {
 				onFocus={() => setSearchState('typing')}
 				onClick={() => setSearchState('typing')}
 				ref={inputRef}
+				disabled={gameState === 'lost' || gameState === 'won'}
 				onKeyDownCapture={(event) => {
 					if (event.key === 'Enter') {
 						if (searchState === 'submitting') {
