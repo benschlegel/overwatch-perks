@@ -3,7 +3,9 @@
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CustomCommandInput } from '@/components/ui/command';
 import { useGameScore } from '@/context/GameScoreContext';
 import { PERKS, type Perk } from '@/data/perks';
+import useCompactSettings from '@/hooks/use-compact-settings';
 import useGameState from '@/hooks/use-game-state';
+import { useSetting } from '@/hooks/use-settings-param';
 import { cn } from '@/lib/utils';
 import type { GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
@@ -23,6 +25,7 @@ export default function PlayerSearch({ className }: Props) {
 	const { gameState, setGameState, currPerk } = useGameState();
 	const { incrementCurrent, resetCurrent } = useGameScore();
 	const plausible = usePlausible<PlausibleEvents>();
+	const settings = useCompactSettings();
 
 	const closeSearch = useCallback(() => {
 		// TODO: find better workaround
@@ -30,6 +33,22 @@ export default function PlayerSearch({ className }: Props) {
 			setSearchState('unfocused');
 		}, 150);
 	}, []);
+
+	const logGame = useCallback(
+		async (isCorrect: boolean, perk: Perk) => {
+			// Logging
+			const gameResult = isCorrect ? 'won' : 'lost';
+			plausible('finishGame', { props: { result: isCorrect ? 'correct' : 'incorrect' } });
+			const loggedGame: GameResult = {
+				gameResult,
+				guessedPerk: perk.id,
+				perkId: currPerk?.id ?? -1,
+				settings,
+			};
+			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+		},
+		[plausible, settings, currPerk?.id]
+	);
 
 	const handleFinishGame = useCallback(
 		async (perk: Perk) => {
@@ -43,18 +62,10 @@ export default function PlayerSearch({ className }: Props) {
 				} else {
 					incrementCurrent();
 				}
-
-				// Logging
-				plausible('finishGame', { props: { result: isCorrect ? 'correct' : 'incorrect' } });
-				const loggedGame: GameResult = {
-					gameResult,
-					guessedPerk: perk.id,
-					perkId: currPerk?.id ?? -1,
-				};
-				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+				await logGame(isCorrect, perk);
 			}
 		},
-		[setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, selectedPerk?.id]
+		[setGameState, gameState, incrementCurrent, resetCurrent, currPerk?.id, selectedPerk?.id, logGame]
 	);
 
 	// Called when player is selected

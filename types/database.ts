@@ -23,6 +23,7 @@ export const gameSaveValidator = z.object({
 		.number()
 		.min(0)
 		.max(PERKS.length - 1),
+	settings: z.array(z.boolean()),
 });
 
 export type GameResult = z.infer<typeof gameSaveValidator>;

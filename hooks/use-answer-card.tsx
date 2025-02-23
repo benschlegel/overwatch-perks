@@ -1,5 +1,6 @@
 import { useGameScore } from '@/context/GameScoreContext';
 import type { Perk } from '@/data/perks';
+import useCompactSettings from '@/hooks/use-compact-settings';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import useGameState from '@/hooks/use-game-state';
 import type { GameResult } from '@/types/database';
@@ -19,6 +20,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const plausible = usePlausible<PlausibleEvents>();
 	const [dialog, _] = useDialogParams();
+	const settings = useCompactSettings();
 
 	const onClick = useCallback(async () => {
 		if (gameState === 'in-progress' || gameState === 'starting') {
@@ -38,10 +40,11 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 				gameResult,
 				guessedPerk: perk.id,
 				perkId: currPerk?.id ?? -1,
+				settings,
 			};
 			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {
