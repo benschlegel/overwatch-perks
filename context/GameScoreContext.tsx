@@ -16,6 +16,8 @@ export const GameScoreContext = createContext<GameScore>(defaultScore);
 export const LOCAL_STORAGE_SCORE_KEY = 'score';
 export const LOCAL_STORAGE_BEST_SCORE_KEY = 'highScore';
 
+// TODO: make context manage and expose hook
+
 export default function GameScoreContextProvider({ children }: PropsWithChildren) {
 	const [currentStreak, setCurrentStreak] = useState<number>(0);
 	const [bestStreak, setBestStreak] = useState<number>(0);
