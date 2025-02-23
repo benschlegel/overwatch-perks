@@ -21,7 +21,7 @@ export const CONFIG: Config = {
 	gameName: 'Guess the Perk (Overwatch)',
 	url: 'https://perks.owldle.com',
 	isDebug: false,
-	version: 'v0.0',
+	version: 'v0.1',
 	backlogSize: 15,
 	preloadAmount: 4,
 	pregenThreshold: 5,
