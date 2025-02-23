@@ -33,6 +33,9 @@ export default function SettingsContent({ setOpen }: Props) {
 			</DialogHeader>
 			<ScrollArea type="scroll" className="h-[350px]">
 				<div className="flex flex-col gap-5">
+					<blockquote className="opacity-90 border-l-[3px] font-mono font-sm border-primary-foreground pl-4 mt-1">
+						<span className="font-bold">Warning</span>: changing settings resets streak.
+					</blockquote>
 					{SETTINGS.map((s) => (
 						<SettingsItem key={s.settingId} description={s.description} name={s.name} settingId={s.settingId} defaultChecked={s.defaultChecked} />
 					))}
