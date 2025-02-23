@@ -3,7 +3,7 @@
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CustomCommandInput } from '@/components/ui/command';
 import { PERKS, type Perk } from '@/data/perks';
 import { cn } from '@/lib/utils';
-import { UserIcon } from 'lucide-react';
+import { Gamepad2Icon, UserIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
@@ -112,7 +112,7 @@ export default function PlayerSearch({ className }: Props) {
 								key={`${perk.name}-${perk.id}`}
 								onSelect={handleItemSubmit}
 								className="text-[16px] sm:text-[16px] sm:py-[0.43rem]">
-								<UserIcon className="mr-2 h-4 w-4" />
+								<Gamepad2Icon className="mr-2 h-4 w-4" />
 								<span>{perk.name}</span>
 							</CommandItem>
 						);

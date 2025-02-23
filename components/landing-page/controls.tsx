@@ -2,11 +2,12 @@
 import CopyStreakButton from '@/components/landing-page/copy-streak-button';
 import { Button } from '@/components/ui/button';
 import useGameState from '@/hooks/use-game-state';
-import useStreakText from '@/hooks/use-streak-text';
-import { CopyIcon, DicesIcon } from 'lucide-react';
+import { useSetting } from '@/hooks/use-settings-param';
+import { DicesIcon } from 'lucide-react';
 
 export default function Controls() {
 	const { rerollPerk, gameState, restartGame } = useGameState();
+	const [hardMode, _] = useSetting('hardMode');
 	return (
 		<div className="flex justify-between items-center mb-4">
 			{/* <Button variant="outline" className="px-3 sm:px-4">
@@ -27,7 +28,7 @@ export default function Controls() {
 				className="sm:px-8 px-10 transform active:scale-95 transition-transform">
 				<p>Next</p>
 				<kbd className="pointer-events-none sm:inline-flex hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-					C
+					{hardMode ? 'alt + c' : 'c'}
 				</kbd>
 			</Button>
 			<Button variant="outline" className="sm:px-5 px-3 transform active:scale-95 transition-transform" onClick={restartGame}>
