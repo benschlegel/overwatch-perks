@@ -43,7 +43,16 @@ export default function HelpContent({ setOpen }: Props) {
 					<blockquote className="sm:leading-7 tracking-wide opacity-90 border-l-[3px] pl-4 mt-1">
 						Guess the new Overwatch Perk based on the icon and four possible answers. Try to get the longest streak you can without getting a Perk wrong.
 					</blockquote>
-					<p>Description work in progress</p>
+					<div className="flex flex-col gap-2">
+						<p className="scroll-m-20 text-base tracking-normal">
+							To play, select the card that maches the icon shown above. There are different <span className="font-semibold">difficulty levels</span> available
+							in the{' '}
+							<LinkButton type="button" href="" onClick={() => setDialog('settings')} className="text-base tracking-normal">
+								settings
+							</LinkButton>{' '}
+							to make the game more challenging. The longer your streak, the better.
+						</p>
+					</div>
 					{/* Tips section */}
 					<div>
 						<div className="flex gap-2 items-center first:mt-0 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">
