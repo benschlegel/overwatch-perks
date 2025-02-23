@@ -31,9 +31,64 @@ const owlHeader = localFont({
 	weight: '700',
 });
 
+export const OgConfig = {
+	ogImagePath: '/opengraph-image.png?new=true',
+	ogImageWidth: 1200,
+	ogImageHeight: 630,
+};
+
+export const DEFAULT_TITLE = 'Guess the Perk';
+export const DEFAULT_DESCRIPTION = 'Guess the overwatch perk and reach the longest streak you can';
+
 export const metadata: Metadata = {
 	title: 'Guess the Perk',
-	description: 'Guess the overwatch perk based on its icon and reach the longest streak possible',
+	description: 'Guess the overwatch perk and reach the longest streak possible',
+	metadataBase: new URL(CONFIG.url),
+	openGraph: {
+		title: DEFAULT_TITLE,
+		description: DEFAULT_DESCRIPTION,
+		url: CONFIG.url,
+		images: [
+			{
+				url: OgConfig.ogImagePath,
+				alt: DEFAULT_TITLE,
+				width: OgConfig.ogImageWidth,
+				height: OgConfig.ogImageHeight,
+				type: 'image/png',
+			},
+		],
+		type: 'website',
+		siteName: 'owperks',
+	},
+	twitter: {
+		title: DEFAULT_TITLE,
+		description: DEFAULT_DESCRIPTION,
+		site: CONFIG.url,
+		siteId: 'owperks',
+		images: [
+			{
+				url: `https://perks.owldle.com${OgConfig.ogImagePath}`,
+				alt: DEFAULT_TITLE,
+				width: OgConfig.ogImageWidth,
+				height: OgConfig.ogImageHeight,
+				type: 'image/png',
+			},
+		],
+		card: 'summary_large_image',
+	},
+	robots: {
+		index: false,
+		follow: true,
+		nocache: true,
+		googleBot: {
+			index: true,
+			follow: false,
+			noimageindex: true,
+			'max-video-preview': -1,
+			'max-snippet': -1,
+		},
+	},
+	keywords: ['Overwatch', 'overwatch', 'perks', 'guess the perk', 'minigame', 'queue game', 'difficult'],
 };
 
 export default function RootLayout({
