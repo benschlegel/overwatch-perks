@@ -1,7 +1,9 @@
+import PlayerSearch from '@/components/landing-page/search';
+
 export default function ExactAnswerCard() {
 	return (
-		<div>
-			<p>test</p>
+		<div className="w-full flex flex-col gap-2">
+			<PlayerSearch />
 		</div>
 	);
 }
