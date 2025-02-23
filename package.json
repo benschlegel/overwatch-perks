@@ -27,6 +27,7 @@
     "babel-plugin-react-compiler": "^19.0.0-beta-21e868a-20250216",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "1.0.0",
     "lucide-react": "^0.475.0",
     "mongodb": "^6.13.1",
     "next": "15.1.0",
