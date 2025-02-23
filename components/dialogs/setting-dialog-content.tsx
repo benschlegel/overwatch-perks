@@ -77,9 +77,11 @@ export function SettingsItem({ name, description, settingId, defaultChecked }: S
 	const onClick = useCallback(
 		(checked: boolean) => {
 			setEnabled(checked);
-			restartGame();
+			if (settingId !== 'debug') {
+				restartGame();
+			}
 		},
-		[setEnabled, restartGame]
+		[setEnabled, restartGame, settingId]
 	);
 
 	return (
