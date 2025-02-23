@@ -22,7 +22,7 @@ export const CONFIG: Config = {
 	url: 'https://perks.owldle.com',
 	isDebug: false,
 	version: 'v0.1',
-	backlogSize: 15,
+	backlogSize: 167,
 	preloadAmount: 4,
-	pregenThreshold: 5,
+	pregenThreshold: 15,
 };
