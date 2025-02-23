@@ -57,7 +57,8 @@ export default function HelpContent({ setOpen }: Props) {
 							<HotkeyInfo hotkey="1,2,3,4" label="Select perk (number for can be found on bottom right of card)" />
 							<HotkeyInfo hotkey="c" label="Go to next perk" />
 							<HotkeyInfo hotkey="r" label="Restart game (also resets streak)" />
-							<HotkeyInfo hotkey="ctrl + e" label="Open/close help dialog" />
+							<HotkeyInfo hotkey="ctrl + e" label="Open/close help" />
+							<HotkeyInfo hotkey="ctrl + s" label="Open/close settings" />
 						</div>
 					</div>
 					<div>
