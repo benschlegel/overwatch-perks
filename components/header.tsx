@@ -25,7 +25,7 @@ export default function Header() {
 						style={{
 							fontFamily: 'var(--font-owl-bold), ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
 						}}>
-						OW<span className="text-primary-foreground">PERKS</span>
+						<span className="text-primary-foreground">OW</span>PERKS
 					</h1>
 				</div>
 				<div className="flex gap-1">
