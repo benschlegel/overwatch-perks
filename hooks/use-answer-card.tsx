@@ -37,11 +37,11 @@ export default function useAnswerCard({ cardId, perk, isCorrect }: Props) {
 			const loggedGame: GameResult = {
 				gameResult,
 				guessedPerk: perk.id,
-				perkId: currPerk.id,
+				perkId: currPerk?.id ?? -1,
 			};
 			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk.id, perk.id]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {

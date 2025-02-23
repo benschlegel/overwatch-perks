@@ -19,15 +19,17 @@ export function usePerks() {
 	useEffect(() => {
 		if (perks.length > 0) {
 			setCurrPerk(perks[0]);
+			console.log('New perks: ', perks);
 		} else {
-			appendBacklog();
+			regenBacklog();
+			console.log('Regen..');
 		}
 	}, [perks]);
 
 	const goNextPerk = useCallback(() => {
 		setPerks((prev) => {
 			let newPerks = prev;
-			if (prev.length < CONFIG.pregenThreshold) {
+			if (prev.length < CONFIG.pregenThreshold + 1) {
 				const newItems = generateBacklog(CONFIG.backlogSize);
 				newPerks = [...prev, ...newItems];
 			}
@@ -41,7 +43,12 @@ export function usePerks() {
 		setPerks((prev) => [...prev, ...newItems]);
 	}, [setPerks]);
 
-	return { currentPerk, goNextPerk };
+	const regenBacklog = useCallback(() => {
+		const newItems = generateBacklog(CONFIG.backlogSize);
+		setPerks(newItems);
+	}, [setPerks]);
+
+	return { currentPerk, goNextPerk, regenBacklog };
 }
 
 /**

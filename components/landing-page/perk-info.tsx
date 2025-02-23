@@ -9,7 +9,7 @@ import useGameState from '@/hooks/use-game-state';
 import { useSetting } from '@/hooks/use-settings-param';
 
 export default function PerkInfo() {
-	const { currPerk, setCurrPerk } = useGameState();
+	const { currPerk } = useGameState();
 	const { bestStreak, currentStreak } = useGameScore();
 	const [isDebugMode, _] = useSetting('debug');
 	return (

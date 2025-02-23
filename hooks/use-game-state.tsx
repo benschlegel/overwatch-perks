@@ -1,30 +1,31 @@
 import { GameStateContext } from '@/context/GameStateContext';
-import { PerkContext } from '@/context/PerkContext';
+import { PerkContext, usePerks } from '@/context/PerkContext';
 import { getRandomPerk, type Perk, PERKS } from '@/data/perks';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import { useCallback, useContext, useEffect } from 'react';
 
 export default function useGameState() {
-	const [currPerk, setCurrPerk] = useContext(PerkContext);
+	// const [currPerk, setCurrPerk] = useContext(PerkContext);
+	const { currentPerk: currPerk, goNextPerk, regenBacklog } = usePerks();
 	const [gameState, setGameState] = useContext(GameStateContext);
 	const heroPerks: Perk[] = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
 	const [dialog, _] = useDialogParams();
 
 	const rerollPerk = useCallback(() => {
-		const newPerk = getRandomPerk();
-		setCurrPerk(newPerk);
+		goNextPerk();
 		setGameState('in-progress');
-	}, [setCurrPerk, setGameState]);
+	}, [goNextPerk, setGameState]);
 
 	const restartGame = useCallback(() => {
+		regenBacklog();
 		setGameState('starting');
-	}, [setGameState]);
+	}, [setGameState, regenBacklog]);
 
-	useEffect(() => {
-		if (gameState === 'starting' || currPerk === undefined) {
-			rerollPerk();
-		}
-	}, [gameState, currPerk, rerollPerk]);
+	// useEffect(() => {
+	// 	if (gameState === 'starting' || currPerk === undefined) {
+	// 		regenBacklog();
+	// 	}
+	// }, [gameState, currPerk, regenBacklog]);
 
 	useEffect(() => {
 		// Handle hotkeys
@@ -53,5 +54,5 @@ export default function useGameState() {
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [rerollPerk, restartGame, gameState, dialog]);
 
-	return { currPerk, setCurrPerk, rerollPerk, heroPerks, gameState, setGameState, restartGame };
+	return { currPerk, goNextPerk, rerollPerk, heroPerks, gameState, setGameState, restartGame };
 }
