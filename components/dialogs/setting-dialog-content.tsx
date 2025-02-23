@@ -45,7 +45,7 @@ export default function SettingsContent({ setOpen }: Props) {
 	);
 }
 
-export const settingNames = ['hardMode', 'debug', 'showHero'] as const;
+export const settingNames = ['hardMode', 'debug', 'showHero', 'randomAnswers'] as const;
 export type SettingName = (typeof settingNames)[number];
 
 type SettingItem = {
@@ -56,7 +56,12 @@ type SettingItem = {
 };
 
 export const SETTINGS: SettingItem[] = [
-	{ name: 'Show Hero', description: 'Show the hero icon + name when guessing.', settingId: 'showHero', defaultChecked: true },
+	{ name: 'Show Hero', description: 'Show hero icon and name while guessing.', settingId: 'showHero', defaultChecked: true },
+	{
+		name: 'Random Answers',
+		description: 'When enabled, answers will be from random perks instead of showing all hero perks.',
+		settingId: 'randomAnswers',
+	},
 	{ name: 'Hard Mode', description: 'Guess perks by providing the exact name instead of choosing from four options.', settingId: 'hardMode' },
 	{ name: 'Debug Mode', description: 'Show perk id and other information useful for debugging and feedback.', settingId: 'debug' },
 ];

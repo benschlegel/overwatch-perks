@@ -1,7 +1,8 @@
 import { GameStateContext } from '@/context/GameStateContext';
-import { PerkContext, usePerks } from '@/context/PerkContext';
+import { generateBacklog, PerkContext, usePerks } from '@/context/PerkContext';
 import { getRandomPerk, type Perk, PERKS } from '@/data/perks';
 import { useDialogParams } from '@/hooks/use-dialog-param';
+import { shuffleArray } from '@/lib/utils';
 import { useCallback, useContext, useEffect } from 'react';
 
 export default function useGameState() {
@@ -9,6 +10,10 @@ export default function useGameState() {
 	const { currentPerk: currPerk, goNextPerk, regenBacklog } = usePerks();
 	const [gameState, setGameState] = useContext(GameStateContext);
 	const heroPerks: Perk[] = currPerk ? PERKS.filter((p) => p.heroId === currPerk.heroId) : [];
+	const randomPerksRaw = generateBacklog(3);
+	// biome-ignore lint/style/noNonNullAssertion: <explanation>
+	const randomPerks = shuffleArray([...randomPerksRaw, currPerk!]);
+
 	const [dialog, _] = useDialogParams();
 
 	const rerollPerk = useCallback(() => {
@@ -54,5 +59,5 @@ export default function useGameState() {
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [rerollPerk, restartGame, gameState, dialog]);
 
-	return { currPerk, goNextPerk, rerollPerk, heroPerks, gameState, setGameState, restartGame };
+	return { currPerk, goNextPerk, rerollPerk, heroPerks, gameState, setGameState, restartGame, randomPerks };
 }

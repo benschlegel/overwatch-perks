@@ -15,6 +15,7 @@ export default function HeroImage({ heroId }: Props) {
 		return getHeroImage(heroId);
 	}, [heroId]);
 
+	// TODO: use opacity instead of switching component
 	return (
 		<div className="relative w-[8rem] pb-[120%]">
 			{showHero ? (
