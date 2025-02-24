@@ -221,7 +221,7 @@ export const PERKS: Perk[] = [
 		id: 32,
 		heroId: 'roadhog',
 		name: 'Scrap Hook',
-		description: 'Charge damage grants temporary overhealth for 50% of the damage dealt.',
+		description: 'Chain hook hits reload 2 ammo.',
 		perkType: 'minor',
 		perkIndex: 0,
 	},
