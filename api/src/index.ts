@@ -3,10 +3,12 @@ import { Elysia,t } from 'elysia';
 import { feedbackPostBody, savePostBody } from './types';
 import type { DbFeedback } from '@shared/database';
 import { CONFIG } from '@shared-global/config';
+import cors from '@elysiajs/cors';
 
 // TODO: use different port on local + run concurrent in package.json
 
 const app = new Elysia()
+.use(cors({ origin: '*' }))
 	.post('/api/save', async ({body, set}) => {
 		console.time("save")
 		// Handle route
