@@ -30,7 +30,13 @@ export default function FeedbackContent({ setOpen }: Props) {
 	const handleSubmit = useCallback(() => {
 		// Format feedback content
 		const feedbackContent: Feedback = { rating: rating >= 0.5 ? rating : undefined, name: name === '' ? undefined : name, feedback };
-		fetch(`${apiRoute}/api/feedback`, { method: 'POST', body: JSON.stringify(feedbackContent) })
+		fetch(`${apiRoute}/api/feedback`, {
+			method: 'POST',
+			body: JSON.stringify(feedbackContent),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
 			.then((res) => {
 				if (res.status === 200) {
 					setFeedback('');

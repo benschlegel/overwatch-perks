@@ -46,7 +46,13 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`${apiRoute}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			await fetch(`${apiRoute}/api/save`, {
+				method: 'POST',
+				body: JSON.stringify(loggedGame),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 		}
 	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
 
