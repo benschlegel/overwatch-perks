@@ -1,5 +1,5 @@
-import type { GameResult, DbLoggedGame, DbFeedback } from '@/types/database';
-import { type ClientSession, MongoClient } from 'mongodb';
+import type { GameResult, DbLoggedGame, DbFeedback, DbTest } from '@/types/database';
+import { MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
 	useDevDatabase = true;

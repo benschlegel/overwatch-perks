@@ -1,0 +1,5 @@
+services:
+  owperks-api:
+    build: .
+    restart: unless-stopped
+    container_name: owperks-api

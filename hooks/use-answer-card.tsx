@@ -4,7 +4,7 @@ import type { Perk } from '@/data/perks';
 import useCompactSettings from '@/hooks/use-compact-settings';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import useGameState from '@/hooks/use-game-state';
-import type { GameResult } from '@/types/database';
+import { API_URL, type GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { usePlausible } from 'next-plausible';
 import { useState, useCallback, useEffect, type RefObject } from 'react';
@@ -15,6 +15,8 @@ type Props = {
 	isCorrect: boolean;
 	cardRef: RefObject<HTMLDivElement | null>;
 };
+
+const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Props) {
 	const { gameState, setGameState, currPerk } = useGameState();
@@ -46,7 +48,13 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				settings,
 			};
 			if (CONFIG.pauseLogs === false) {
-				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+				fetch(`${apiRoute}/api/save`, {
+					method: 'POST',
+					body: JSON.stringify(loggedGame),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}).then(() => console.log('Round finished.'));
 			}
 		}
 	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);

@@ -8,7 +8,7 @@ import useCompactSettings from '@/hooks/use-compact-settings';
 import useGameState from '@/hooks/use-game-state';
 import { useSetting } from '@/hooks/use-settings-param';
 import { cn } from '@/lib/utils';
-import type { GameResult } from '@/types/database';
+import { API_URL, type GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { Gamepad2Icon, UserIcon } from 'lucide-react';
 import { usePlausible } from 'next-plausible';
@@ -17,6 +17,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 type SearchState = 'unfocused' | 'typing' | 'submitting';
+
+const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 export default function PlayerSearch({ className }: Props) {
 	const [selectedPerk, setSelectedPerk] = useState<Perk | undefined>();
@@ -47,7 +49,13 @@ export default function PlayerSearch({ className }: Props) {
 				settings,
 			};
 			if (CONFIG.pauseLogs === false) {
-				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+				fetch(`${apiRoute}/api/save`, {
+					method: 'POST',
+					body: JSON.stringify(loggedGame),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}).then(() => console.log('Round finished.'));
 			}
 		},
 		[plausible, settings, currPerk?.id]

@@ -1,0 +1,50 @@
+FROM oven/bun AS build
+
+# Set up main working directory
+WORKDIR /app
+
+# Copy API package files first for dependency installation
+COPY api/package.json ./api/
+COPY api/tsconfig.json ./api/
+COPY api/bun.lockb ./api/
+
+# Copy shared directories
+COPY types ./types
+COPY lib ./lib
+COPY data ./data
+COPY config.ts .
+
+# Copy API source files
+COPY api/src ./api/src
+
+# Install dependencies in the API directory
+WORKDIR /app/api
+RUN bun install
+
+# Create symlinks to node_modules in the root directory
+# This makes dependencies available to shared libraries
+WORKDIR /app
+RUN ln -s /app/api/node_modules /app/node_modules
+
+# Build the application
+ENV NODE_ENV=production
+WORKDIR /app/api
+RUN bun build \
+    --compile \
+    --minify-whitespace \
+    --minify-syntax \
+    --target bun \
+    --outfile server \
+    ./src/index.ts
+
+FROM gcr.io/distroless/base
+
+WORKDIR /app
+
+COPY --from=build /app/api/server server
+
+ENV NODE_ENV=production
+
+CMD ["./server"]
+
+EXPOSE 3000
