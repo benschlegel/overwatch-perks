@@ -45,7 +45,7 @@ export default function PerkIcon({ perk }: Props) {
 				quality={100}
 				priority
 				fill
-				unoptimized={false}
+				unoptimized={true}
 				className={`object-cover rounded-full transition-opacity duration-100 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
 			/>
 		</div>
