@@ -4,6 +4,10 @@ export type Config = {
 	isDebug: boolean;
 	version: string;
 	/**
+	 * Wether to pause logging results to db
+	 */
+	pauseLogs: boolean;
+	/**
 	 * How many perks to generate
 	 */
 	backlogSize: number;
@@ -25,4 +29,5 @@ export const CONFIG: Config = {
 	backlogSize: 167,
 	preloadAmount: 4,
 	pregenThreshold: 15,
+	pauseLogs: true,
 };

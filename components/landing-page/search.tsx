@@ -1,6 +1,7 @@
 'use client';
 
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList, CustomCommandInput } from '@/components/ui/command';
+import { CONFIG } from '@/config';
 import { useGameScore } from '@/context/GameScoreContext';
 import { PERKS, type Perk } from '@/data/perks';
 import useCompactSettings from '@/hooks/use-compact-settings';
@@ -45,7 +46,9 @@ export default function PlayerSearch({ className }: Props) {
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			if (CONFIG.pauseLogs === false) {
+				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			}
 		},
 		[plausible, settings, currPerk?.id]
 	);

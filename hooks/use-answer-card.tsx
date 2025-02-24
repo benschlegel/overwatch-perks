@@ -1,3 +1,4 @@
+import { CONFIG } from '@/config';
 import { useGameScore } from '@/context/GameScoreContext';
 import type { Perk } from '@/data/perks';
 import useCompactSettings from '@/hooks/use-compact-settings';
@@ -44,7 +45,9 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			if (CONFIG.pauseLogs === false) {
+				await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			}
 		}
 	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
 
