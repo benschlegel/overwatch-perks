@@ -47,13 +47,13 @@ export default function PlayerSearch({ className }: Props) {
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`${apiRoute}/api/save`, {
+			fetch(`${apiRoute}/api/save`, {
 				method: 'POST',
 				body: JSON.stringify(loggedGame),
 				headers: {
 					'Content-Type': 'application/json',
 				},
-			});
+			}).then(() => console.log('Round finished.'));
 		},
 		[plausible, settings, currPerk?.id]
 	);
