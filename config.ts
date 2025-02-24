@@ -29,5 +29,5 @@ export const CONFIG: Config = {
 	backlogSize: 167,
 	preloadAmount: 4,
 	pregenThreshold: 15,
-	pauseLogs: true,
+	pauseLogs: false,
 };
