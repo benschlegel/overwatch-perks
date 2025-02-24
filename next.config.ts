@@ -12,6 +12,7 @@ const nextConfig = withPlausibleProxy({ customDomain: 'https://plausible.global.
 			},
 		],
 		formats: ['image/avif'],
+		unoptimized: true,
 	},
 	compiler: {
 		removeConsole: process.env.NODE_ENV === 'production',
