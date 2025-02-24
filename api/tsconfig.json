@@ -23,16 +23,20 @@
     ],
     "paths": {
       "@shared/*": ["../types/*"],
-      "@shared-lib/*": ["../lib/*"]
+      "@shared-lib/*": ["../lib/*"],
+      "@shared-data/*": ["../data/*"],
+      "@shared-global/*": ["../*"],
+      "@local/*": ["./*"]
     },
     "target": "ES2017"
   },
   "include": [
     "**/*.ts",
+    "*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     "**/*.test.ts",
-    "tests/**/*", "../types/*.ts", "../lib/*.ts"],
+    "tests/**/*", "../types/*.ts", "../lib/*.ts", "../data/*.ts", "../*.ts"],
   "exclude": [
     "node_modules",
   ],
