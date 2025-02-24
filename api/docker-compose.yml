@@ -1,0 +1,6 @@
+services:
+  owldle-cron:
+    build: .
+    restart: unless-stopped
+    container_name: owperks-api
+    env_file: .env.local

@@ -1,4 +1,4 @@
-import type { GameResult, DbLoggedGame, DbFeedback } from '@/types/database';
+import type { GameResult, DbLoggedGame, DbFeedback, DbTest } from '@/types/database';
 import { type ClientSession, MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -28,6 +28,8 @@ const database = dbClient.db(dbName);
 const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
 const feedbackID = 'feedback';
 const feedbackCollection = database.collection<DbFeedback>(feedbackID);
+const testID = 'test';
+const testCollection = database.collection<DbTest>(testID);
 
 /**
  *
@@ -56,4 +58,8 @@ export async function deleteLogs(version: string) {
  */
 export async function addFeedback(feedback: DbFeedback) {
 	return feedbackCollection.insertOne(feedback);
+}
+
+export async function addTest(prop: string) {
+	return testCollection.insertOne({ prop });
 }

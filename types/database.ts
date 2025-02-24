@@ -36,3 +36,5 @@ export const feedbackSchema = z.object({
 
 export type Feedback = z.infer<typeof feedbackSchema>;
 export type DbFeedback = Feedback & { timestamp: Date; gameVersion: string };
+
+export type DbTest = { prop: string };
