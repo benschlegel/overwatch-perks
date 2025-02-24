@@ -39,6 +39,7 @@
 , "next.config.mjs", "postcss.config.mjs"  ],
   "exclude": [
     "node_modules",
-    "cron"
+    "cron",
+    "api"
   ]
 }
