@@ -8,7 +8,7 @@ import cors from '@elysiajs/cors';
 // TODO: use different port on local + run concurrent in package.json
 
 const app = new Elysia()
-.use(cors({ origin: '*' }))
+.use(cors())
 	.post('/api/save', async ({body, set}) => {
 		console.time("save")
 		// Handle route
