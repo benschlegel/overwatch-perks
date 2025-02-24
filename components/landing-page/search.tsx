@@ -17,6 +17,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 type SearchState = 'unfocused' | 'typing' | 'submitting';
 
+const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
+
 export default function PlayerSearch({ className }: Props) {
 	const [selectedPerk, setSelectedPerk] = useState<Perk | undefined>();
 	const [searchState, setSearchState] = useState<SearchState>('unfocused');
@@ -45,7 +47,7 @@ export default function PlayerSearch({ className }: Props) {
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`${API_URL}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			await fetch(`${apiRoute}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		},
 		[plausible, settings, currPerk?.id]
 	);

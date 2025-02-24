@@ -15,6 +15,8 @@ type Props = {
 	cardRef: RefObject<HTMLDivElement | null>;
 };
 
+const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
+
 export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Props) {
 	const { gameState, setGameState, currPerk } = useGameState();
 	const { incrementCurrent, resetCurrent } = useGameScore();
@@ -44,7 +46,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`${API_URL}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			await fetch(`${apiRoute}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		}
 	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
 

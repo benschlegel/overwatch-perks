@@ -11,7 +11,7 @@ import type React from 'react';
 import { useCallback, useState } from 'react';
 
 const initialRating = -1;
-
+const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
 type Props = {
 	setOpen: (value: boolean) => void;
 };
@@ -30,7 +30,7 @@ export default function FeedbackContent({ setOpen }: Props) {
 	const handleSubmit = useCallback(() => {
 		// Format feedback content
 		const feedbackContent: Feedback = { rating: rating >= 0.5 ? rating : undefined, name: name === '' ? undefined : name, feedback };
-		fetch(`${API_URL}/api/feedback`, { method: 'POST', body: JSON.stringify(feedbackContent) })
+		fetch(`${apiRoute}/api/feedback`, { method: 'POST', body: JSON.stringify(feedbackContent) })
 			.then((res) => {
 				if (res.status === 200) {
 					setFeedback('');
