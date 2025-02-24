@@ -7,7 +7,7 @@ import useCompactSettings from '@/hooks/use-compact-settings';
 import useGameState from '@/hooks/use-game-state';
 import { useSetting } from '@/hooks/use-settings-param';
 import { cn } from '@/lib/utils';
-import type { GameResult } from '@/types/database';
+import { API_URL, type GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { Gamepad2Icon, UserIcon } from 'lucide-react';
 import { usePlausible } from 'next-plausible';
@@ -45,7 +45,7 @@ export default function PlayerSearch({ className }: Props) {
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			await fetch(`${API_URL}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		},
 		[plausible, settings, currPerk?.id]
 	);

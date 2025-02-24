@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import StarRating from '@/components/ui/rate-stars';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import type { Feedback } from '@/types/database';
+import { API_URL, type Feedback } from '@/types/database';
 import type React from 'react';
 import { useCallback, useState } from 'react';
 
@@ -30,7 +30,7 @@ export default function FeedbackContent({ setOpen }: Props) {
 	const handleSubmit = useCallback(() => {
 		// Format feedback content
 		const feedbackContent: Feedback = { rating: rating >= 0.5 ? rating : undefined, name: name === '' ? undefined : name, feedback };
-		fetch('/api/feedback', { method: 'POST', body: JSON.stringify(feedbackContent) })
+		fetch(`${API_URL}/api/feedback`, { method: 'POST', body: JSON.stringify(feedbackContent) })
 			.then((res) => {
 				if (res.status === 200) {
 					setFeedback('');

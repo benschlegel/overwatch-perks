@@ -3,7 +3,7 @@ import type { Perk } from '@/data/perks';
 import useCompactSettings from '@/hooks/use-compact-settings';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import useGameState from '@/hooks/use-game-state';
-import type { GameResult } from '@/types/database';
+import { API_URL, type GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { usePlausible } from 'next-plausible';
 import { useState, useCallback, useEffect, type RefObject } from 'react';
@@ -44,7 +44,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				perkId: currPerk?.id ?? -1,
 				settings,
 			};
-			await fetch(`/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
+			await fetch(`${API_URL}/api/save`, { method: 'POST', body: JSON.stringify(loggedGame) });
 		}
 	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
 
