@@ -1,13 +1,14 @@
-import { addFeedback, addTest, logGame } from '@shared-lib/databaseAccess';
+import { addFeedback, logGame } from '@shared-lib/databaseAccess';
 import { Elysia,t } from 'elysia';
 import { feedbackPostBody, savePostBody } from './types';
-import type { DbFeedback, DbTest } from '@shared/database';
+import type { DbFeedback } from '@shared/database';
 import { CONFIG } from '@shared-global/config';
 
 // TODO: use different port on local + run concurrent in package.json
 
 const app = new Elysia()
 	.post('/api/save', async ({body, set}) => {
+		console.time("save")
 		// Handle route
 		try {
 			// Try to log game, return with success code if so
@@ -20,9 +21,11 @@ const app = new Elysia()
 			set.status = 500;
     	return { message: "Couldn't save game." };
 		}
+		console.timeEnd("save")
 	}, {body: savePostBody})
 	.post('/api/feedback', async ({body, set}) => {
-				// Handle route
+		// Handle route
+		console.time("feedback")
 		try {
 			// Try to log game, return with success code if so
 			const timestamp = new Date();
@@ -35,6 +38,7 @@ const app = new Elysia()
 			set.status = 500;
     	return { message: "Couldn't save game." };
 		}
+		console.timeEnd("feedback")
 	}, {body: feedbackPostBody})
 	.listen(3000);
 

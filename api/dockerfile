@@ -12,7 +12,7 @@ COPY api/bun.lockb ./api/
 COPY types ./types
 COPY lib ./lib
 COPY data ./data
-COPY config .
+COPY config.ts .
 
 # Copy API source files
 COPY api/src ./api/src
