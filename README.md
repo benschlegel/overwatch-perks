@@ -24,7 +24,7 @@
 
 <p align="center">
 	<a href="">
-		<img alt="Stargazers" src="https://img.shields.io/github/stars/benschlegel/OWLDLE?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
+		<img alt="Stargazers" src="https://img.shields.io/github/stars/benschlegel/overwatch-perks?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
 	<a href="">
 		<img alt="Releases" src="https://img.shields.io/github/release/benschlegel/overwatch-perks.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=302D41"/></a>
 	<a href="">
@@ -40,9 +40,9 @@
 
 ## Showcase
 
-| ![Showcase 1 (Showing screenshot of game)](images/showcase1.png) | ![Showcase 2 (Showing screenshot of game in light mode)](images/showcase2.png) |
+| ![Showcase 1 (Showing screenshot of game)](images/base.png) | ![Showcase 2 (Showing game during a run)](images/base_eval.png) |
 | --- | --- |
-| ![Showcase 3 (Showing victory screen)](images/showcase3.png) | ![Showcase 3 (Showing mobile layout)](images/showcase4.png) |
+| ![Showcase 3 (Showing hard mode)](images/hard_mode.png) | ![Showcase 3 (Showing mobile layout)](images/mobile.png) |
 
 
 
