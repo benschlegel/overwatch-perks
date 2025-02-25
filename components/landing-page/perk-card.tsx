@@ -1,4 +1,5 @@
 'use client';
+import PerkIcon from '@/components/game/perk-icon';
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
@@ -7,7 +8,7 @@ import type { Perk } from '@/data/perks';
 import useAnswerCard from '@/hooks/use-answer-card';
 import { useSetting } from '@/hooks/use-settings-param';
 import { cn } from '@/lib/utils';
-import { useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
@@ -24,25 +25,11 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 
 	const cardRef = useRef<HTMLDivElement>(null);
 	const { onClick, result } = useAnswerCard({ cardId, isCorrect, perk, cardRef });
-	const [showDescription, _desc] = useSetting('showDescription');
+	const [showDescription, _setDesc] = useSetting('showDescription');
+	const [isInverse, _setInv] = useSetting('inverse');
 
-	return (
-		<Card
-			data-correct={result}
-			className={cn(
-				'w-full outline-background-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[correct=false]:outline-none data-[correct=false]:ring-2 data-[correct=false]:ring-ring data-[correct=false]:ring-offset-1 ring-offset-background hover:bg-secondary focus-visible:bg-secondary focus-visible:transition-none transition-colors data-[correct=false]:bg-red-600/45 data-[correct=true]:bg-green-600/45',
-				className
-			)}
-			tabIndex={0}
-			ref={cardRef}
-			onClick={onClick}
-			// biome-ignore lint/a11y/useSemanticElements: easier to keep card styling this way
-			role="button"
-			onKeyDown={(e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					onClick();
-				}
-			}}>
+	const DefaultContent = useCallback(() => {
+		return (
 			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
 				<div className="flex flex-col flex-1">
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
@@ -61,6 +48,38 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					</>
 				)}
 			</CardContent>
+		);
+	}, [cardId, isCorrect, perk.description, perk.name, perk.perkType, showDescription]);
+
+	const InverseContent = useCallback(() => {
+		return (
+			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
+				<div className="flex items-center justify-center sm:py-6 py-4">
+					<PerkIcon perk={perk} />
+				</div>
+				{/* <p className="absolute bottom-2 right-3 text-xs font-medium text-muted-foreground">{cardId}</p> */}
+			</CardContent>
+		);
+	}, [perk]);
+
+	return (
+		<Card
+			data-correct={result}
+			className={cn(
+				'w-full outline-background-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[correct=false]:outline-none data-[correct=false]:ring-2 data-[correct=false]:ring-ring data-[correct=false]:ring-offset-1 ring-offset-background hover:bg-secondary focus-visible:bg-secondary focus-visible:transition-none transition-colors data-[correct=false]:bg-red-600/45 data-[correct=true]:bg-green-600/45',
+				className
+			)}
+			tabIndex={0}
+			ref={cardRef}
+			onClick={onClick}
+			// biome-ignore lint/a11y/useSemanticElements: easier to keep card styling this way
+			role="button"
+			onKeyDown={(e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					onClick();
+				}
+			}}>
+			{isInverse ? <InverseContent /> : <DefaultContent />}
 		</Card>
 	);
 }

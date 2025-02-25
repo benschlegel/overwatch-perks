@@ -1,18 +1,19 @@
 'use client';
 import { GameStateContext } from '@/context/GameStateContext';
 import type { Perk } from '@/data/perks';
+import { cn } from '@/lib/utils';
 import { LoaderCircleIcon } from 'lucide-react';
 import Image from 'next/image';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { type HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react';
 
-type Props = {
+interface Props extends HTMLAttributes<HTMLDivElement> {
 	perk?: Perk;
-};
+}
 
 const imageFileExt = 'png';
 const basePath = '/assets/perks';
 
-export default function PerkIcon({ perk }: Props) {
+export default function PerkIcon({ perk, className }: Props) {
 	const [isLoading, setLoading] = useState(true);
 	const imgUrl = perk !== undefined ? `${basePath}/${perk.heroId}_${perk.perkType}_${perk.perkIndex}.${imageFileExt}` : undefined;
 	const [gameState, _] = useContext(GameStateContext);
@@ -31,7 +32,7 @@ export default function PerkIcon({ perk }: Props) {
 	if (!perk || !imgUrl) return <></>;
 
 	return (
-		<div className="relative rounded-full size-20 bg-secondary flex justify-center items-center">
+		<div className={cn('relative rounded-full size-20 bg-secondary flex justify-center items-center', className)}>
 			{isLoading && (
 				<div className="absolute inset-0 flex items-center justify-center">
 					<LoaderCircleIcon className="w-10 h-10 text-primary animate-spin" aria-label="Loading" />
