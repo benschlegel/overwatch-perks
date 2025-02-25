@@ -28,7 +28,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 	const plausible = usePlausible<PlausibleEvents>();
 	const [dialog, _] = useDialogParams();
 	const settings = useCompactSettings();
-	const { isCurrentBest } = useContext(CurrentBestContext);
+	const { isCurrentBest, setIsCurrentBest } = useContext(CurrentBestContext);
 	const { toast } = useToast();
 
 	// TODO: This is getting out of hand, split into multiple functions
@@ -55,7 +55,8 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 			};
 			if (CONFIG.pauseLogs === false) {
 				if (gameResult === 'lost' && currentStreak > 0) {
-					if (isCurrentBest) {
+					if (isCurrentBest === true) {
+						setIsCurrentBest(false);
 						toast({
 							title: 'New best streak reached! 🎉',
 							description: `You hit a new best streak of ${currentStreak}`,
@@ -98,6 +99,7 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 		currentStreak,
 		isCurrentBest,
 		toast,
+		setIsCurrentBest,
 	]);
 
 	const updateCorrectCard = useCallback(() => {
