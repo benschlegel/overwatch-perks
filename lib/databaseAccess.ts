@@ -64,7 +64,7 @@ export async function getTotalTurns() {
 }
 
 export async function getTotalRuns() {
-	return gameLogCollection.countDocuments();
+	return runCollection.countDocuments();
 }
 
 export async function estimateTotalTurns() {

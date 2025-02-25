@@ -28,12 +28,6 @@ export default function useGameState() {
 		setGameState('starting');
 	}, [setGameState, regenBacklog]);
 
-	// useEffect(() => {
-	// 	if (gameState === 'starting' || currPerk === undefined) {
-	// 		regenBacklog();
-	// 	}
-	// }, [gameState, currPerk, regenBacklog]);
-
 	useEffect(() => {
 		// Handle hotkeys
 		const handleKeyDown = (e: KeyboardEvent) => {

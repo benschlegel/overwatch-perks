@@ -6,6 +6,7 @@ import { CONFIG } from '@shared-global/config';
 import cors from '@elysiajs/cors';
 
 // TODO: use different port on local + run concurrent in package.json
+// TODO: refactor after v2 merge
 
 const app = new Elysia()
 	.use(cors())
@@ -66,7 +67,7 @@ const app = new Elysia()
 		const formatted = turns.toLocaleString('en-US');
 		return { totalTurns: turns, formattedTotalTurns: formatted };
 	})
-	.get('/api/totalRuns', async () => {
+	.get('/api/run', async () => {
 		const turns = await getTotalRuns();
 		const formatted = turns.toLocaleString('en-US');
 		return { totalRuns: turns, formattedTotalRuns: formatted };

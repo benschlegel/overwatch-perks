@@ -20,7 +20,7 @@ const apiRoute = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Props) {
 	const { gameState, setGameState, currPerk } = useGameState();
-	const { incrementCurrent, resetCurrent } = useGameScore();
+	const { incrementCurrent, resetCurrent, currentStreak } = useGameScore();
 	const [result, setResult] = useState<boolean | undefined>(undefined);
 	const plausible = usePlausible<PlausibleEvents>();
 	const [dialog, _] = useDialogParams();
@@ -54,10 +54,25 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 					headers: {
 						'Content-Type': 'application/json',
 					},
-				}).then(() => console.log('Round finished.'));
+				}).then(() => {
+					if (gameResult === 'lost' && currentStreak > 0) {
+						const run = {
+							settings,
+							turns: currentStreak,
+						};
+						console.log('Logging run: ', run);
+						fetch(`${apiRoute}/api/run`, {
+							method: 'POST',
+							body: JSON.stringify(run),
+							headers: {
+								'Content-Type': 'application/json',
+							},
+						}).catch((e) => console.error);
+					}
+				});
 			}
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current]);
+	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current, currentStreak]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {
