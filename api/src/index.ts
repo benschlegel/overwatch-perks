@@ -1,4 +1,4 @@
-import { addFeedback, logGame } from '@shared-lib/databaseAccess';
+import { addFeedback, getTotalTurns, logGame } from '@shared-lib/databaseAccess';
 import { Elysia, t } from 'elysia';
 import { feedbackPostBody, savePostBody } from './types';
 import type { DbFeedback } from '@shared/database';
@@ -46,6 +46,10 @@ const app = new Elysia()
 		},
 		{ body: feedbackPostBody }
 	)
+	.get('/api/totalTurns', async () => {
+		const turns = await getTotalTurns();
+		return { totalTurns: turns };
+	})
 	.listen(3000);
 
 console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);

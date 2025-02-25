@@ -51,6 +51,14 @@ export async function deleteLogs(version: string) {
 	return gameLogCollection.deleteMany({ gameVersion: version });
 }
 
+export async function getTotalTurns() {
+	return gameLogCollection.countDocuments();
+}
+
+export async function estimateTotalTurns() {
+	return gameLogCollection.estimatedDocumentCount();
+}
+
 /**
  * Add website feedback to db
  */
