@@ -31,11 +31,11 @@ export default function PerkInfo() {
 							<Separator className="mt-1" />
 							<div className="flex h-5 items-center space-x-4 sm:text-sm text-xs text-muted-foreground w-full justify-center mt-4">
 								<p className="text-center">
-									Current Streak: <span className="sm:block">{currentStreak}</span>
+									Current Streak: <span className="sm:block text-white font-bold">{currentStreak}</span>
 								</p>
 								<Separator orientation="vertical" />
 								<p className="text-center">
-									Best Streak: <span className="sm:block">{bestStreak}</span>
+									Best Streak: <span className="sm:block  text-white font-bold">{bestStreak}</span>
 								</p>
 								{(CONFIG.isDebug || isDebugMode) && (
 									<>
