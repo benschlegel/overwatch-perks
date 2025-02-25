@@ -1,7 +1,7 @@
 <h3 align="center">
-	<img src="images/logo.png" alt="Logo"/><br/>
+	<img src="images/banner.png" alt="banner"/><br/>
 <br/>
-  Guess the <a href="https://en.wikipedia.org/wiki/Overwatch_League">Overwatch League</a> (OWL) player using a series of clues (like the players team, role, country and region). Resets every day at midnight.
+  Guess the new <a href="https://overwatch.blizzard.com/en-us/">Overwatch</a> perks and improve memory for identifying its icons in a gameified way.
   <br />
 
 </h3>
@@ -12,15 +12,11 @@
   <a href="#features">Features</a>
   ·
   <a href="#getting-started">Getting Started</a>
-  ·
-  <a href="#about">About</a>
+  .
+  <a href="#roadmap">Roadmap</a>
   ·
   <a href="#about">Sponsor</a>
 </h6>
-
-<p align="center">
-  <img src="images/temp_spacer.png" width="400" height="9" />
-</p>
 
 <p align="center">
 	<a href="">
@@ -35,6 +31,8 @@
     <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbenschlegel%2Foverwatch-perks%2Frefs%2Fheads%2Fmain%2Ftests%2Freport.json&query=%24.numPassedTests&suffix=%20passing&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNkOWUwZWUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1mbGFzay1jb25pY2FsIj48cGF0aCBkPSJNMTAgMnY3LjUyN2EyIDIgMCAwIDEtLjIxMS44OTZMNC43MiAyMC41NWExIDEgMCAwIDAgLjkgMS40NWgxMi43NmExIDEgMCAwIDAgLjktMS40NWwtNS4wNjktMTAuMTI3QTIgMiAwIDAgMSAxNCA5LjUyN1YyIi8%2BPHBhdGggZD0iTTguNSAyaDciLz48cGF0aCBkPSJNNyAxNmgxMCIvPjwvc3ZnPg%3D%3D&logoColor=302D41&label=Tests&labelColor=%23302D41&color=%23a6da95" alt="Number of passing tests"/>
   <a href="https://perks.owldle.com/">
     <img src="https://img.shields.io/badge/View%20Website-000?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNEOUUwRUUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1nbG9iZSI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgMmExNC41IDE0LjUgMCAwIDAgMCAyMCAxNC41IDE0LjUgMCAwIDAgMC0yMCIvPjxwYXRoIGQ9Ik0yIDEyaDIwIi8+PC9zdmc+&logoColor=fff&style=for-the-badge&labelColor=302D41&color=eed49f" alt="Link to website"/></a>
+  <a href="https://plausible.global.bschlegel.com/perks.owldle.com">
+    <img src="https://img.shields.io/badge/View%20Analytics-000?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNkMGQwZDEiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGFydC1uby1heGVzLWNvbWJpbmVkIj48cGF0aCBkPSJNMTIgMTZ2NSIvPjxwYXRoIGQ9Ik0xNiAxNHY3Ii8+PHBhdGggZD0iTTIwIDEwdjExIi8+PHBhdGggZD0ibTIyIDMtOC42NDYgOC42NDZhLjUuNSAwIDAgMS0uNzA4IDBMOS4zNTQgOC4zNTRhLjUuNSAwIDAgMC0uNzA3IDBMMiAxNSIvPjxwYXRoIGQ9Ik00IDE4djMiLz48cGF0aCBkPSJNOCAxNHY3Ii8+PC9zdmc+&logoColor=fff&style=for-the-badge&labelColor=302D41&color=f5a97f" alt="Link to analytics"/></a>
 
 </p>
 
@@ -42,7 +40,7 @@
 
 | ![Showcase 1 (Showing screenshot of game)](images/base.png) | ![Showcase 2 (Showing game during a run)](images/base_eval.png) |
 | --- | --- |
-| ![Showcase 3 (Showing hard mode)](images/hard_mode.png) | ![Showcase 3 (Showing mobile layout)](images/mobile.png) |
+| <img align="top" src="images/hard_mode.png" /> | <div align="center"> <img align="center" src="images/mobile.png" height=250 />&nbsp;&nbsp;<img align="center" src="images/mobile2.png" height=250 /></div> |
 
 
 
@@ -53,7 +51,6 @@ This project was built using [`Next.js`](https://nextjs.org/) and [`tailwindcss`
 Major features are:
 
 - 🎮 Multiple game modes and difficulty levels
-- 🎲
 - 🎨 Consistent and dynamic themes (light + dark mode)
   - All components use theme colors and automatically switch to correct theme
 - 📱 Fully responsive
@@ -84,12 +81,12 @@ This project is still under active development, new features, increased stabilit
 
 Currently, some things I plan on working on are:
 
-- [] More difficulty modes (only show names, reverse, etc)
-- [] Better telegraphing for current/highscore
-- [] Side bar/menu revamp to make mode selection more intuitive + enable more options in the future
-- [] Optimize game even further to try and reduce server usage
-- [] Possible twitch integration
-- [] Cheatsheet version
+- [ ] More difficulty modes (only show names, reverse, etc)
+- [ ] Better telegraphing for current/highscore
+- [ ] Side bar/menu revamp to make mode selection more intuitive + enable more options in the future
+- [ ] Optimize game even further to try and reduce server usage
+- [ ] Possible twitch integration
+- [ ] Cheatsheet version
 
 ## Getting Started
 
