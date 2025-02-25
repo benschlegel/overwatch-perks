@@ -19,7 +19,7 @@ export type FeedbackPostBody = Static<typeof savePostBody>;
 
 export const saveRunBody = t.Object({
 	turns: t.Integer({ minimum: 1 }),
-	duration: t.Integer({ minimum: 100, maximum: 7_200_000 }),
+	duration: t.Optional(t.Integer({ minimum: 100, maximum: 7_200_000 })),
 	settings: t.Array(t.Boolean()),
 });
 
