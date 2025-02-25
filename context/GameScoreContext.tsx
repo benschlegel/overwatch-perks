@@ -1,4 +1,5 @@
 'use client';
+import { CurrentBestContext } from '@/context/CurrentBestContext';
 import { GameStateContext } from '@/context/GameStateContext';
 import { createContext, type Dispatch, type SetStateAction, useState, type PropsWithChildren, useCallback, useContext, useEffect } from 'react';
 
@@ -28,6 +29,7 @@ export default function GameScoreContextProvider({ children }: PropsWithChildren
 export function useGameScore() {
 	const { bestStreak, currentStreak, setBestStreak, setCurrentStreak } = useContext(GameScoreContext);
 	const [gameState, _] = useContext(GameStateContext);
+	const { setIsCurrentBest } = useContext(CurrentBestContext);
 
 	const incrementCurrent = useCallback(() => {
 		const newStreak = currentStreak + 1;
@@ -35,8 +37,9 @@ export function useGameScore() {
 		if (newStreak > bestStreak) {
 			setBestStreak(newStreak);
 			localStorage.setItem(LOCAL_STORAGE_BEST_SCORE_KEY, JSON.stringify(newStreak));
+			setIsCurrentBest(true);
 		}
-	}, [currentStreak, bestStreak, setBestStreak, setCurrentStreak]);
+	}, [currentStreak, bestStreak, setBestStreak, setCurrentStreak, setIsCurrentBest]);
 
 	const resetCurrent = useCallback(() => {
 		setCurrentStreak(0);

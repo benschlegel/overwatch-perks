@@ -1,18 +1,22 @@
 import { Button } from '@/components/ui/button';
 import { SwitchableButton } from '@/components/ui/switchable-button';
 import useStreakText from '@/hooks/use-streak-text';
+import type { PlausibleEvents } from '@/types/plausible';
 import { CheckIcon, CopyIcon } from 'lucide-react';
+import { usePlausible } from 'next-plausible';
+import { useCallback } from 'react';
 
 export default function CopyStreakButton() {
 	const text = useStreakText();
+	const plausible = usePlausible<PlausibleEvents>();
+
+	const onClick = useCallback(() => {
+		navigator.clipboard.writeText(text);
+		plausible('copyResults', { props: { type: 'footer-button' } });
+	}, [text, plausible]);
 
 	return (
-		<SwitchableButton
-			className="max-w-[7.5rem] box-border"
-			onClick={() => {
-				navigator.clipboard.writeText(text);
-			}}
-			switchedContent={<SwitchedButtonContent />}>
+		<SwitchableButton className="max-w-[7.5rem] box-border" onClick={onClick} switchedContent={<SwitchedButtonContent />}>
 			<DefaultButtonContent />
 		</SwitchableButton>
 	);

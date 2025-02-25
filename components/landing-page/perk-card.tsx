@@ -1,12 +1,14 @@
 'use client';
+import PerkIcon from '@/components/game/perk-icon';
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
 import { Separator } from '@/components/ui/separator';
 import { CONFIG } from '@/config';
 import type { Perk } from '@/data/perks';
 import useAnswerCard from '@/hooks/use-answer-card';
+import { useSetting } from '@/hooks/use-settings-param';
 import { cn } from '@/lib/utils';
-import { useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	perk: Perk;
@@ -23,6 +25,42 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 
 	const cardRef = useRef<HTMLDivElement>(null);
 	const { onClick, result } = useAnswerCard({ cardId, isCorrect, perk, cardRef });
+	const [showDescription, _setDesc] = useSetting('showDescription');
+	const [isInverse, _setInv] = useSetting('inverse');
+
+	const DefaultContent = useCallback(() => {
+		return (
+			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
+				<div className="flex flex-col flex-1">
+					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
+					{showDescription && <HighlightText className="sm:text-base text-sm mt-[0.4rem] sm:mt-1" text={perk.description} />}
+				</div>
+				{showDescription && (
+					<>
+						<Separator className="mt-1 sm:mb-0 mb-1 bg-foreground opacity-[0.08]" />
+						<div className="w-full text-xs font-medium sm:mb-[-0.25rem] text-muted-foreground flex justify-between">
+							<p>
+								<span className="font-semibold">{perk.perkType}</span>
+							</p>
+							{CONFIG.isDebug && <p>{isCorrect ? 'correct' : ''}</p>}
+							<p>{cardId}</p>
+						</div>
+					</>
+				)}
+			</CardContent>
+		);
+	}, [cardId, isCorrect, perk.description, perk.name, perk.perkType, showDescription]);
+
+	const InverseContent = useCallback(() => {
+		return (
+			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
+				<div className="flex items-center justify-center sm:py-6 py-4">
+					<PerkIcon perk={perk} />
+				</div>
+				{/* <p className="absolute bottom-2 right-3 text-xs font-medium text-muted-foreground">{cardId}</p> */}
+			</CardContent>
+		);
+	}, [perk]);
 
 	return (
 		<Card
@@ -41,20 +79,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 					onClick();
 				}
 			}}>
-			<CardContent className={'flex flex-col h-full text-center sm:gap-2 gap-1 sm:p-4 p-2 transition-colors'}>
-				<div className="flex flex-col flex-1">
-					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
-					<HighlightText className="sm:text-base text-sm mt-[0.4rem] sm:mt-1" text={perk.description} />
-				</div>
-				<Separator className="mt-1 sm:mb-0 mb-1 bg-foreground opacity-[0.08]" />
-				<div className="w-full text-xs font-medium sm:mb-[-0.25rem] text-muted-foreground flex justify-between">
-					<p>
-						<span className="font-semibold">{perk.perkType}</span>
-					</p>
-					{CONFIG.isDebug && <p>{isCorrect ? 'correct' : ''}</p>}
-					<p>{cardId}</p>
-				</div>
-			</CardContent>
+			{isInverse ? <InverseContent /> : <DefaultContent />}
 		</Card>
 	);
 }

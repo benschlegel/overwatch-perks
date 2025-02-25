@@ -49,7 +49,7 @@ export default function SettingsContent({ setOpen }: Props) {
 	);
 }
 
-export const settingNames = ['hardMode', 'debug', 'showHero', 'randomAnswers'] as const;
+export const settingNames = ['hardMode', 'debug', 'showHero', 'randomAnswers', 'showDescription', 'inverse'] as const;
 export type SettingName = (typeof settingNames)[number];
 
 type SettingItem = {
@@ -61,6 +61,8 @@ type SettingItem = {
 
 export const SETTINGS: SettingItem[] = [
 	{ name: 'Show Hero', description: 'Show hero icon and name while guessing.', settingId: 'showHero', defaultChecked: true },
+	{ name: 'Show Description', description: 'Show perk description on each answer option.', settingId: 'showDescription', defaultChecked: true },
+	{ name: 'Inverse mode', description: 'Guess the perk given its name and four possible icons (inverse of default).', settingId: 'inverse' },
 	{
 		name: 'Random Answers',
 		description: 'When enabled, answers will be from random perks instead of showing all hero perks.',
@@ -90,7 +92,7 @@ export function SettingsItem({ name, description, settingId, defaultChecked }: S
 				<span>{name}</span>
 				<span className="font-normal leading-snug text-muted-foreground">{description}</span>
 			</Label>
-			<Switch id={settingId} defaultChecked={defaultChecked} checked={enabled} onCheckedChange={onClick} />
+			<Switch defaultChecked={defaultChecked} checked={enabled} onCheckedChange={onClick} />
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ export default function Controls() {
 				disabled={gameState === 'starting' || gameState === 'in-progress'}
 				onClick={rerollPerk}
 				className="sm:px-8 px-10 transform active:scale-95 transition-transform">
-				<p>Next</p>
+				<p>{gameState !== 'lost' ? 'Next' : 'Restart'}</p>
 				<kbd className="pointer-events-none sm:inline-flex hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
 					{hardMode ? 'alt + c' : 'c'}
 				</kbd>

@@ -92,8 +92,11 @@ export default function HelpContent({ setOpen }: Props) {
 									<LinkButton type="button" href="" onClick={() => setDialog('feedback')}>
 										send feedback/suggestions
 									</LinkButton>
-									, <LinkButton href={'https://ko-fi.com/scorer5'}>donate</LinkButton> or check out the source code for this project on{' '}
-									<LinkButton href={'https://github.com/benschlegel/overwatch-perks'}>Github</LinkButton>.
+									,{' '}
+									<LinkButton href={'https://ko-fi.com/scorer5'} title="Ko-Fi donation">
+										donate
+									</LinkButton>{' '}
+									or check out the source code for this project on <LinkButton href={'https://github.com/benschlegel/overwatch-perks'}>Github</LinkButton>.
 								</p>
 							</div>
 						</div>

@@ -11,6 +11,7 @@ import GameStateContextProvider from '@/context/GameStateContext';
 import GameScoreContextProvider from '@/context/GameScoreContext';
 import { PERKS } from '@/data/perks';
 import { CONFIG } from '@/config';
+import CurrentBestContextProvider from '@/context/CurrentBestContext';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -100,9 +101,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="twitter:card" content="summary_large_image" />
-				{/* {PERKS.map((p) => (
-					<link rel="preload" key={p.id} as="image" href={`${CONFIG.url}/assets/perks/${p.heroId}_${p.perkType}_${p.perkIndex}.png`} />
-				))} */}
+				{PERKS.map((p) => (
+					<link rel="preload" key={p.id} as="image" href={`/assets/perks/${p.heroId}_${p.perkType}_${p.perkIndex}.png`} />
+				))}
 				{/* Add your own plausible config (if you want to set up analytics) */}
 				<Suspense>
 					<PlausibleWrapper />
@@ -113,12 +114,14 @@ export default function RootLayout({
 					<NuqsAdapter>
 						<PerkContextProvider>
 							<GameStateContextProvider>
-								<GameScoreContextProvider>
-									<div className="px-2 pt-8 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
-										<main className="w-[40rem]">{children}</main>
-									</div>
-									<Toaster />
-								</GameScoreContextProvider>
+								<CurrentBestContextProvider>
+									<GameScoreContextProvider>
+										<div className="px-2 pt-8 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
+											<main className="w-[40rem]">{children}</main>
+										</div>
+										<Toaster />
+									</GameScoreContextProvider>
+								</CurrentBestContextProvider>
 							</GameStateContextProvider>
 						</PerkContextProvider>
 					</NuqsAdapter>
