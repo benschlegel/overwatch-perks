@@ -1,4 +1,5 @@
-import type { GameResult, DbLoggedGame, DbFeedback, DbTest } from '@/types/database';
+import { CONFIG } from '@/config';
+import type { GameResult, DbLoggedGame, DbFeedback, DbTest, DbRun } from '@/types/database';
 import { MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -29,6 +30,9 @@ const gameLogCollection = database.collection<DbLoggedGame>(gameLogs);
 const feedbackID = 'feedback';
 const feedbackCollection = database.collection<DbFeedback>(feedbackID);
 
+const runId = 'runs';
+const runCollection = database.collection<DbRun>(runId);
+
 /**
  *
  *
@@ -47,11 +51,19 @@ export async function logGame(gameResult: GameResult, timestamp: Date, version: 
 	return gameLogCollection.insertOne({ finishedAt: timestamp, gameResult, gameVersion: version });
 }
 
+export async function logRun(run: DbRun) {
+	return runCollection.insertOne(run);
+}
+
 export async function deleteLogs(version: string) {
 	return gameLogCollection.deleteMany({ gameVersion: version });
 }
 
 export async function getTotalTurns() {
+	return gameLogCollection.countDocuments();
+}
+
+export async function getTotalRuns() {
 	return gameLogCollection.countDocuments();
 }
 
