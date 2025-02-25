@@ -1,13 +1,16 @@
+import StreakToastAction from '@/components/landing-page/streak-toast-action';
 import { CONFIG } from '@/config';
+import { CurrentBestContext } from '@/context/CurrentBestContext';
 import { useGameScore } from '@/context/GameScoreContext';
 import type { Perk } from '@/data/perks';
 import useCompactSettings from '@/hooks/use-compact-settings';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import useGameState from '@/hooks/use-game-state';
-import { API_URL, type GameResult } from '@/types/database';
+import { useToast } from '@/hooks/use-toast';
+import type { GameResult } from '@/types/database';
 import type { PlausibleEvents } from '@/types/plausible';
 import { usePlausible } from 'next-plausible';
-import { useState, useCallback, useEffect, type RefObject } from 'react';
+import { useState, useCallback, useEffect, type RefObject, useContext } from 'react';
 
 type Props = {
 	cardId: number;
@@ -25,7 +28,10 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 	const plausible = usePlausible<PlausibleEvents>();
 	const [dialog, _] = useDialogParams();
 	const settings = useCompactSettings();
+	const { isCurrentBest } = useContext(CurrentBestContext);
+	const { toast } = useToast();
 
+	// TODO: This is getting out of hand, split into multiple functions
 	const onClick = useCallback(async () => {
 		if (gameState === 'in-progress' || gameState === 'starting') {
 			// Update game/card state
@@ -48,31 +54,51 @@ export default function useAnswerCard({ cardId, perk, isCorrect, cardRef }: Prop
 				settings,
 			};
 			if (CONFIG.pauseLogs === false) {
+				if (gameResult === 'lost' && currentStreak > 0) {
+					if (isCurrentBest) {
+						toast({
+							title: 'New best streak reached! 🎉',
+							description: `You hit a new best streak of ${currentStreak}`,
+							duration: 10_000,
+							action: <StreakToastAction />,
+						});
+					}
+					const run = {
+						settings,
+						turns: currentStreak,
+					};
+					fetch(`${apiRoute}/api/run`, {
+						method: 'POST',
+						body: JSON.stringify(run),
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					}).catch((e) => console.error);
+				}
 				fetch(`${apiRoute}/api/save`, {
 					method: 'POST',
 					body: JSON.stringify(loggedGame),
 					headers: {
 						'Content-Type': 'application/json',
 					},
-				}).then(() => {
-					if (gameResult === 'lost' && currentStreak > 0) {
-						const run = {
-							settings,
-							turns: currentStreak,
-						};
-						console.log('Logging run: ', run);
-						fetch(`${apiRoute}/api/run`, {
-							method: 'POST',
-							body: JSON.stringify(run),
-							headers: {
-								'Content-Type': 'application/json',
-							},
-						}).catch((e) => console.error);
-					}
-				});
+				}).catch((e) => console.error);
 			}
 		}
-	}, [isCorrect, setGameState, gameState, incrementCurrent, resetCurrent, plausible, currPerk?.id, perk.id, settings, cardRef.current, currentStreak]);
+	}, [
+		isCorrect,
+		setGameState,
+		gameState,
+		incrementCurrent,
+		resetCurrent,
+		plausible,
+		currPerk?.id,
+		perk.id,
+		settings,
+		cardRef.current,
+		currentStreak,
+		isCurrentBest,
+		toast,
+	]);
 
 	const updateCorrectCard = useCallback(() => {
 		if (isCorrect) {
