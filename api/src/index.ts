@@ -48,7 +48,8 @@ const app = new Elysia()
 	)
 	.get('/api/totalTurns', async () => {
 		const turns = await getTotalTurns();
-		return { totalTurns: turns };
+		const formatted = turns.toLocaleString('en-US');
+		return { totalTurns: turns, formattedTotalTurns: formatted };
 	})
 	.listen(3000);
 
