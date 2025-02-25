@@ -31,12 +31,18 @@ export default function PerkInfo() {
 						<div className="w-full pl-4">
 							<Separator className="mt-1" />
 							<div className="flex h-5 items-center space-x-4 sm:text-sm text-xs text-muted-foreground w-full justify-center mt-4">
-								<p className="text-center animate-bouncy">
-									Current Streak: <BouncyText className="sm:block text-white font-bold">{currentStreak}</BouncyText>
+								<p className="text-center">
+									Current Streak:{' '}
+									<BouncyText className="sm:block text-white font-bold" text={currentStreak.toString()}>
+										{currentStreak}
+									</BouncyText>
 								</p>
 								<Separator orientation="vertical" />
 								<p className="text-center">
-									Best Streak: <span className="sm:block  text-white font-bold">{bestStreak}</span>
+									Best Streak:{' '}
+									<BouncyText className="sm:block text-white font-bold" text={bestStreak.toString()}>
+										{bestStreak}
+									</BouncyText>
 								</p>
 								{(CONFIG.isDebug || isDebugMode) && (
 									<>

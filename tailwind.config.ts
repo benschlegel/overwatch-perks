@@ -77,7 +77,7 @@ const config: Config = {
 				},
 				bouncy: {
 					'0%, 100%': { transform: 'scale(1)' },
-					'50%': { transform: 'scale(1.5)' },
+					'50%': { transform: 'scale(1.65)' },
 				},
 			},
 			animation: {
