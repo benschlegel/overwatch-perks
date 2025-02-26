@@ -42,14 +42,13 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 							<p>
 								<span className="font-semibold">{perk.perkType}</span>
 							</p>
-							{CONFIG.isDebug && <p>{isCorrect ? 'correct' : ''}</p>}
 							<p>{cardId}</p>
 						</div>
 					</>
 				)}
 			</CardContent>
 		);
-	}, [cardId, isCorrect, perk.description, perk.name, perk.perkType, showDescription]);
+	}, [cardId, perk.description, perk.name, perk.perkType, showDescription]);
 
 	const InverseContent = useCallback(() => {
 		return (
@@ -66,7 +65,7 @@ export default function PerkCard({ perk, index, className, correctPerkId }: Prop
 		<Card
 			data-correct={result}
 			className={cn(
-				'w-full outline-background-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[correct=false]:outline-none data-[correct=false]:ring-2 data-[correct=false]:ring-ring data-[correct=false]:ring-offset-1 ring-offset-background hover:bg-secondary focus-visible:bg-secondary focus-visible:transition-none transition-colors data-[correct=false]:bg-red-600/45 data-[correct=true]:bg-green-600/45',
+				`w-full outline-background-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[correct=false]:outline-none data-[correct=false]:ring-2 data-[correct=false]:ring-ring data-[correct=false]:ring-offset-1 ring-offset-background hover:bg-secondary focus-visible:bg-secondary focus-visible:transition-none transition-colors data-[correct=false]:bg-red-600/45 data-[correct=true]:bg-green-600/45 ${CONFIG.isDebug && isCorrect ? 'ring-2 ring-green-500' : ''}`,
 				className
 			)}
 			tabIndex={0}
