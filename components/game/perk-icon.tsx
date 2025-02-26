@@ -13,6 +13,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 const imageFileExt = 'png';
 const basePath = '/assets/perks';
 
+const MAX_LOADING_TIMEOUT = 3500;
+
 export default function PerkIcon({ perk, className }: Props) {
 	const [isLoading, setLoading] = useState(true);
 	const imgUrl = perk !== undefined ? `${basePath}/${perk.heroId}_${perk.perkType}_${perk.perkIndex}.${imageFileExt}` : undefined;
@@ -24,10 +26,18 @@ export default function PerkIcon({ perk, className }: Props) {
 		}
 	}, [gameState]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: set loading to true every time perk changes so it also works in case the same perk gets rolled twice in a row
+	// biome-ignore lint/correctness/useExhaustiveDependencies: set loading to true every time perk changes so it also works in case the same perk gets rolled twice in a row (not sure if this works tbh)
 	useEffect(() => {
 		setLoading(true);
 	}, [perk]);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, MAX_LOADING_TIMEOUT);
+
+		return () => clearTimeout(timer); // Cleanup in case the component unmounts before the timeout completes
+	}, []);
 
 	const onLoaded = useCallback(() => {
 		setLoading(false);
