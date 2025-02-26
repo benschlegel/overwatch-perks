@@ -34,7 +34,7 @@ export default function PerkIcon({ perk, className }: Props) {
 	return (
 		<div className={cn('relative rounded-full size-20 bg-secondary flex justify-center items-center', className)} key={perk.name}>
 			{isLoading && (
-				<div className="absolute inset-0 flex items-center justify-center">
+				<div className="absolute inset-0 flex items-center justify-center" key={`${perk.name}-loader`}>
 					<LoaderCircleIcon className="w-10 h-10 text-primary animate-spin" aria-label="Loading" />
 				</div>
 			)}
@@ -45,6 +45,7 @@ export default function PerkIcon({ perk, className }: Props) {
 				onLoad={onLoaded}
 				quality={100}
 				priority
+				key={`${perk.name}-img`}
 				fill
 				loading="eager"
 				unoptimized={true}
