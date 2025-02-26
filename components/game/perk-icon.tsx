@@ -24,10 +24,20 @@ export default function PerkIcon({ perk, className }: Props) {
 		}
 	}, [gameState]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: set loading to true every time perk changes so it also works in case the same perk gets rolled twice in a row
+	useEffect(() => {
+		setLoading(true);
+	}, [perk]);
+
 	const onLoaded = useCallback(() => {
 		setLoading(false);
 		console.log('Loaded image.');
 	}, []);
+
+	const onError = useCallback(() => {
+		setLoading(false);
+		console.error(`Failed to load image: ${imgUrl}`);
+	}, [imgUrl]);
 
 	if (!perk || !imgUrl) return <></>;
 
@@ -43,9 +53,10 @@ export default function PerkIcon({ perk, className }: Props) {
 				src={imgUrl}
 				alt={`${perk.name} icon`}
 				onLoad={onLoaded}
+				onError={onError}
 				quality={100}
 				priority
-				key={`${perk.name}-img`}
+				key={`${perk.name}-${perk.id}-img`}
 				fill
 				loading="eager"
 				unoptimized={true}
