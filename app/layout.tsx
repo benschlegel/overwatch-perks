@@ -89,7 +89,7 @@ export const metadata: Metadata = {
 			'max-snippet': -1,
 		},
 	},
-	keywords: ['Overwatch', 'overwatch', 'perks', 'guess the perk', 'minigame', 'queue game', 'difficult'],
+	keywords: ['owperks', 'overwatch perks', 'Overwatch', 'overwatch', 'perks', 'guess the perk', 'minigame', 'queue game', 'difficult'],
 };
 
 export default function RootLayout({
