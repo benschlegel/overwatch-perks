@@ -56,6 +56,7 @@ type SettingItem = {
 	name: string;
 	description: string;
 	defaultChecked?: boolean;
+	disabled?: boolean;
 	settingId: SettingName;
 };
 
@@ -67,12 +68,13 @@ export const SETTINGS: SettingItem[] = [
 		name: 'Random Answers',
 		description: 'When enabled, answers will be from random perks instead of showing all hero perks.',
 		settingId: 'randomAnswers',
+		disabled: true,
 	},
 	{ name: 'Hard Mode', description: 'Guess perks by providing the exact name instead of choosing from four options.', settingId: 'hardMode' },
 	{ name: 'Debug Mode', description: 'Show perk id and other information useful for debugging and feedback.', settingId: 'debug' },
 ];
 
-export function SettingsItem({ name, description, settingId, defaultChecked }: SettingItem) {
+export function SettingsItem({ name, description, settingId, defaultChecked, disabled }: SettingItem) {
 	const [enabled, setEnabled] = useSetting(settingId);
 	const { restartGame } = useGameState();
 
@@ -92,7 +94,7 @@ export function SettingsItem({ name, description, settingId, defaultChecked }: S
 				<span>{name}</span>
 				<span className="font-normal leading-snug text-muted-foreground">{description}</span>
 			</Label>
-			<Switch defaultChecked={defaultChecked} checked={enabled} onCheckedChange={onClick} />
+			<Switch defaultChecked={defaultChecked} checked={enabled} onCheckedChange={onClick} disabled={disabled} />
 		</div>
 	);
 }
