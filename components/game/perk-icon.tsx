@@ -32,7 +32,7 @@ export default function PerkIcon({ perk, className }: Props) {
 	if (!perk || !imgUrl) return <></>;
 
 	return (
-		<div className={cn('relative rounded-full size-20 bg-secondary flex justify-center items-center', className)}>
+		<div className={cn('relative rounded-full size-20 bg-secondary flex justify-center items-center', className)} key={perk.name}>
 			{isLoading && (
 				<div className="absolute inset-0 flex items-center justify-center">
 					<LoaderCircleIcon className="w-10 h-10 text-primary animate-spin" aria-label="Loading" />
