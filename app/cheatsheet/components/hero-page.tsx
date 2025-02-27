@@ -1,3 +1,6 @@
+'use client';
+import Header from '@/app/cheatsheet/components/header';
+import Socials from '@/components/socials';
 import type { HeroId } from '@/data/heroes';
 import Link from 'next/link';
 
@@ -9,16 +12,21 @@ export default function HeroPage({ heroId }: Props) {
 		heroId = 'tracer';
 	}
 
-	console.log(`Hero id: ${heroId}`);
 	return (
-		<div className="flex flex-col gap-2">
-			<p>Slug: {heroId}</p>
-			<Link href={'/cheatsheet'} prefetch>
-				Go to no slug
-			</Link>
-			<Link href={'/cheatsheet/ana'} prefetch>
-				Go to ana
-			</Link>
+		<div>
+			<Socials />
+			<Header />
 		</div>
 	);
+	// return (
+	// 	<div className="flex flex-col gap-2">
+	// 		<p>Slug: {heroId}</p>
+	// 		<Link href={'/cheatsheet'} prefetch>
+	// 			Go to no slug
+	// 		</Link>
+	// 		<Link href={'/cheatsheet/ana'} prefetch>
+	// 			Go to ana
+	// 		</Link>
+	// 	</div>
+	// );
 }
