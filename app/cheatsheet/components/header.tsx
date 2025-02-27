@@ -1,4 +1,5 @@
 import { HelpDialog, HelpTriggerButton } from '@/app/cheatsheet/components/help-dialog';
+import { CheatsheetSettingsDialog, SettingsTriggerButton } from '@/app/cheatsheet/components/settings-dialog';
 import { FeedbackDialog, FeedbackTriggerButton } from '@/components/dialogs/feedback-dialog';
 import { ModeToggle } from '@/components/landing-page/theme-switcher';
 import { Separator } from '@/components/ui/separator';
@@ -28,6 +29,9 @@ export default function Header() {
 					</h1>
 				</div>
 				<div className="flex gap-1">
+					<Suspense fallback={SettingsTriggerButton}>
+						<CheatsheetSettingsDialog />
+					</Suspense>
 					<ModeToggle />
 				</div>
 			</div>
