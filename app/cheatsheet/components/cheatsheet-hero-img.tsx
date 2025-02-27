@@ -11,7 +11,7 @@ export default function LinkHeroImage({ heroId }: Props) {
 
 	// TODO: use opacity instead of switching component
 	return (
-		<div className="relative w-[8rem] pb-[120%]">
+		<div className="relative sm:w-[8rem] w-[6rem] pb-[120%]">
 			<Image src={heroSource} alt={`${heroId}'s hero portrait`} loading="eager" unoptimized={true} quality={100} fill className="object-cover rounded-t-lg" />
 		</div>
 	);

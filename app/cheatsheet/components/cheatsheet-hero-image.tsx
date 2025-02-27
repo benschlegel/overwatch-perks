@@ -14,7 +14,7 @@ export default function CheatsheetHeroCard({ heroId }: Props) {
 			<LinkHeroImage heroId={heroId} />
 			<Separator className="mb-2 h-1 transition-colors duration-300" />
 			<div className="flex flex-col items-center justify-center">
-				<p className="pb-2 font-bold font-mono">{heroName ?? 'loading'}</p>
+				<p className="pb-2 font-bold font-mono text-center">{heroName ?? 'loading'}</p>
 			</div>
 		</div>
 	);
