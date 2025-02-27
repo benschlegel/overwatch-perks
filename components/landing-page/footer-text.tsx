@@ -1,6 +1,6 @@
 import LinkButton from '@/components/ui/link-button';
 
-export default function DonateText() {
+export default function FooterText() {
 	return (
 		<div className="p-2 px-2 opacity-60 w-full flex items-center justify-center">
 			<p className="text-sm text-muted-foreground text-center">

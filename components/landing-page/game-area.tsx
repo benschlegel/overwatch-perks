@@ -1,6 +1,6 @@
 import AnswerCardWrapper from '@/components/landing-page/answer-card-wrapper';
 import Controls from '@/components/landing-page/controls';
-import DonateText from '@/components/landing-page/donate-text';
+import FooterText from '@/components/landing-page/footer-text';
 import PerkInfo from '@/components/landing-page/perk-info';
 import { Suspense } from 'react';
 
@@ -11,7 +11,7 @@ export default function GameArea() {
 				<PerkInfo />
 				<AnswerCardWrapper />
 				<Controls />
-				<DonateText />
+				<FooterText />
 			</Suspense>
 		</div>
 	);
