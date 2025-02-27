@@ -3,6 +3,7 @@ import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTit
 import HotkeyInfo from '@/components/ui/hotkey-info';
 import LinkButton from '@/components/ui/link-button';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { CONFIG } from '@/config';
 import { useDialogParams } from '@/hooks/use-dialog-param';
 import { CircleHelpIcon, Clapperboard, LightbulbIcon } from 'lucide-react';
 import { memo, useCallback } from 'react';
@@ -45,8 +46,8 @@ export default function HelpContent({ setOpen }: Props) {
 					</blockquote>
 					<div className="flex flex-col gap-2">
 						<p className="scroll-m-20 text-base tracking-normal">
-							To play, select the card that maches the icon shown above. There are different <span className="font-semibold">difficulty levels</span> available
-							in the{' '}
+							Welcome to <span className="font-semibold">{CONFIG.gameName}</span>! To play, select the card that maches the icon shown above. There are
+							different <span className="font-semibold">difficulty levels</span> available in the{' '}
 							<LinkButton type="button" href="" onClick={() => setDialog('settings')} className="text-base tracking-normal">
 								settings
 							</LinkButton>{' '}
