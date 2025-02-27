@@ -1,8 +1,8 @@
 'use client';
+import CheatsheetArea from '@/app/cheatsheet/components/cheatsheet-area';
 import Header from '@/app/cheatsheet/components/header';
 import Socials from '@/components/socials';
 import type { HeroId } from '@/data/heroes';
-import Link from 'next/link';
 
 type Props = {
 	heroId?: HeroId;
@@ -16,6 +16,7 @@ export default function HeroPage({ heroId }: Props) {
 		<div>
 			<Socials />
 			<Header />
+			<CheatsheetArea heroId={heroId} />
 		</div>
 	);
 	// return (
