@@ -7,7 +7,7 @@ type Props = {
 
 export default function CheatsheetArea({ heroId }: Props) {
 	return (
-		<div>
+		<div className="flex flex-col gap-4">
 			<CheatsheetHeroCard heroId={heroId} />
 		</div>
 	);

@@ -25,7 +25,11 @@ export default function Header() {
 						style={{
 							fontFamily: 'var(--font-owl-bold), ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
 						}}>
-						<span className="text-primary-foreground">PERK</span>CHEATSHEET
+						{/* Jank to fix mobile display */}
+						<span className="sm:block hidden">
+							<span className="text-primary-foreground">PERK</span>CHEATSHEET
+						</span>
+						<span className="sm:hidden block tracking-base text-2xl text-primary-foreground">CHEATSHEET</span>
 					</h1>
 				</div>
 				<div className="flex gap-1">
