@@ -4,17 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import type { HeroId } from '@/data/heroes';
 import { MessageSquareTextIcon } from 'lucide-react';
-import { parseAsBoolean, useQueryState } from 'nuqs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const DIALOG_KEY = 'hero-select';
-
-type Props = {
-	selectedHeroId?: HeroId;
-};
-
-export function HeroDialog({ selectedHeroId: selectedHero }: Props) {
-	const [open, setOpen] = useState(selectedHero === undefined);
+export function HeroDialog() {
+	const [open, setOpen] = useState(true);
 	return (
 		<Dialog open={open} onOpenChange={(val) => (val === true ? setOpen(true) : setOpen(false))}>
 			<DialogTrigger asChild>{FeedbackTriggerButton}</DialogTrigger>

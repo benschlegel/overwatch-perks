@@ -1,7 +1,8 @@
-import { HeroDialog } from '@/app/cheatsheet/components/hero-dialog';
+import HeroPage from '@/app/cheatsheet/components/hero-page';
 import { isValidHeroId, type HeroId } from '@/data/heroes';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+// TODO: add hero page to layout, only add dialog to base page
 
 export default async function Cheatsheet({
 	params,
@@ -20,20 +21,5 @@ export default async function Cheatsheet({
 		notFound();
 	}
 
-	return (
-		<div className="flex flex-col">
-			<p>Slug: {heroId}</p>
-
-			<HeroDialog selectedHeroId={heroId} />
-			{heroIdSlug !== undefined ? (
-				<Link href={'/cheatsheet'} prefetch>
-					Go to no slug
-				</Link>
-			) : (
-				<Link href={'/cheatsheet/ana'} prefetch>
-					Go to ana slug
-				</Link>
-			)}
-		</div>
-	);
+	return <HeroPage heroId={heroId} />;
 }
