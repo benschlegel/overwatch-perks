@@ -17,31 +17,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			url: 'https://perks.owldle.com?hardMode=6',
 			lastModified: yesterday,
 			changeFrequency: 'always',
-			priority: 1,
-		},
-		{
-			url: 'https://perks.owldle.com?randomAnswers=true',
-			lastModified: yesterday,
-			changeFrequency: 'always',
-			priority: 1,
-		},
-		{
-			url: 'https://perks.owldle.com?randomAnswers=true',
-			lastModified: yesterday,
-			changeFrequency: 'always',
-			priority: 1,
-		},
-		{
-			url: 'https://perks.owldle.com?showHelp=true',
-			lastModified: yesterday,
-			changeFrequency: 'monthly',
 			priority: 0.8,
 		},
 		{
-			url: 'https://perks.owldle.com?showFeedback=true',
+			url: 'https://perks.owldle.com?randomAnswers=true',
 			lastModified: yesterday,
-			changeFrequency: 'never',
-			priority: 0.5,
+			changeFrequency: 'always',
+			priority: 0.8,
+		},
+		{
+			url: 'https://perks.owldle.com?randomAnswers=true',
+			lastModified: yesterday,
+			changeFrequency: 'always',
+			priority: 0.8,
+		},
+		{
+			url: 'https://perks.owldle.com?dialog=help',
+			lastModified: yesterday,
+			changeFrequency: 'monthly',
+			priority: 1,
 		},
 	];
 }
