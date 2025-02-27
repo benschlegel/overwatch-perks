@@ -19,6 +19,7 @@ const nextConfig = withPlausibleProxy({ customDomain: 'https://plausible.global.
 	},
 	experimental: {
 		reactCompiler: true,
+		viewTransition: true,
 		// instrumentationHook: true,
 	},
 });
