@@ -1,4 +1,4 @@
-import CheatsheetHeroCard from '@/app/cheatsheet/components/hero-card';
+import CheatsheetHeroCardWrapper from '@/app/cheatsheet/components/hero-card';
 import { type TabKey, useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
 import { Tabs } from '@/components/ui/tabs';
 import type { HeroId } from '@/data/heroes';
@@ -20,7 +20,7 @@ export default function CheatsheetArea({ heroId }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
 			<Tabs value={tab} onValueChange={handleChange}>
-				<CheatsheetHeroCard heroId={heroId} />
+				<CheatsheetHeroCardWrapper heroId={heroId} />
 			</Tabs>
 		</div>
 	);
