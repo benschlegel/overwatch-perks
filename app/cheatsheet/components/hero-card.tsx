@@ -1,7 +1,9 @@
+import type { TabKey } from '@/app/cheatsheet/hooks/use-tab-param';
 import HeroCard from '@/components/landing-page/hero-card';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getHeroName, type HeroId } from '@/data/heroes';
 import Link from 'next/link';
 
@@ -25,7 +27,17 @@ export default function CheatsheetHeroCard({ heroId }: Props) {
 						<div className="w-full pl-4">
 							<Separator className="mt-1 " />
 							<div className="flex items-center space-x-4 sm:text-sm text-xs text-muted-foreground w-full justify-center mt-2 sm:mb-[-0.4rem] ">
-								<p>Footer</p>
+								<TabsList className="flex w-full mx-2">
+									<TabsTrigger className="flex-1" value={'info' as TabKey}>
+										Perk info
+									</TabsTrigger>
+									<TabsTrigger className="flex-1" value={'community' as TabKey}>
+										Community
+									</TabsTrigger>
+									<TabsTrigger className="flex-1" value={'personal' as TabKey}>
+										Personal
+									</TabsTrigger>
+								</TabsList>
 							</div>
 						</div>
 					</div>
