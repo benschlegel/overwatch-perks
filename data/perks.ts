@@ -1291,6 +1291,31 @@ export const PERKS: Perk[] = [
 	},
 ];
 
+export const PERK_IDS = PERKS.map((p) => p.id);
+
+const mappedPerksRaw = PERKS.reduce<Record<string, { heroId: string; ids: number[] }>>((acc, { heroId, id }) => {
+	if (!acc[heroId]) {
+		acc[heroId] = { heroId, ids: [] };
+	}
+	acc[heroId].ids.push(id);
+	return acc;
+}, {});
+
+export const PERK_IDS_BY_HERO = Object.values(mappedPerksRaw);
+/**
+ * Gets all perk ids associated with a hero id (e.g. [123,124,125,126]). Will return empty array if heroId is not valid
+ */
+export function getHeroPerkIds(heroId: HeroId) {
+	return PERK_IDS_BY_HERO.find((h) => h.heroId === heroId)?.ids ?? [];
+}
+
+/**
+ * Gets all perks associated with a hero
+ */
+export function getHeroPerks(heroId: HeroId) {
+	return PERKS.find((h) => h.heroId === heroId);
+}
+
 export function getRandomPerk() {
 	return PERKS[Math.floor(Math.random() * PERKS.length)];
 }

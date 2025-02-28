@@ -44,6 +44,9 @@ export type DbRun = {
 	finishedAt: Date;
 };
 
-export type DbTest = { prop: string };
+export type DbVote = {
+	_id: number;
+	votes: number;
+};
 
 export const API_URL = process.env.API_URL ?? '';

@@ -1,5 +1,7 @@
 import { CONFIG } from '@/config';
-import type { GameResult, DbLoggedGame, DbFeedback, DbTest, DbRun } from '@/types/database';
+import type { HeroId } from '@/data/heroes';
+import { getHeroPerkIds } from '@/data/perks';
+import type { GameResult, DbLoggedGame, DbFeedback, DbRun, DbVote } from '@/types/database';
 import { MongoClient } from 'mongodb';
 let useDevDatabase = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -32,6 +34,9 @@ const feedbackCollection = database.collection<DbFeedback>(feedbackID);
 
 const runId = 'runs';
 const runCollection = database.collection<DbRun>(runId);
+
+const voteId = 'votes';
+const voteCollection = database.collection<DbVote>(voteId);
 
 /**
  *
@@ -77,3 +82,38 @@ export async function estimateTotalTurns() {
 export async function addFeedback(feedback: DbFeedback) {
 	return feedbackCollection.insertOne(feedback);
 }
+
+export async function incrementVote(perkId: number) {
+	return voteCollection.updateOne(
+		{ _id: perkId }, // Filter by id
+		{ $inc: { votes: 1 } }, // Increment votes by 1
+		{ upsert: true } // Create document if it does not exist
+	);
+}
+
+export async function getVotesByHero(heroId: HeroId) {
+	const perkIds = getHeroPerkIds(heroId);
+}
+
+export async function getTotalVotes() {
+	const result = await voteCollection
+		.aggregate([
+			{
+				$group: { _id: null, totalVotes: { $sum: '$votes' } },
+			},
+		])
+		.toArray();
+
+	return result.length > 0 ? result[0].totalVotes : 0;
+}
+
+// const result = await collection.aggregate([{
+// 	$group: { _id: null, totalVotes: { $sum: "$votes" } }
+// }]).toArray();
+
+// return result.length > 0 ? result[0].totalVotes : 0;
+
+// {
+//   id: "bass-blowout",
+//   votes: 25
+// }
