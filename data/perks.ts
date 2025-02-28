@@ -1314,7 +1314,7 @@ export function getHeroPerkIds(heroId: HeroId) {
  * Gets all perks associated with a hero
  */
 export function getHeroPerks(heroId: HeroId) {
-	return PERKS.find((h) => h.heroId === heroId);
+	return PERKS.filter((h) => h.heroId === heroId);
 }
 
 export function getRandomPerk() {
