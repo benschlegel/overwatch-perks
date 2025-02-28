@@ -29,7 +29,9 @@ export default function Header() {
 						<span className="sm:block hidden">
 							<span className="text-primary-foreground">PERK</span>CHEATSHEET
 						</span>
-						<span className="sm:hidden block tracking-base text-2xl text-primary-foreground">CHEATSHEET</span>
+						<span className="sm:hidden block tracking-base text-2xl">
+							<span className="text-primary-foreground">CHEATSHEET</span>
+						</span>
 					</h1>
 				</div>
 				<div className="flex gap-1">
