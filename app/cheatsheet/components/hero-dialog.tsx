@@ -1,24 +1,21 @@
 'use client';
-import FeedbackContent from '@/components/dialogs/feedback-content';
+import HeroDialogContent from '@/app/cheatsheet/components/hero-dialog-content';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import type { HeroId } from '@/data/heroes';
 import { MessageSquareTextIcon } from 'lucide-react';
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
 
-export function HeroDialog() {
-	const [open, setOpen] = useState(true);
+type Props = {
+	open: boolean;
+	setOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export function HeroDialog({ open, setOpen }: Props) {
 	return (
 		<Dialog open={open} onOpenChange={(val) => (val === true ? setOpen(true) : setOpen(false))}>
-			<DialogTrigger asChild>{FeedbackTriggerButton}</DialogTrigger>
-			<FeedbackContent setOpen={setOpen} />
+			{/* <DialogTrigger asChild>{FeedbackTriggerButton}</DialogTrigger> */}
+			<HeroDialogContent setOpen={setOpen} />
 		</Dialog>
 	);
 }
-
-export const FeedbackTriggerButton = (
-	<Button variant="ghost" size="icon" className="!p-0" aria-label="Help">
-		<MessageSquareTextIcon className="!size-[1.2rem] !transition-all" />
-		<span className="sr-only">Send feedback</span>
-	</Button>
-);
