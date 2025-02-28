@@ -116,7 +116,7 @@ export default function RootLayout({
 							<GameStateContextProvider>
 								<CurrentBestContextProvider>
 									<GameScoreContextProvider>
-										<div className="px-2 pt-8 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
+										<div className="px-2 sm:pt-8 pt-6 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
 											<main className="w-[40rem]">{children}</main>
 										</div>
 										<Toaster />
