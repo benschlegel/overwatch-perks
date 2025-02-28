@@ -262,6 +262,7 @@ export const DAMAGE_HEROES = HEROES.map((h) => h.role === 'damage');
 export const SUPPORT_HEROES = HEROES.map((h) => h.role === 'support');
 export type HeroName = (typeof HEROES)[number]['name'];
 export type HeroRole = (typeof HEROES)[number]['role'];
+export type Hero = (typeof HEROES)[number];
 
 /**
  * Returns hero name for given hero id

@@ -1,7 +1,10 @@
 'use client';
+import SmallHeroCard from '@/app/cheatsheet/components/small-hero-card';
+import SmallHeroImage from '@/app/cheatsheet/components/small-hero-img';
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { HEROES } from '@/data/heroes';
 import { Gamepad2Icon } from 'lucide-react';
 import { memo, useCallback } from 'react';
 
@@ -30,7 +33,11 @@ export default function HeroDialogContent({ setOpen }: Props) {
 				<DialogDescription className="mt-2 text-left mb-0">Select hero to see perks</DialogDescription>
 			</DialogHeader>
 			<ScrollArea type="scroll" className="h-[650px]">
-				<div className="flex flex-col gap-5">Test</div>
+				<div className="flex w-full h-full gap-2 flex-wrap">
+					{HEROES.map((h) => (
+						<SmallHeroCard hero={h} key={`small-img-${h.id}`} />
+					))}
+				</div>
 			</ScrollArea>
 			<DialogFooter>
 				<MemoizedButton onClick={handleClose} />

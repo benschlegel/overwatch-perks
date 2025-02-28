@@ -12,6 +12,7 @@ import GameScoreContextProvider from '@/context/GameScoreContext';
 import { PERKS } from '@/data/perks';
 import { CONFIG } from '@/config';
 import CurrentBestContextProvider from '@/context/CurrentBestContext';
+import { HEROES } from '@/data/heroes';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -101,6 +102,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="twitter:card" content="summary_large_image" />
+				{/* {HEROES.map((h) => (
+					<link rel="preload" key={h.id} as="image" href={h.portrait} />
+				))} */}
 				{PERKS.map((p) => (
 					<link rel="preload" key={p.id} as="image" href={`/assets/perks/${p.heroId}_${p.perkType}_${p.perkIndex}.png`} />
 				))}
