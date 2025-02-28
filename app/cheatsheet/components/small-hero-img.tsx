@@ -14,6 +14,7 @@ export default function SmallHeroImage({ hero }: Props) {
 				// priority
 				fetchPriority="high"
 				loading="lazy"
+				decoding="async"
 				unoptimized={true}
 				fill
 				quality={100}

@@ -1,21 +1,17 @@
 'use client';
-import HeroDialogContent from '@/app/cheatsheet/components/hero-dialog-content';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import type { HeroId } from '@/data/heroes';
-import { MessageSquareTextIcon } from 'lucide-react';
-import { type Dispatch, type SetStateAction, useState } from 'react';
+import { HeroSelectContext } from '@/app/cheatsheet/context/HeroSelectContext';
+import { Dialog } from '@/components/ui/dialog';
+import { type Dispatch, lazy, type SetStateAction, Suspense, useContext, useState } from 'react';
+const LazyHeroDialogContent = lazy(() => import('@/app/cheatsheet/components/hero-dialog-content'));
 
-type Props = {
-	open: boolean;
-	setOpen: Dispatch<SetStateAction<boolean>>;
-};
-
-export function HeroDialog({ open, setOpen }: Props) {
+export function HeroDialog() {
+	const { isOpen, setIsOpen } = useContext(HeroSelectContext);
 	return (
-		<Dialog open={open} onOpenChange={(val) => (val === true ? setOpen(true) : setOpen(false))}>
+		<Dialog open={isOpen} onOpenChange={(val) => (val === true ? setIsOpen(true) : setIsOpen(false))}>
 			{/* <DialogTrigger asChild>{FeedbackTriggerButton}</DialogTrigger> */}
-			<HeroDialogContent setOpen={setOpen} />
+			<Suspense>
+				<LazyHeroDialogContent setOpen={setIsOpen} />
+			</Suspense>
 		</Dialog>
 	);
 }
