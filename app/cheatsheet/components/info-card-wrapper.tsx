@@ -1,4 +1,5 @@
 import PerkCardBase from '@/app/cheatsheet/components/perk-card';
+import { Separator } from '@/components/ui/separator';
 import type { HeroId } from '@/data/heroes';
 import { getHeroPerks } from '@/data/perks';
 import { useMemo } from 'react';
@@ -14,9 +15,19 @@ export default function InfoCardWrapper({ heroId }: Props) {
 	if (!perks) return <></>;
 	return (
 		<div className="flex flex-col w-full sm:gap-3 gap-2 sm:mt-2 mt-1">
+			<div className="flex items-center">
+				<Separator className="flex-1 mx-5" />
+				<p className="text-muted-foreground">Minor perks</p>
+				<Separator className="flex-1 mx-5" />
+			</div>
 			<div className="flex flex-row sm:gap-3 gap-2">
 				<PerkCardBase perk={perks[0]} />
 				<PerkCardBase perk={perks[1]} />
+			</div>
+			<div className="flex items-center">
+				<Separator className="flex-1 mx-5" />
+				<p className="text-muted-foreground">Major perks</p>
+				<Separator className="flex-1 mx-5" />
 			</div>
 			<div className="flex flex-row sm:gap-3 gap-2">
 				<PerkCardBase perk={perks[2]} />

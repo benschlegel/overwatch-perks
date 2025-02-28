@@ -13,7 +13,7 @@ type Props = {
 export default function CheatsheetHeroCardWrapper({ heroId }: Props) {
 	const heroName = getHeroName(heroId);
 	return (
-		<Card className="transition-colors">
+		<Card className="transition-colors sm:mb-4 mb-2">
 			<CardContent className="flex flex-col sm:gap-2 gap-1 sm:p-4 p-2 transition-colors">
 				<div className="flex items-stretch justify-between sm:gap-4 gap-2">
 					<CheatsheetHeroCard heroId={heroId} />
