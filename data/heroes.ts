@@ -257,9 +257,9 @@ export const HEROES = [
 
 export type HeroId = (typeof HEROES)[number]['id'];
 export const HERO_IDS = HEROES.map((h) => h.id);
-export const TANK_HEROES = HEROES.map((h) => h.role === 'tank');
-export const DAMAGE_HEROES = HEROES.map((h) => h.role === 'damage');
-export const SUPPORT_HEROES = HEROES.map((h) => h.role === 'support');
+export const TANK_HEROES = HEROES.filter((h) => h.role === 'tank');
+export const DAMAGE_HEROES = HEROES.filter((h) => h.role === 'damage');
+export const SUPPORT_HEROES = HEROES.filter((h) => h.role === 'support');
 export type HeroName = (typeof HEROES)[number]['name'];
 export type HeroRole = (typeof HEROES)[number]['role'];
 export type Hero = (typeof HEROES)[number];
