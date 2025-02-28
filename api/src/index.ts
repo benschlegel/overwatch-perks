@@ -1,6 +1,6 @@
-import { addFeedback, getTotalRuns, getTotalTurns, getTotalVotes, getVotes, incrementVote, logGame, logRun } from '@shared-lib/databaseAccess';
+import { addFeedback, getTotalRuns, getTotalTurns, getTotalVotes, getVotes, getVotesByHero, incrementVote, logGame, logRun } from '@shared-lib/databaseAccess';
 import { Elysia } from 'elysia';
-import { feedbackPostBody, savePostBody, saveRunBody, votePostBody } from './types';
+import { feedbackPostBody, heroIdBody, savePostBody, saveRunBody, votePostBody } from './types';
 import type { DbFeedback } from '@shared/database';
 import { CONFIG } from '@shared-global/config';
 import cors from '@elysiajs/cors';
@@ -78,12 +78,20 @@ const app = new Elysia()
 		{ body: votePostBody }
 	)
 	.get(
-		'/api/votes/:perkId',
+		'/api/votes/perk/:perkId',
 		async ({ params, set }) => {
 			const votes = await getVotes(params.perkId);
 			return votes;
 		},
 		{ params: votePostBody }
+	)
+	.get(
+		'/api/votes/:heroId',
+		async ({ params, set }) => {
+			const votes = await getVotesByHero(params.heroId);
+			return votes;
+		},
+		{ params: heroIdBody }
 	)
 	.get('/api/totalTurns', async () => {
 		const turns = await getTotalTurns();

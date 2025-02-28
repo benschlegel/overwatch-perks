@@ -103,7 +103,12 @@ interface VotesMap {
 /**
  * Gets all votes for all perks associated with a hero (e.g. passing 'lucio' would provide something like [{id: 123, votes: 2}, ...])
  */
-export async function getVotesByHero(heroId: HeroId) {
+export async function getVotesByHero(heroId: HeroId): Promise<
+	{
+		id: number;
+		votes: number;
+	}[]
+> {
 	const perkIds = getHeroPerkIds(heroId);
 
 	const results = (await voteCollection.find({ _id: { $in: perkIds } }).toArray()) as DbVote[];

@@ -1,4 +1,4 @@
-import { HERO_IDS } from '@shared-data/heroes';
+import { HERO_IDS, HeroId } from '@shared-data/heroes';
 import { MAX_PERK_ID, PERKS } from '@shared-data/perks';
 import { type Static, t } from 'elysia';
 
@@ -22,6 +22,10 @@ export const validPerkId = t.Number({ minimum: 0, maximum: MAX_PERK_ID, multiple
 
 export const votePostBody = t.Object({
 	perkId: validPerkId,
+});
+
+export const heroIdBody = t.Object({
+	heroId: t.UnionEnum(HERO_IDS as any),
 });
 
 export const saveRunBody = t.Object({
