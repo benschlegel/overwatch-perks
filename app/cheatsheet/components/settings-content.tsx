@@ -5,7 +5,6 @@ import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTit
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Switch } from '@/components/ui/switch';
-import { useSetting } from '@/hooks/use-settings-param';
 import { SettingsIcon } from 'lucide-react';
 import React, { memo, useCallback } from 'react';
 type Props = {

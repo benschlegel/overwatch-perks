@@ -1,3 +1,4 @@
+import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
 import PerkIcon from '@/components/game/perk-icon';
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
@@ -10,9 +11,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function PerkCardBase({ className, perk, ...props }: Props) {
+	const [dialog, setDialog] = useInfoDialogs();
 	const onClick = useCallback(() => {
-		//
-	}, []);
+		setDialog(`${perk.perkType}-${perk.perkIndex + 1}` as InfoDialogKey);
+	}, [perk.perkIndex, perk.perkType, setDialog]);
 	if (perk === undefined) return <></>;
 	// TODO: convert to grid and have 4 row layout on mobile
 	return (

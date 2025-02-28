@@ -1,6 +1,7 @@
 import ControlsRow from '@/app/cheatsheet/components/controls-row';
 import CheatsheetHeroCardWrapper from '@/app/cheatsheet/components/hero-card';
 import InfoCardWrapper from '@/app/cheatsheet/components/info-card-wrapper';
+import { InfoDialog } from '@/app/cheatsheet/dialogs/info-dialog';
 import { type TabKey, useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
@@ -30,6 +31,7 @@ export default function CheatsheetArea({ heroId }: Props) {
 			</Tabs>
 			<Separator className="mt-3" />
 			<ControlsRow />
+			<InfoDialog heroId={heroId} />
 		</div>
 	);
 }
