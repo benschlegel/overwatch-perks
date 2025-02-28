@@ -96,8 +96,29 @@ export async function getVotes(perkId: number) {
 	return res ? res.votes : 0;
 }
 
+interface VotesMap {
+	[key: number]: number;
+}
+
+/**
+ * Gets all votes for all perks associated with a hero (e.g. passing 'lucio' would provide something like [{id: 123, votes: 2}, ...])
+ */
 export async function getVotesByHero(heroId: HeroId) {
 	const perkIds = getHeroPerkIds(heroId);
+
+	const results = (await voteCollection.find({ _id: { $in: perkIds } }).toArray()) as DbVote[];
+
+	// Create a map of id -> votes from the query results
+	const votesMap = results.reduce<VotesMap>((map, doc) => {
+		map[doc._id] = doc.votes;
+		return map;
+	}, {});
+
+	// Map each input id to an object with id and votes (0 if not found)
+	return perkIds.map((id) => ({
+		id: id,
+		votes: votesMap[id] || 0,
+	}));
 }
 
 export async function getTotalVotes() {
