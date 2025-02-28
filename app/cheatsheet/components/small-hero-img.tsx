@@ -7,7 +7,7 @@ type Props = {
 
 export default function SmallHeroImage({ hero }: Props) {
 	return (
-		<div className="relative sm:w-[8rem] pb-[120%]">
+		<div className="relative sm:w-[8rem] w-[6rem] pb-[120%]">
 			<Image
 				src={hero.portrait}
 				alt={`${hero.name}'s hero portrait`}

@@ -22,12 +22,12 @@ export default function RoleImages({ role }: Props) {
 	}, [role]);
 	return (
 		<>
-			<div className="flex items-center justify-center gap-4 my-5">
+			<div data-role={role} className={`flex items-center justify-center gap-4 mb-6 ${role !== 'tank' && 'mt-6'}`}>
 				<Separator className="flex-1" />
 				<h2 className="scroll-m-20 text-2xl font-semibold tracking-tight uppercase">{role}</h2>
 				<Separator className="flex-1 mr-6" />
 			</div>
-			<div className="flex w-full h-full px-4 pl-6 gap-2 flex-wrap overflow-visible">
+			<div className="flex w-full h-full justify-center sm:px-4 sm:pl-6 gap-2 gap-y-3 flex-wrap overflow-visible">
 				{heroes.map((h) => (
 					<SmallHeroCard hero={h} key={`small-img-${h.id}`} />
 				))}
