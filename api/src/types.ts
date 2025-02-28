@@ -1,4 +1,5 @@
-import { PERKS } from '@shared-data/perks';
+import { HERO_IDS } from '@shared-data/heroes';
+import { MAX_PERK_ID, PERKS } from '@shared-data/perks';
 import { type Static, t } from 'elysia';
 
 export const savePostBody = t.Object({
@@ -16,6 +17,12 @@ export const feedbackPostBody = t.Object({
 	feedback: t.String({ maxLength: 4096 }),
 });
 export type FeedbackPostBody = Static<typeof savePostBody>;
+
+export const validPerkId = t.Number({ minimum: 0, maximum: MAX_PERK_ID, multipleOf: 1 });
+
+export const votePostBody = t.Object({
+	perkId: validPerkId,
+});
 
 export const saveRunBody = t.Object({
 	turns: t.Integer({ minimum: 1 }),

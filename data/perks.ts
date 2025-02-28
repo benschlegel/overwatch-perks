@@ -1291,6 +1291,7 @@ export const PERKS: Perk[] = [
 	},
 ];
 
+export const MAX_PERK_ID = PERKS[PERKS.length - 1].id;
 export const PERK_IDS = PERKS.map((p) => p.id);
 
 const mappedPerksRaw = PERKS.reduce<Record<string, { heroId: string; ids: number[] }>>((acc, { heroId, id }) => {

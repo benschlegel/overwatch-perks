@@ -91,6 +91,11 @@ export async function incrementVote(perkId: number) {
 	);
 }
 
+export async function getVotes(perkId: number) {
+	const res = await voteCollection.findOne({ _id: perkId });
+	return res ? res.votes : 0;
+}
+
 export async function getVotesByHero(heroId: HeroId) {
 	const perkIds = getHeroPerkIds(heroId);
 }
