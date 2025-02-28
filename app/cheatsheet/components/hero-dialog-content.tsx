@@ -33,7 +33,7 @@ export default function HeroDialogContent({ setOpen }: Props) {
 				</DialogTitle>
 				<DialogDescription className="mt-2 text-left mb-0">Select hero to see perks</DialogDescription>
 			</DialogHeader>
-			<ScrollArea type="scroll" className="h-[45rem]">
+			<ScrollArea type="scroll" className="h-[47rem]">
 				{ROLES.map((role) => (
 					<RoleImages role={role} key={`roles-${role}`} />
 				))}
