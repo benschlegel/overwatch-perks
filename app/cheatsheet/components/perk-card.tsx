@@ -1,4 +1,5 @@
 import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
+import { useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
 import PerkIcon from '@/components/game/perk-icon';
 import { Card, CardContent } from '@/components/ui/card';
 import HighlightText from '@/components/ui/highlight-text';
@@ -12,6 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default function PerkCardBase({ className, perk, ...props }: Props) {
 	const [dialog, setDialog] = useInfoDialogs();
+	const [tab, setTab] = useTabParam();
 	const onClick = useCallback(() => {
 		if (perk) {
 			setDialog(`${perk.perkType}-${perk.perkIndex + 1}` as InfoDialogKey);
@@ -44,7 +46,7 @@ export default function PerkCardBase({ className, perk, ...props }: Props) {
 				{/* <div className="absolute top-2 left-2">
 					<PerkIcon perk={perk} className="size-12" />
 				</div> */}
-				<div className="flex flex-col">
+				<div className="flex flex-1 flex-col">
 					<p className="font-semibold sm:text-lg text-base">{perk.name}</p>
 					<div className="flex flex-1 items-center justify-center sm:py-0 py-1 sm:pb-0 pb-2">
 						<HighlightText className="sm:text-base text-sm mt-[0.4rem] sm:mt-3" text={perk.description} />
