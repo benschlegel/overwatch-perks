@@ -12,7 +12,8 @@ export default function ChangeHeroButton() {
 	}, [setIsOpen]);
 	return (
 		<Button variant="outline" onClick={onClick}>
-			Change heroes <RefreshCwIcon className="text-text" />
+			<span className="sm:block hidden">Change heroes</span>
+			<span className="sm:hidden block">Switch</span> <RefreshCwIcon className="text-text" />
 		</Button>
 	);
 }

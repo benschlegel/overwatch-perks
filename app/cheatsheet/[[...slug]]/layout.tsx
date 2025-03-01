@@ -7,7 +7,7 @@ const DEFAULT_TITLE = 'Perk Cheatsheet';
 const DEFAULT_DESCRIPTION = 'A cheatsheet for info on all Overwatch hero perks.';
 
 const OgConfig = {
-	ogImagePath: '/opengraph-image-cheatsheet.png?new=true',
+	ogImagePath: '/opengraph-image-cheatsheet.png?different=true',
 	ogImageWidth: 1200,
 	ogImageHeight: 630,
 };
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 		siteId: 'owperks-cheatsheet',
 		images: [
 			{
-				url: `https://perks.owldle.com${OgConfig.ogImagePath}`,
+				url: `https://perks.owldle.com/cheatsheet${OgConfig.ogImagePath}`,
 				alt: DEFAULT_TITLE,
 				width: OgConfig.ogImageWidth,
 				height: OgConfig.ogImageHeight,
