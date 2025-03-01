@@ -58,7 +58,9 @@ export default function InfoDialogContent({ heroId }: Props) {
 	if (perk === undefined) return <></>;
 
 	return (
-		<DialogContent className="sm:max-w-[36rem] max-h-full py-6 px-3 md:px-7" aria-describedby="Info for perk">
+		<DialogContent
+			className="sm:max-w-[36rem] max-h-full py-6 px-3 md:px-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+			aria-describedby="Info for perk">
 			<DialogHeader>
 				<DialogTitle className="flex flex-row gap-2 items-center text-left">
 					<InfoIcon className="h-[1.3rem] w-[1.3rem] transition-all" />

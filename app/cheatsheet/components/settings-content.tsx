@@ -31,13 +31,14 @@ export default function SettingsContent({ setOpen }: Props) {
 				</DialogTitle>
 				<DialogDescription className="mt-2 text-left mb-0">Change cheatsheet settings</DialogDescription>
 			</DialogHeader>
-			<ScrollArea type="scroll" className="h-[350px]">
+			{/* <ScrollArea type="scroll" className="h-[350px]">
 				<div className="flex flex-col gap-5">
 					{CHEATSHEET_SETTINGS.map((s) => (
 						<SettingsItem key={s.settingId} description={s.description} name={s.name} settingId={s.settingId} defaultChecked={s.defaultChecked} />
 					))}
 				</div>
-			</ScrollArea>
+			</ScrollArea> */}
+			<p>Work in progress.</p>
 			<DialogFooter>
 				<MemoizedButton onClick={handleClose} />
 			</DialogFooter>

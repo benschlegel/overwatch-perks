@@ -28,26 +28,25 @@ export default function HelpContent({ setOpen }: Props) {
 		<DialogContent
 			className="sm:max-w-[48rem] max-h-full py-6 px-3 md:px-7"
 			// onOpenAutoFocus={(e) => e.preventDefault()}
-			aria-describedby="Tutorial on how to play the game"
+			aria-describedby="Help"
 		>
 			<DialogHeader>
 				<DialogTitle className="flex flex-row gap-2 items-center text-left">
 					<CircleHelpIcon className="h-[1.3rem] w-[1.3rem] transition-all" />
-					How to play
+					Help
 				</DialogTitle>
-				<DialogDescription className="mt-2 text-left mb-0">Tutorial</DialogDescription>
+				{/* <DialogDescription className="mt-2 text-left mb-0">Overwatch perk cheatsheet</DialogDescription> */}
 			</DialogHeader>
 			<ScrollArea type="scroll" className="h-[440px]">
 				<main className="h-full w-full flex flex-col gap-6 px-2 pb-2 text-wrap break-words ">
 					<div className="flex flex-col gap-2">
-						<p className="scroll-m-20 text-base tracking-normal">
-							[WORK IN PROGRESS] To play, select the card that maches the icon shown above. There are different{' '}
-							<span className="font-semibold">difficulty levels</span> available in the{' '}
-							<LinkButton type="button" href="" onClick={() => setDialog('settings')} className="text-base tracking-normal">
-								settings
-							</LinkButton>{' '}
-							to make the game more challenging. The longer your streak, the better.
-						</p>
+						<h1 className="scroll-m-20 text-base tracking-normal">
+							Welcome to the <span className="font-bold">Overwatch perk cheatsheet</span>! Select a hero to see all its perks, including community favorites and
+							more!
+							<br />
+							<br />
+							You can see more info about a perk and vote by clicking on a perk or switching tabs (between info, community and personal).
+						</h1>
 					</div>
 					{/* Tips section */}
 					<div>
@@ -59,11 +58,10 @@ export default function HelpContent({ setOpen }: Props) {
 							<p className="scroll-m-20 text-base tracking-normal mt-4">
 								To make navigation and playing easier, this website has some hotkeys that can be used:
 							</p>
-							<HotkeyInfo hotkey="1,2,3,4" label="Select perk (number for can be found on bottom right of card)" />
-							<HotkeyInfo hotkey="c" label="Go to next perk" />
-							<HotkeyInfo hotkey="r" label="Restart game (also resets streak)" />
+							<HotkeyInfo hotkey="ctrl + s" label="Open/close hero select" />
 							<HotkeyInfo hotkey="ctrl + e" label="Open/close help" />
-							<HotkeyInfo hotkey="ctrl + s" label="Open/close settings" />
+							<HotkeyInfo hotkey="arrow left" label="Select previous perk card (while perk info is active)" />
+							<HotkeyInfo hotkey="arrow left" label="Select next perk card (while perk info is active)" />
 						</div>
 					</div>
 					<div>
