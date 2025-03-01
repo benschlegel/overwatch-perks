@@ -13,8 +13,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function PerkCardBase({ className, perk, ...props }: Props) {
 	const [dialog, setDialog] = useInfoDialogs();
 	const onClick = useCallback(() => {
-		setDialog(`${perk.perkType}-${perk.perkIndex + 1}` as InfoDialogKey);
-	}, [perk.perkIndex, perk.perkType, setDialog]);
+		if (perk) {
+			setDialog(`${perk.perkType}-${perk.perkIndex + 1}` as InfoDialogKey);
+		}
+	}, [perk, setDialog]);
 	if (perk === undefined) return <></>;
 	// TODO: convert to grid and have 4 row layout on mobile
 	return (
