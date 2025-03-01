@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 			},
 		],
 		type: 'website',
-		siteName: 'owperks',
+		siteName: DEFAULT_TITLE,
 	},
 	twitter: {
 		title: DEFAULT_TITLE,
