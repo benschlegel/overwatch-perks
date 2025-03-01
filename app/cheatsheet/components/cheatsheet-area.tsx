@@ -1,10 +1,12 @@
 import CommunityCardWrapper from '@/app/cheatsheet/components/community-card-wrapper';
 import ControlsRow from '@/app/cheatsheet/components/controls-row';
+import FooterText from '@/app/cheatsheet/components/footer-text';
 import CheatsheetHeroCardWrapper from '@/app/cheatsheet/components/hero-card';
 import InfoCardWrapper from '@/app/cheatsheet/components/info-card-wrapper';
 import PersonalCardWrapper from '@/app/cheatsheet/components/personal-card-wrapper';
 import { InfoDialog } from '@/app/cheatsheet/dialogs/info-dialog';
 import { type TabKey, useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
+import DonateText from '@/components/landing-page/donate-text';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import type { HeroId } from '@/data/heroes';
@@ -45,6 +47,7 @@ export default function CheatsheetArea({ heroId }: Props) {
 			</div>
 			<ControlsRow />
 			<InfoDialog heroId={heroId} />
+			<FooterText />
 		</div>
 	);
 }
