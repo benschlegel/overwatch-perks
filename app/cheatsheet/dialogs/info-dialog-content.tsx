@@ -9,7 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { getHeroName, type HeroId } from '@/data/heroes';
 import { PERKS } from '@/data/perks';
 import { InfoIcon } from 'lucide-react';
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
 type Props = {
 	heroId: HeroId;
@@ -32,12 +32,28 @@ export default function InfoDialogContent({ heroId }: Props) {
 	const { data: allVotes, isLoading } = useVotes(heroId);
 	const { mutate: addVote, isPending } = useVoteMutation(heroId);
 	const { totalHeroVotes, totalTypeVotes, perkVotes, votePercentage, votePercentageFormatted } = usePerkVotes(heroId, perk);
+	const [isVoteDisabled, setIsVoteDisabled] = useState(false);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined' && perk !== undefined) {
+			const localStorageKey = `vote-${heroId}-${perk.perkType}`;
+			const oldState = localStorage.getItem(localStorageKey);
+			console.log(`Old state: ${oldState}`);
+			setIsVoteDisabled(oldState !== null);
+		}
+	}, [heroId, perk]);
 
 	const handleVote = useCallback(() => {
+		// TODO: check localStorage before voting
 		if (perk !== undefined) {
+			setIsVoteDisabled(true);
+			if (typeof window !== 'undefined') {
+				const localStorageKey = `vote-${heroId}-${perk.perkType}`;
+				localStorage.setItem(localStorageKey, perk.perkIndex.toString());
+			}
 			addVote(perk.id);
 		}
-	}, [perk, addVote]);
+	}, [perk, addVote, heroId]);
 
 	if (perk === undefined) return <></>;
 
@@ -82,7 +98,11 @@ export default function InfoDialogContent({ heroId }: Props) {
 			{/* </ScrollArea> */}
 			<DialogFooter>
 				<div className="w-full flex justify-between items-center">
-					<Button type="submit" onClick={handleVote} className="bg-primary-foreground text-white opacity-90 hover:bg-primary-foreground hover:opacity-100">
+					<Button
+						type="submit"
+						disabled={isVoteDisabled}
+						onClick={handleVote}
+						className="bg-primary-foreground text-white opacity-90 hover:bg-primary-foreground hover:opacity-100">
 						Vote for this perk
 					</Button>
 					<div className="flex justify-between items-center gap-2">

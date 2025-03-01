@@ -23,13 +23,18 @@ export default function CheatsheetArea({ heroId }: Props) {
 	);
 	return (
 		<div className="flex flex-col gap-4">
+			{/* <blockquote className="w-full italic text-sm tracking-wide opacity-90 border-l-[3px] pl-4 mt-1 text-muted-foreground">
+				Click on a perk for more info.
+			</blockquote> */}
 			<Tabs value={tab} onValueChange={handleChange}>
 				<CheatsheetHeroCardWrapper heroId={heroId} />
 				<TabsContent value={'info' as TabKey}>
 					<InfoCardWrapper heroId={heroId} />
 				</TabsContent>
 			</Tabs>
-			<Separator className="mt-3" />
+			<div>
+				<Separator className="mt-3" />
+			</div>
 			<ControlsRow />
 			<InfoDialog heroId={heroId} />
 		</div>
