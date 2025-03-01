@@ -1,5 +1,6 @@
 import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
 import { TabKey } from '@/app/cheatsheet/hooks/use-tab-param';
+import { useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
 import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
@@ -33,6 +34,7 @@ export default function InfoDialogContent({ heroId }: Props) {
 	));
 	const perk = getPerk(heroId, dialog);
 	const hero = getHeroName(heroId);
+	const { data: votes, isLoading } = useVotes(heroId);
 
 	if (perk === undefined) return <></>;
 
@@ -56,6 +58,16 @@ export default function InfoDialogContent({ heroId }: Props) {
 				<div className="flex-1">
 					<p>{dialog}</p>
 					<p>{heroId}</p>
+
+					{isLoading ? (
+						<p>loading...</p>
+					) : (
+						votes?.map((v) => (
+							<p key={v.id}>
+								{v.id}: {v.votes}
+							</p>
+						))
+					)}
 				</div>
 				<Separator className="mt-8 mb-4" />
 				<div className="flex items-center justify-center text-center w-full">37% of people prefer this minor perk (312 votes)</div>
