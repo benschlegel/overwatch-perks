@@ -1,6 +1,6 @@
 import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
 import { TabKey } from '@/app/cheatsheet/hooks/use-tab-param';
-import { useVoteMutation, useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
+import { usePerkVotes, useVoteMutation, useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
 import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
@@ -30,8 +30,9 @@ export default function InfoDialogContent({ heroId }: Props) {
 	));
 	const perk = getPerk(heroId, dialog);
 	const hero = getHeroName(heroId);
-	const { data: votes, isLoading } = useVotes(heroId);
+	const { data: allVotes, isLoading } = useVotes(heroId);
 	const { mutate: addVote, isPending } = useVoteMutation(heroId);
+	const { totalHeroVotes, totalTypeVotes, perkVotes, votePercentage } = usePerkVotes(heroId, perk);
 
 	const handleVote = useCallback(() => {
 		if (perk !== undefined) {
@@ -61,11 +62,13 @@ export default function InfoDialogContent({ heroId }: Props) {
 				<div className="flex-1">
 					<p>{dialog}</p>
 					<p>{heroId}</p>
-
+					<p>Current votes: {perkVotes}</p>
+					<p>Total category votes: {totalTypeVotes}</p>
+					<p>% voting for this: {votePercentage}%</p>
 					{isLoading ? (
 						<p>loading...</p>
 					) : (
-						votes?.map((v) => (
+						allVotes?.map((v) => (
 							<p key={v.id}>
 								{v.id}: {v.votes}
 							</p>
