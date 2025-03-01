@@ -1,6 +1,6 @@
 import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
 import { TabKey } from '@/app/cheatsheet/hooks/use-tab-param';
-import { useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
+import { useVoteMutation, useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
 import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
@@ -23,10 +23,6 @@ export default function InfoDialogContent({ heroId }: Props) {
 		setDialog('none');
 	}, [setDialog]);
 
-	const handleVote = useCallback(() => {
-		//
-	}, []);
-
 	const MemoizedButtonRow = memo(({ onClick }: { onClick: () => void }) => (
 		<Button type="submit" variant="outline" autoFocus onClick={onClick}>
 			Close
@@ -35,6 +31,13 @@ export default function InfoDialogContent({ heroId }: Props) {
 	const perk = getPerk(heroId, dialog);
 	const hero = getHeroName(heroId);
 	const { data: votes, isLoading } = useVotes(heroId);
+	const { mutate: addVote, isPending } = useVoteMutation(heroId);
+
+	const handleVote = useCallback(() => {
+		if (perk !== undefined) {
+			addVote(perk.id);
+		}
+	}, [perk, addVote]);
 
 	if (perk === undefined) return <></>;
 
