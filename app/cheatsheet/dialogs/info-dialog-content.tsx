@@ -58,20 +58,26 @@ export default function InfoDialogContent({ heroId }: Props) {
 				</div>
 			</div>
 			{/* <ScrollArea type="scroll" className="h-[25rem]"> */}
-			<div className="h-[25rem] flex flex-col justify-center items-center">
+			<div className="h-[22rem] flex flex-col justify-center items-center">
 				<div className="flex flex-1  w-full flex-col gap-8 items-start justify-start">
 					<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">{perk.name}</h2>
 					<h3 className="scroll-m-20 leading-7 text-xl tracking-tight">
 						<HighlightText text={perk.description} />
 					</h3>
 				</div>
-				<Progress value={votePercentage ?? 0} className="h-2 mt-8 mb-4" />
-				<p className="leading-7 [&:not(:first-child)]:mt-6 text-center w-full">
-					{votePercentageFormatted}% prefer this <span className="font-semibold"> minor </span> perk{' '}
-					<span className="text-muted-foreground">
-						({perkVotes} {perkVotes === 1 ? 'vote' : 'votes'})
-					</span>
-				</p>
+
+				<div className="mb-6 w-full">
+					{/* <blockquote className="sm:leading-7 w-full italic text-sm tracking-wide opacity-90 border-l-[3px] pl-4 mt-1">
+						Voting indicates you prefer this perk over {hero}'s other {perk.perkType} perk.
+					</blockquote> */}
+					<Progress value={votePercentage ?? 0} className="h-2 mt-4 mb-2" />
+					<p className="leading-7 text-center w-full">
+						{votePercentageFormatted}% prefer this <span className="font-semibold"> {perk.perkType} </span> perk{' '}
+						<span className="text-muted-foreground">
+							({perkVotes} {perkVotes === 1 ? 'vote' : 'votes'})
+						</span>
+					</p>
+				</div>
 			</div>
 			{/* </ScrollArea> */}
 			<DialogFooter>
@@ -82,7 +88,7 @@ export default function InfoDialogContent({ heroId }: Props) {
 					<div className="flex justify-between items-center gap-2">
 						<NavButton direction="left" perkIndex={perk.perkIndex} perkType={perk.perkType} />
 						<p className="sm:block hidden">
-							<span className="capitalize">{perk.perkType}</span> perk {perk.perkIndex + 1} ({perk.perkIndex === 0 ? 'left' : 'right'})
+							perk {perk.perkIndex + 1} ({perk.perkIndex === 0 ? 'left' : 'right'})
 						</p>
 						<NavButton direction="right" perkIndex={perk.perkIndex} perkType={perk.perkType} />
 					</div>
