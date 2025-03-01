@@ -3,10 +3,10 @@ import ReactQueryProvider from '@/app/cheatsheet/context/ReactQueryProvider';
 import { CONFIG } from '@/config';
 import type { Metadata } from 'next';
 
-export const DEFAULT_TITLE = 'Perk Cheatsheet';
-export const DEFAULT_DESCRIPTION = 'A cheatsheet for info on all Overwatch hero perks.';
+const DEFAULT_TITLE = 'Perk Cheatsheet';
+const DEFAULT_DESCRIPTION = 'A cheatsheet for info on all Overwatch hero perks.';
 
-export const OgConfig = {
+const OgConfig = {
 	ogImagePath: '/opengraph-image-cheatsheet.png?new=true',
 	ogImageWidth: 1200,
 	ogImageHeight: 630,
