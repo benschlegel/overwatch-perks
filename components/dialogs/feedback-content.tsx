@@ -109,7 +109,11 @@ export default function FeedbackContent({ setOpen }: Props) {
 				</div>
 			</div>
 			<DialogFooter>
-				<Button type="submit" disabled={trimmedFeedback.length < 1} onClick={handleSubmit} className="bg-primary-foreground text-white opacity-85">
+				<Button
+					type="submit"
+					disabled={trimmedFeedback.length < 1}
+					onClick={handleSubmit}
+					className="bg-primary-foreground text-white opacity-85 hover:bg-primary-foreground hover:opacity-100">
 					Send feedback
 				</Button>
 			</DialogFooter>

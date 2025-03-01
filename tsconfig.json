@@ -24,6 +24,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@app/*": [
+        "./app/*"
       ]
     },
     "target": "ES2017"
@@ -35,6 +38,8 @@
     ".next/types/**/*.ts",
     "**/*.test.ts",
     "tests/**/*",
+    "app/**/*.ts",
+    "app/**/*.tsx",
     "vitest.config.mts"
 , "next.config.mjs", "postcss.config.mjs"  ],
   "exclude": [

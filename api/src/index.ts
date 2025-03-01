@@ -1,6 +1,6 @@
-import { addFeedback, getTotalRuns, getTotalTurns, logGame, logRun } from '@shared-lib/databaseAccess';
+import { addFeedback, getTotalRuns, getTotalTurns, getTotalVotes, getVotes, getVotesByHero, incrementVote, logGame, logRun } from '@shared-lib/databaseAccess';
 import { Elysia } from 'elysia';
-import { feedbackPostBody, savePostBody, saveRunBody } from './types';
+import { feedbackPostBody, heroIdBody, savePostBody, saveRunBody, votePostBody } from './types';
 import type { DbFeedback } from '@shared/database';
 import { CONFIG } from '@shared-global/config';
 import cors from '@elysiajs/cors';
@@ -62,6 +62,37 @@ const app = new Elysia()
 		},
 		{ body: feedbackPostBody }
 	)
+	.post(
+		'/api/vote/:perkId',
+		async ({ params, set }) => {
+			try {
+				const res = await incrementVote(params.perkId);
+				if (res?.acknowledged) {
+					set.status = 200;
+				}
+			} catch (e) {
+				set.status = 500;
+				return { message: "Couldn't cast vote." };
+			}
+		},
+		{ params: votePostBody }
+	)
+	.get(
+		'/api/votes/perk/:perkId',
+		async ({ params, set }) => {
+			const votes = await getVotes(params.perkId);
+			return votes;
+		},
+		{ params: votePostBody }
+	)
+	.get(
+		'/api/votes/:heroId',
+		async ({ params, set }) => {
+			const votes = await getVotesByHero(params.heroId);
+			return votes;
+		},
+		{ params: heroIdBody }
+	)
 	.get('/api/totalTurns', async () => {
 		const turns = await getTotalTurns();
 		const formatted = turns.toLocaleString('en-US');
@@ -72,6 +103,11 @@ const app = new Elysia()
 		const formatted = turns.toLocaleString('en-US');
 		return { totalRuns: turns, formattedTotalRuns: formatted };
 	})
-	.listen(3000);
+	.get('/api/votes', async () => {
+		const votes = await getTotalVotes();
+		const formatted = votes.toLocaleString('en-US');
+		return { totalVotes: votes, formattedTotalVotes: formatted };
+	})
+	.listen(process.env.API_PORT ?? 3000);
 
 console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);

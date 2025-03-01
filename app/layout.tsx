@@ -12,6 +12,7 @@ import GameScoreContextProvider from '@/context/GameScoreContext';
 import { PERKS } from '@/data/perks';
 import { CONFIG } from '@/config';
 import CurrentBestContextProvider from '@/context/CurrentBestContext';
+import { HEROES } from '@/data/heroes';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
 			},
 		],
 		type: 'website',
-		siteName: 'owperks',
+		siteName: DEFAULT_TITLE,
 	},
 	twitter: {
 		title: DEFAULT_TITLE,
@@ -101,6 +102,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="twitter:card" content="summary_large_image" />
+				{/* {HEROES.map((h) => (
+					<link rel="preload" key={h.id} as="image" href={h.portrait} />
+				))} */}
 				{PERKS.map((p) => (
 					<link rel="preload" key={p.id} as="image" href={`/assets/perks/${p.heroId}_${p.perkType}_${p.perkIndex}.png`} />
 				))}
@@ -116,7 +120,7 @@ export default function RootLayout({
 							<GameStateContextProvider>
 								<CurrentBestContextProvider>
 									<GameScoreContextProvider>
-										<div className="px-2 pt-8 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
+										<div className="px-2 sm:pt-8 pt-6 sm:px-4 lg:px-8 w-full h-full flex justify-center items-center">
 											<main className="w-[40rem]">{children}</main>
 										</div>
 										<Toaster />

@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export const HEROES = [
 	{
 		id: 'ana',
@@ -254,8 +256,13 @@ export const HEROES = [
 ] as const;
 
 export type HeroId = (typeof HEROES)[number]['id'];
+export const HERO_IDS = HEROES.map((h) => h.id);
+export const TANK_HEROES = HEROES.filter((h) => h.role === 'tank');
+export const DAMAGE_HEROES = HEROES.filter((h) => h.role === 'damage');
+export const SUPPORT_HEROES = HEROES.filter((h) => h.role === 'support');
 export type HeroName = (typeof HEROES)[number]['name'];
 export type HeroRole = (typeof HEROES)[number]['role'];
+export type Hero = (typeof HEROES)[number];
 
 /**
  * Returns hero name for given hero id
@@ -270,4 +277,7 @@ export const DEFAULT_HERO_ID: HeroId = 'ana';
 
 export function getHeroImage(heroId: HeroId) {
 	return HEROES.find((h) => h.id === heroId)?.portrait ?? HEROES[0].portrait;
+}
+export function isValidHeroId(heroId: string | HeroId) {
+	return HERO_IDS.some((h) => heroId);
 }
