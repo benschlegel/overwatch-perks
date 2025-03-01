@@ -2,6 +2,7 @@ import CommunityCardWrapper from '@/app/cheatsheet/components/community-card-wra
 import ControlsRow from '@/app/cheatsheet/components/controls-row';
 import CheatsheetHeroCardWrapper from '@/app/cheatsheet/components/hero-card';
 import InfoCardWrapper from '@/app/cheatsheet/components/info-card-wrapper';
+import PersonalCardWrapper from '@/app/cheatsheet/components/personal-card-wrapper';
 import { InfoDialog } from '@/app/cheatsheet/dialogs/info-dialog';
 import { type TabKey, useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
 import { Separator } from '@/components/ui/separator';
@@ -36,7 +37,7 @@ export default function CheatsheetArea({ heroId }: Props) {
 					<CommunityCardWrapper heroId={heroId} />
 				</TabsContent>
 				<TabsContent value={'personal' as TabKey}>
-					<InfoCardWrapper heroId={heroId} />
+					<PersonalCardWrapper heroId={heroId} />
 				</TabsContent>
 			</Tabs>
 			<div>
