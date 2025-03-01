@@ -1,17 +1,14 @@
+import NavButton from '@/app/cheatsheet/components/nav-button';
 import { type InfoDialogKey, useInfoDialogs } from '@/app/cheatsheet/hooks/use-info-dialog';
-import { TabKey } from '@/app/cheatsheet/hooks/use-tab-param';
 import { usePerkVotes, useVoteMutation, useVotes } from '@/app/cheatsheet/hooks/use-vote-query';
-import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import HighlightText from '@/components/ui/highlight-text';
 import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { getHeroName, type HeroId } from '@/data/heroes';
-import { type PerkIndex, PERKS, type PerkType } from '@/data/perks';
-import { ChevronLeftIcon, ChevronRightIcon, InfoIcon, SettingsIcon } from 'lucide-react';
+import { PERKS } from '@/data/perks';
+import { InfoIcon } from 'lucide-react';
 import React, { memo, useCallback } from 'react';
 
 type Props = {
@@ -84,8 +81,8 @@ export default function InfoDialogContent({ heroId }: Props) {
 					</Button>
 					<div className="flex justify-between items-center gap-2">
 						<NavButton direction="left" perkIndex={perk.perkIndex} perkType={perk.perkType} />
-						<p>
-							<span className="capitalize">{perk.perkType}</span> perk {perk.perkIndex + 1} (left)
+						<p className="sm:block hidden">
+							<span className="capitalize">{perk.perkType}</span> perk {perk.perkIndex + 1} ({perk.perkIndex === 0 ? 'left' : 'right'})
 						</p>
 						<NavButton direction="right" perkIndex={perk.perkIndex} perkType={perk.perkType} />
 					</div>
@@ -93,25 +90,6 @@ export default function InfoDialogContent({ heroId }: Props) {
 				</div>
 			</DialogFooter>
 		</DialogContent>
-	);
-}
-
-function NavButton({ direction, perkIndex, perkType }: { direction: 'left' | 'right'; perkIndex: PerkIndex; perkType: PerkType }) {
-	const [infoDialog, setInfoDialog] = useInfoDialogs();
-	const isValid = direction === 'left' ? perkIndex === 1 : perkIndex === 0;
-	const onClick = useCallback(() => {
-		const newIndex = ((perkIndex + 1) % 2) + 1;
-		const newDialog = `${perkType}-${newIndex}` as InfoDialogKey;
-		console.log('new index: ', newIndex);
-		console.log('new dialog: ', newDialog);
-		setInfoDialog(newDialog);
-		//
-	}, [perkIndex, perkType, setInfoDialog]);
-	return (
-		<Button variant="ghost" size="icon" className="!p-0" aria-label={`Go ${direction}`} onClick={onClick} disabled={!isValid}>
-			{direction === 'left' ? <ChevronLeftIcon className="!size-[1.2rem] !transition-all" /> : <ChevronRightIcon className="!size-[1.2rem] !transition-all" />}
-			<span className="sr-only">Go {direction}</span>
-		</Button>
 	);
 }
 
