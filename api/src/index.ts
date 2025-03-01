@@ -63,10 +63,10 @@ const app = new Elysia()
 		{ body: feedbackPostBody }
 	)
 	.post(
-		'/api/vote',
-		async ({ body, set }) => {
+		'/api/vote/:perkId',
+		async ({ params, set }) => {
 			try {
-				const res = await incrementVote(body.perkId);
+				const res = await incrementVote(params.perkId);
 				if (res?.acknowledged) {
 					set.status = 200;
 				}
@@ -75,7 +75,7 @@ const app = new Elysia()
 				return { message: "Couldn't cast vote." };
 			}
 		},
-		{ body: votePostBody }
+		{ params: votePostBody }
 	)
 	.get(
 		'/api/votes/perk/:perkId',

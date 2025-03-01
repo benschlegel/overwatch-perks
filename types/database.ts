@@ -49,4 +49,9 @@ export type DbVote = {
 	votes: number;
 };
 
+export type VoteResponse = {
+	id: number;
+	votes: number;
+};
+
 export const API_URL = process.env.API_URL ?? '';
