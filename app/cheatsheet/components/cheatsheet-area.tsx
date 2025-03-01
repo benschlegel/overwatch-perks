@@ -1,3 +1,4 @@
+import CommunityCardWrapper from '@/app/cheatsheet/components/community-card-wrapper';
 import ControlsRow from '@/app/cheatsheet/components/controls-row';
 import CheatsheetHeroCardWrapper from '@/app/cheatsheet/components/hero-card';
 import InfoCardWrapper from '@/app/cheatsheet/components/info-card-wrapper';
@@ -29,6 +30,12 @@ export default function CheatsheetArea({ heroId }: Props) {
 			<Tabs value={tab} onValueChange={handleChange}>
 				<CheatsheetHeroCardWrapper heroId={heroId} />
 				<TabsContent value={'info' as TabKey}>
+					<InfoCardWrapper heroId={heroId} />
+				</TabsContent>
+				<TabsContent value={'community' as TabKey}>
+					<CommunityCardWrapper heroId={heroId} />
+				</TabsContent>
+				<TabsContent value={'personal' as TabKey}>
 					<InfoCardWrapper heroId={heroId} />
 				</TabsContent>
 			</Tabs>

@@ -28,8 +28,8 @@ function formatNumber(num: number, digits = 2) {
 }
 
 export function usePerkVotes(heroId: HeroId, perk?: Perk, percentageDigits = 1) {
-	const { data } = useVotes(heroId);
-	if (data && perk) {
+	const { data, isPending } = useVotes(heroId);
+	if (!isPending && data && perk) {
 		const perksByType = perk.perkType === 'minor' ? [data[0], data[1]] : [data[2], data[3]];
 		const totalHeroVotes = data.reduce((partialCount, curr) => partialCount + curr.votes, 0);
 		const totalTypeVotes = perksByType.reduce((partialCount, curr) => partialCount + curr.votes, 0);
@@ -44,7 +44,7 @@ export function usePerkVotes(heroId: HeroId, perk?: Perk, percentageDigits = 1) 
 
 		return { perkVotes: currVotes, totalTypeVotes, totalHeroVotes, votePercentageFormatted, votePercentage };
 	}
-	return { isLoading: true };
+	return { isPending: isPending };
 }
 
 export const useVoteMutation = (heroId: string) => {
