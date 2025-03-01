@@ -6,7 +6,6 @@ import InfoCardWrapper from '@/app/cheatsheet/components/info-card-wrapper';
 import PersonalCardWrapper from '@/app/cheatsheet/components/personal-card-wrapper';
 import { InfoDialog } from '@/app/cheatsheet/dialogs/info-dialog';
 import { type TabKey, useTabParam } from '@/app/cheatsheet/hooks/use-tab-param';
-import DonateText from '@/components/landing-page/donate-text';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import type { HeroId } from '@/data/heroes';
