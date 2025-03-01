@@ -38,7 +38,6 @@ export function usePerkVotes(heroId: HeroId, perk?: Perk, percentageDigits = 1) 
 		let votePercentageFormatted = '0';
 		let votePercentage = 0;
 		if (totalTypeVotes !== 0) {
-			console.log('Curr votes: ');
 			votePercentage = ((currVotes ?? 0) / totalTypeVotes) * 100;
 			votePercentageFormatted = formatNumber(votePercentage, percentageDigits);
 		}

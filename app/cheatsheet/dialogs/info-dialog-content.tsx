@@ -5,12 +5,13 @@ import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import HighlightText from '@/components/ui/highlight-text';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { getHeroName, type HeroId } from '@/data/heroes';
-import { PERKS } from '@/data/perks';
-import { InfoIcon, SettingsIcon } from 'lucide-react';
+import { type PerkIndex, PERKS, type PerkType } from '@/data/perks';
+import { ChevronLeftIcon, ChevronRightIcon, InfoIcon, SettingsIcon } from 'lucide-react';
 import React, { memo, useCallback } from 'react';
 
 type Props = {
@@ -55,26 +56,17 @@ export default function InfoDialogContent({ heroId }: Props) {
 				</DialogDescription>
 			</DialogHeader>
 			<div className="relative">
-				<div className="absolute sm:top-2 sm:right-2 top-1 right-1">
+				<div className="absolute sm:top-0 top-2 sm:right-0 right-2">
 					<PerkIcon perk={perk} className="sm:size-[4.25rem] size-14" />
 				</div>
 			</div>
-			<ScrollArea type="scroll" className="h-[25rem]">
-				<div className="flex-1">
-					<p>{dialog}</p>
-					<p>{heroId}</p>
-					<p>Current votes: {perkVotes}</p>
-					<p>Total category votes: {totalTypeVotes}</p>
-					<p>% voting for this: {votePercentageFormatted}%</p>
-					{isLoading ? (
-						<p>loading...</p>
-					) : (
-						allVotes?.map((v) => (
-							<p key={v.id}>
-								{v.id}: {v.votes}
-							</p>
-						))
-					)}
+			{/* <ScrollArea type="scroll" className="h-[25rem]"> */}
+			<div className="h-[25rem] flex flex-col justify-center items-center">
+				<div className="flex flex-1  w-full flex-col gap-8 items-start justify-start">
+					<h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">{perk.name}</h2>
+					<h3 className="scroll-m-20 leading-7 text-xl tracking-tight">
+						<HighlightText text={perk.description} />
+					</h3>
 				</div>
 				<Progress value={votePercentage ?? 0} className="h-2 mt-8 mb-4" />
 				<p className="leading-7 [&:not(:first-child)]:mt-6 text-center w-full">
@@ -83,16 +75,43 @@ export default function InfoDialogContent({ heroId }: Props) {
 						({perkVotes} {perkVotes === 1 ? 'vote' : 'votes'})
 					</span>
 				</p>
-			</ScrollArea>
+			</div>
+			{/* </ScrollArea> */}
 			<DialogFooter>
 				<div className="w-full flex justify-between items-center">
-					<Button type="submit" onClick={handleVote} className="bg-primary-foreground text-white opacity-85 hover:bg-primary-foreground hover:opacity-100">
+					<Button type="submit" onClick={handleVote} className="bg-primary-foreground text-white opacity-90 hover:bg-primary-foreground hover:opacity-100">
 						Vote for this perk
 					</Button>
+					<div className="flex justify-between items-center gap-2">
+						<NavButton direction="left" perkIndex={perk.perkIndex} perkType={perk.perkType} />
+						<p>
+							<span className="capitalize">{perk.perkType}</span> perk {perk.perkIndex + 1} (left)
+						</p>
+						<NavButton direction="right" perkIndex={perk.perkIndex} perkType={perk.perkType} />
+					</div>
 					<MemoizedButtonRow onClick={handleClose} />
 				</div>
 			</DialogFooter>
 		</DialogContent>
+	);
+}
+
+function NavButton({ direction, perkIndex, perkType }: { direction: 'left' | 'right'; perkIndex: PerkIndex; perkType: PerkType }) {
+	const [infoDialog, setInfoDialog] = useInfoDialogs();
+	const isValid = direction === 'left' ? perkIndex === 1 : perkIndex === 0;
+	const onClick = useCallback(() => {
+		const newIndex = ((perkIndex + 1) % 2) + 1;
+		const newDialog = `${perkType}-${newIndex}` as InfoDialogKey;
+		console.log('new index: ', newIndex);
+		console.log('new dialog: ', newDialog);
+		setInfoDialog(newDialog);
+		//
+	}, [perkIndex, perkType, setInfoDialog]);
+	return (
+		<Button variant="ghost" size="icon" className="!p-0" aria-label={`Go ${direction}`} onClick={onClick} disabled={!isValid}>
+			{direction === 'left' ? <ChevronLeftIcon className="!size-[1.2rem] !transition-all" /> : <ChevronRightIcon className="!size-[1.2rem] !transition-all" />}
+			<span className="sr-only">Go {direction}</span>
+		</Button>
 	);
 }
 
