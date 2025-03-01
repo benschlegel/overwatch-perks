@@ -36,13 +36,14 @@ export function usePerkVotes(heroId: HeroId, perk?: Perk, percentageDigits = 1) 
 		const currVotes = data.find((d) => d.id === perk?.id)?.votes;
 
 		let votePercentageFormatted = '0';
+		let votePercentage = 0;
 		if (totalTypeVotes !== 0) {
 			console.log('Curr votes: ');
-			const votePercentage = (currVotes ?? 0) / totalTypeVotes;
-			votePercentageFormatted = formatNumber(votePercentage * 100, percentageDigits);
+			votePercentage = ((currVotes ?? 0) / totalTypeVotes) * 100;
+			votePercentageFormatted = formatNumber(votePercentage, percentageDigits);
 		}
 
-		return { perkVotes: currVotes, totalTypeVotes, totalHeroVotes, votePercentage: votePercentageFormatted };
+		return { perkVotes: currVotes, totalTypeVotes, totalHeroVotes, votePercentageFormatted, votePercentage };
 	}
 	return { isLoading: true };
 }

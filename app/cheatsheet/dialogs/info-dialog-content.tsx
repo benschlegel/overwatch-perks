@@ -5,6 +5,7 @@ import { SettingsItem } from '@/components/dialogs/setting-dialog-content';
 import PerkIcon from '@/components/game/perk-icon';
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { getHeroName, type HeroId } from '@/data/heroes';
@@ -32,7 +33,7 @@ export default function InfoDialogContent({ heroId }: Props) {
 	const hero = getHeroName(heroId);
 	const { data: allVotes, isLoading } = useVotes(heroId);
 	const { mutate: addVote, isPending } = useVoteMutation(heroId);
-	const { totalHeroVotes, totalTypeVotes, perkVotes, votePercentage } = usePerkVotes(heroId, perk);
+	const { totalHeroVotes, totalTypeVotes, perkVotes, votePercentage, votePercentageFormatted } = usePerkVotes(heroId, perk);
 
 	const handleVote = useCallback(() => {
 		if (perk !== undefined) {
@@ -64,7 +65,7 @@ export default function InfoDialogContent({ heroId }: Props) {
 					<p>{heroId}</p>
 					<p>Current votes: {perkVotes}</p>
 					<p>Total category votes: {totalTypeVotes}</p>
-					<p>% voting for this: {votePercentage}%</p>
+					<p>% voting for this: {votePercentageFormatted}%</p>
 					{isLoading ? (
 						<p>loading...</p>
 					) : (
@@ -75,8 +76,13 @@ export default function InfoDialogContent({ heroId }: Props) {
 						))
 					)}
 				</div>
-				<Separator className="mt-8 mb-4" />
-				<div className="flex items-center justify-center text-center w-full">37% of people prefer this minor perk (312 votes)</div>
+				<Progress value={votePercentage ?? 0} className="h-2 mt-8 mb-4" />
+				<p className="leading-7 [&:not(:first-child)]:mt-6 text-center w-full">
+					{votePercentageFormatted}% prefer this <span className="font-semibold"> minor </span> perk{' '}
+					<span className="text-muted-foreground">
+						({perkVotes} {perkVotes === 1 ? 'vote' : 'votes'})
+					</span>
+				</p>
 			</ScrollArea>
 			<DialogFooter>
 				<div className="w-full flex justify-between items-center">
