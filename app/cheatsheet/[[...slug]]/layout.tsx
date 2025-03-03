@@ -1,14 +1,14 @@
 import HeroSelectContextProvider from '@/app/cheatsheet/context/HeroSelectContext';
 import ReactQueryProvider from '@/app/cheatsheet/context/ReactQueryProvider';
 import { CONFIG } from '@/config';
-import { isValidHeroId, type HeroId } from '@/data/heroes';
+import { getHeroName, isValidHeroId, type HeroId } from '@/data/heroes';
 import type { Metadata } from 'next';
 
 const DEFAULT_TITLE = 'Perk Cheatsheet';
 const DEFAULT_DESCRIPTION = 'A cheatsheet for info on all Overwatch hero perks.';
 
 const OgConfig = {
-	ogImagePath: '/opengraph-image-cheatsheet.png?new=true',
+	ogImagePath: '/opengraph-image-cheatsheet.png?different=true',
 	ogImageWidth: 1200,
 	ogImageHeight: 630,
 };
@@ -20,14 +20,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: Her
 		heroId = heroIdSlug[0];
 	}
 
+	const heroName = getHeroName(heroId);
+
 	let urlFull = `${CONFIG.url}/cheatsheet`;
+	let titleFull = DEFAULT_TITLE;
 	const isValid = heroId !== undefined ? isValidHeroId(heroId) : true;
 	if (isValid) {
 		urlFull += `/${heroId}`;
+		titleFull += ` - ${heroName}`;
 	}
 
 	const metadata: Metadata = {
-		title: DEFAULT_TITLE,
+		title: titleFull,
 		description: DEFAULT_DESCRIPTION,
 		metadataBase: new URL(urlFull),
 		alternates: {

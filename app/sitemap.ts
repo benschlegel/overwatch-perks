@@ -1,3 +1,4 @@
+import { HEROES } from '@/data/heroes';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -6,11 +7,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	yesterday.setHours(2);
 	yesterday.setMinutes(0);
 	yesterday.setSeconds(0);
-	return [
+	const sites: MetadataRoute.Sitemap = [
 		{
 			url: 'https://perks.owldle.com/',
 			lastModified: yesterday,
 			changeFrequency: 'always',
+			priority: 1,
+		},
+		{
+			url: 'https://perks.owldle.com/cheatsheet',
+			lastModified: yesterday,
+			changeFrequency: 'monthly',
+			priority: 1,
+		},
+		{
+			url: 'https://perks.owldle.com/cheatsheet',
+			lastModified: yesterday,
+			changeFrequency: 'monthly',
 			priority: 1,
 		},
 		{
@@ -38,4 +51,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			priority: 1,
 		},
 	];
+
+	for (const hero of HEROES) {
+		sites.push({
+			url: `https://perks.owldle.com/cheatsheet/${hero.id}`,
+			lastModified: yesterday,
+			changeFrequency: 'weekly',
+			priority: 0.95,
+		});
+	}
+
+	return sites;
 }
