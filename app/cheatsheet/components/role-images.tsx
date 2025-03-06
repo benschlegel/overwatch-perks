@@ -28,7 +28,7 @@ export default function RoleImages({ role }: Props) {
 				<Separator className="flex-1 mr-6" />
 			</div>
 			<div
-				className={`flex w-full h-full justify-center sm:px-4 sm:pl-6 gap-2 gap-y-3 flex-wrap overflow-visible ${role === 'support' ? 'sm:!pb-0 !mb-40' : ''}`}>
+				className={`flex w-full h-full justify-center sm:px-4 sm:pl-6 gap-2 gap-y-3 flex-wrap overflow-visible ${role === 'support' ? 'sm:!mb-0 !mb-40' : ''}`}>
 				{heroes.map((h) => (
 					<SmallHeroCard hero={h} key={`small-img-${h.id}`} />
 				))}
