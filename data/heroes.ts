@@ -256,7 +256,7 @@ export const HEROES = [
 	{
 		id: 'freja',
 		name: 'Freja',
-		portrait: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/31/OW2_Freja.png/revision/latest?cb=20250322151231',
+		portrait: '/assets/heroes/freja.avif',
 		role: 'damage',
 	},
 ] as const;

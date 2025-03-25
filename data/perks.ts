@@ -1289,6 +1289,38 @@ export const PERKS: Perk[] = [
 		perkType: 'major',
 		perkIndex: 1,
 	},
+	{
+		id: 168,
+		heroId: 'freja',
+		name: 'Frost Bolts',
+		description: 'Enemies hit by 3 regular bolts in quick succession are slowed by 20% for 2 seconds.',
+		perkType: 'minor',
+		perkIndex: 0,
+	},
+	{
+		id: 169,
+		heroId: 'freja',
+		name: 'Tracking Instinct',
+		description: 'Critical health enemies are revealed to you.',
+		perkType: 'minor',
+		perkIndex: 1,
+	},
+	{
+		id: 170,
+		heroId: 'freja',
+		name: 'Ready to Hunt',
+		description: 'Updraft grants a temporary free use of Quick Dash.',
+		perkType: 'major',
+		perkIndex: 0,
+	},
+	{
+		id: 171,
+		heroId: 'freja',
+		name: 'Relentless Barrage',
+		description: 'Direct hits with Take Aim refund 4 automatic bolt ammo.',
+		perkType: 'major',
+		perkIndex: 1,
+	},
 ];
 
 export const MAX_PERK_ID = PERKS[PERKS.length - 1].id;
