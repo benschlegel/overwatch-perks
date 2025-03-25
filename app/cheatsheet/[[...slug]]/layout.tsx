@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: Her
 	let urlFull = `${CONFIG.url}/cheatsheet`;
 	let titleFull = DEFAULT_TITLE;
 	const isValid = heroId !== undefined ? isValidHeroId(heroId) : true;
-	if (isValid) {
+	if (isValid && heroId !== undefined) {
 		urlFull += `/${heroId}`;
 		titleFull += ` - ${heroName}`;
 	}
