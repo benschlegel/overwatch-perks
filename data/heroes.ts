@@ -253,6 +253,12 @@ export const HEROES = [
 		portrait: 'https://d15f34w2p8l1cc.cloudfront.net/overwatch/71cabc939c577581f66b952f9c70891db779251e8e70f29de3c7bf494edacfe4.png',
 		role: 'support',
 	},
+	{
+		id: 'freja',
+		name: 'Freja',
+		portrait: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/31/OW2_Freja.png/revision/latest?cb=20250322151231',
+		role: 'damage',
+	},
 ] as const;
 
 export type HeroId = (typeof HEROES)[number]['id'];
